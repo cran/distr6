@@ -1,7 +1,6 @@
 ## ---- include=FALSE------------------------------------------------------
 knitr::opts_chunk$set(collapse = T, comment = "#>")
 options(tibble.print_min = 4L, tibble.print_max = 4L)
-remotes::install_github("alan-turing-institute/distr6")
 library("distr6")
 set.seed(42)
 
