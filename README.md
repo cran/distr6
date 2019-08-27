@@ -1,7 +1,4 @@
-distr6
-================
-
-<img src="man/figures/logo.png" align="right" alt="" width="120" />
+# distr6 <img src="man/figures/logo.png" align="right" alt="" width="120" />
 
 [![Travis Build
 Status](https://travis-ci.com/alan-turing-institute/distr6.svg?branch=master)](https://travis-ci.com/alan-turing-institute/distr6)
@@ -9,7 +6,7 @@ Status](https://travis-ci.com/alan-turing-institute/distr6.svg?branch=master)](h
 status](https://ci.appveyor.com/api/projects/status/mrexqbmrtrx865jf/branch/master?svg=true)](https://ci.appveyor.com/project/RaphaelS1/distr6-xsr0j/branch/master)
 [![codecov](https://codecov.io/gh/alan-turing-institute/distr6/branch/master/graph/badge.svg)](https://codecov.io/gh/alan-turing-institute/distr6)
 [![Lifecycle](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://alan-turing-institute.github.io/distr6/articles/webs/api_lifecycle.html)
-<https://www.r-pkg.org/badges/version/distr6>
+<https://www.r-pkg.org/badges/version-ago/distr6>
 <https://cranlogs.r-pkg.org/badges/grand-total/distr6?color=brightgreen>
 [![dependencies](https://tinyverse.netlify.com/badge/distr6)](https://CRAN.R-project.org/package=distr6)
 [![License:
@@ -19,9 +16,9 @@ MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.or
 ## What is distr6?
 
 distr6 is a unified and clean interface to organise the probability
-distributions implemented in R into one R6 object oriented package, as
-well as adding distributions yet to implemented in R, currently we have
-36 probability distributions as well as 11 kernels. Building the package
+distributions implemented in R into one R6 object oriented package, As
+well as adding distributions that are not yet implemented in R. Currently we have
+37 probability distributions as well as 11 kernels. Building the package
 from the ground up and making use of tried and tested design patterns
 (as per Gamma et al. 1994), distr6 aims to make probability
 distributions easy to use, understand and analyse.

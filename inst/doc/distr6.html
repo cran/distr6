@@ -11,7 +11,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
-<meta name="date" content="2019-07-22" />
+<meta name="date" content="2019-08-27" />
 
 <title>Introduction to distr6</title>
 
@@ -301,7 +301,7 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 
 
 <h1 class="title toc-ignore">Introduction to distr6</h1>
-<h4 class="date">2019-07-22</h4>
+<h4 class="date">2019-08-27</h4>
 
 
 
@@ -467,19 +467,19 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <a class="sourceLine" id="cb16-15" data-line-number="15"><span class="co">#&gt; 1:      Bern       Bernoulli     discrete  univariate   stats</span></a>
 <a class="sourceLine" id="cb16-16" data-line-number="16"><span class="co">#&gt; 2:     Binom        Binomial     discrete  univariate   stats</span></a>
 <a class="sourceLine" id="cb16-17" data-line-number="17"><span class="co">#&gt; 3:       Cat     Categorical     discrete  univariate  distr6</span></a>
-<a class="sourceLine" id="cb16-18" data-line-number="18"><span class="co">#&gt; 4:     DUnif DiscreteUniform     discrete  univariate  distr6</span></a>
-<a class="sourceLine" id="cb16-19" data-line-number="19"><span class="co">#&gt; 5:      Geom       Geometric     discrete  univariate   stats</span></a>
-<a class="sourceLine" id="cb16-20" data-line-number="20"><span class="co">#&gt; 6: Hypergeom  Hypergeometric     discrete  univariate   stats</span></a>
+<a class="sourceLine" id="cb16-18" data-line-number="18"><span class="co">#&gt; 4:     Degen      Degenerate     discrete  univariate  distr6</span></a>
+<a class="sourceLine" id="cb16-19" data-line-number="19"><span class="co">#&gt; 5:     DUnif DiscreteUniform     discrete  univariate  distr6</span></a>
+<a class="sourceLine" id="cb16-20" data-line-number="20"><span class="co">#&gt; 6:       Emp       Empirical     discrete  univariate  distr6</span></a>
 <a class="sourceLine" id="cb16-21" data-line-number="21"></a>
 <a class="sourceLine" id="cb16-22" data-line-number="22"><span class="co"># Multiple filters can be used, note this is case-insensitive</span></a>
 <a class="sourceLine" id="cb16-23" data-line-number="23"><span class="kw">head</span>(<span class="kw">listDistributions</span>(<span class="dt">filter =</span> <span class="kw">list</span>(<span class="dt">VaLueSupport =</span> <span class="st">&quot;continuous&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;distr6&quot;</span>)))</a>
-<a class="sourceLine" id="cb16-24" data-line-number="24"><span class="co">#&gt;    ShortName  ClassName ValueSupport  VariateForm Package</span></a>
-<a class="sourceLine" id="cb16-25" data-line-number="25"><span class="co">#&gt; 1:       Arc    Arcsine   continuous   univariate  distr6</span></a>
-<a class="sourceLine" id="cb16-26" data-line-number="26"><span class="co">#&gt; 2:     Degen Degenerate   continuous   univariate  distr6</span></a>
-<a class="sourceLine" id="cb16-27" data-line-number="27"><span class="co">#&gt; 3:      Diri  Dirichlet   continuous multivariate  distr6</span></a>
-<a class="sourceLine" id="cb16-28" data-line-number="28"><span class="co">#&gt; 4:      Frec    Frechet   continuous   univariate  distr6</span></a>
-<a class="sourceLine" id="cb16-29" data-line-number="29"><span class="co">#&gt; 5:      Gomp   Gompertz   continuous   univariate  distr6</span></a>
-<a class="sourceLine" id="cb16-30" data-line-number="30"><span class="co">#&gt; 6:      Gumb     Gumbel   continuous   univariate  distr6</span></a></code></pre></div>
+<a class="sourceLine" id="cb16-24" data-line-number="24"><span class="co">#&gt;    ShortName ClassName ValueSupport  VariateForm Package</span></a>
+<a class="sourceLine" id="cb16-25" data-line-number="25"><span class="co">#&gt; 1:       Arc   Arcsine   continuous   univariate  distr6</span></a>
+<a class="sourceLine" id="cb16-26" data-line-number="26"><span class="co">#&gt; 2:      Diri Dirichlet   continuous multivariate  distr6</span></a>
+<a class="sourceLine" id="cb16-27" data-line-number="27"><span class="co">#&gt; 3:      Frec   Frechet   continuous   univariate  distr6</span></a>
+<a class="sourceLine" id="cb16-28" data-line-number="28"><span class="co">#&gt; 4:      Gomp  Gompertz   continuous   univariate  distr6</span></a>
+<a class="sourceLine" id="cb16-29" data-line-number="29"><span class="co">#&gt; 5:      Gumb    Gumbel   continuous   univariate  distr6</span></a>
+<a class="sourceLine" id="cb16-30" data-line-number="30"><span class="co">#&gt; 6:       Lap   Laplace   continuous   univariate  distr6</span></a></code></pre></div>
 </div>
 <div id="r6-s3-and-magrittr" class="section level3">
 <h3>R6, S3 and Magrittr</h3>
