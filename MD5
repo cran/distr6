@@ -1,7 +1,7 @@
-c272906c524effde70970f8f244972a3 *DESCRIPTION
+fda0b0334e695569c5fc94a3310bf45a *DESCRIPTION
 cf2ac1b6dff1ae6894fb2f357df37cbf *LICENSE
-8f54ea1d26ea45499365ca7756f2528d *NAMESPACE
-1f6505472d2c447a4b23cafc90ab87bd *NEWS.md
+6192e9abacae38a42ad1f8449e4d4c09 *NAMESPACE
+5e3db73ed264d9454c0a0d8792168e96 *NEWS.md
 47b936127bf8f317e92383948330a447 *R/Distribution.R
 582428e94064389dd1314ebe4f8f89dc *R/DistributionDecorator.R
 3ca3eafd1951b73253d05c91bbe23e47 *R/DistributionDecorator_CoreStatistics.R
@@ -77,8 +77,9 @@ affef9ef8d405efd2d95a1db78e57cc7 *R/Wrapper_MixtureDistribution.R
 cea6bab668de88abf61c9fffc01b827c *R/Wrapper_ProductDistribution.R
 8191728ba6f14cf3e4489557aed6e525 *R/Wrapper_Scale.R
 02945190f46cb2a831369ce64c383540 *R/Wrapper_TruncatedDistribution.R
-529951c86419bc340a220637ce46b43c *R/Wrapper_VectorDistribution.R
+43eb91d229954ffb7d6a66d380a35052 *R/Wrapper_VectorDistribution.R
 0a290aede6e4dac6d4e157ad35412b9c *R/assertions.R
+4ff7e32a6f0eb0935f1615071c5e24c0 *R/c.Distribution.R
 2de856d8929a2e0720f6e72a91b6810a *R/decomposeMixture.R
 acabec8a1688cfe068ac49f37bdcf01d *R/decorate.R
 da93fd84988fe8414534c3af52a71b80 *R/distr6-deprecated.R
@@ -109,7 +110,7 @@ e26521c866449afd005ae54502849428 *R/zzz.R
 26cead811a416f5d97053ee969af48e7 *README.md
 1c8931953fb05918f970ca0f4d785fe2 *build/vignette.rds
 b016034aad3004fd99408716079bdd66 *inst/doc/distr6.R
-913bf66174b9c48824c8852a3e4e5a82 *inst/doc/distr6.html
+d1b6d4ad1434650415fd6e8c2f757588 *inst/doc/distr6.html
 90424b7d9206218c525b8469f46a5b02 *inst/doc/distr6.rmd
 b5f0a5646b5375cc58b29f241a5fc92f *man/Arcsine.Rd
 bb28bc9c947d3bc4857ca4a81186419d *man/ArrayDistribution-deprecated.Rd
@@ -202,6 +203,7 @@ d61649986d9e65c5ec21bdaf370c2ea5 *man/VectorDistribution.Rd
 301027eb7767e5739434948d88086c35 *man/as.ParameterSet.Rd
 f88ac5a164dbcf73966813bf4bf5d6f5 *man/as.data.table.Rd
 109139fdeac5fc05403df3be78c0ad32 *man/as.numeric.Interval.Rd
+2a86268bc0e0a2dbd61022ea571edb91 *man/c.Distribution.Rd
 8a510290acb9026b2b3806a34263b26a *man/cdf.Rd
 ef680b6db1cdd9fadaa730e7da004aa3 *man/cdfAntiDeriv.Rd
 681aed25c33ae8705022ab90c6c31da8 *man/cdfPNorm.Rd
@@ -385,7 +387,8 @@ d0c281efb9f697edd04996092b2b955d *tests/testthat/test-Set.R
 5a10785c0f739eb62de634f57b47ae99 *tests/testthat/test-SetInterval.R
 16b11708af59480eeb287d35ac2e52db *tests/testthat/test-SetIntervalOperations.R
 d48f6727354702ea74b946582d86ed12 *tests/testthat/test-SpecialSet.R
-fb98f0376ba0e23c286dc74b11a6ffa5 *tests/testthat/test-VectorDistribution.R
+15677aea04cdf7bcfe2d11336ccc4ee5 *tests/testthat/test-VectorDistribution.R
+b2c4384bdb59e71f2c9aab34ba7099a3 *tests/testthat/test-cDistribution.R
 e5c8433362c62a08d0e61a64f145fa3c *tests/testthat/test-continuousDistribution.R
 d9a151dbec190fba1025f32b885c18c9 *tests/testthat/test-convolution.R
 3e8b6f386b50a9749b4e98f63202d7d5 *tests/testthat/test-corestatistics.R
