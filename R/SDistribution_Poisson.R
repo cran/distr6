@@ -1,4 +1,4 @@
-#' @include SetInterval_SpecialSet.R ParameterSet.R
+
 #-------------------------------------------------------------
 # Poisson Distribution Documentation
 #-------------------------------------------------------------
@@ -42,11 +42,11 @@ NULL
 #-------------------------------------------------------------
 # Poisson Distribution Definition
 #-------------------------------------------------------------
-Poisson <- R6::R6Class("Poisson", inherit = SDistribution, lock_objects = F)
+Poisson <- R6Class("Poisson", inherit = SDistribution, lock_objects = F)
 Poisson$set("public","name","Poisson")
 Poisson$set("public","short_name","Pois")
 Poisson$set("public","description","Poisson Probability Distribution.")
-Poisson$set("public","package","stats")
+Poisson$set("public","packages","stats")
 
 Poisson$set("public","mean",function(){
   return(self$getParameterValue("rate"))

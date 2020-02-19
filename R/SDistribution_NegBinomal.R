@@ -1,4 +1,4 @@
-#' @include SetInterval_SpecialSet.R ParameterSet.R
+
 #-------------------------------------------------------------
 # Negative Binomial Distribution Documentation
 #-------------------------------------------------------------
@@ -60,11 +60,10 @@ NULL
 #-------------------------------------------------------------
 # NegativeBinomial Distribution Definition
 #-------------------------------------------------------------
-NegativeBinomial <- R6::R6Class("NegativeBinomial", inherit = SDistribution, lock_objects = F)
+NegativeBinomial <- R6Class("NegativeBinomial", inherit = SDistribution, lock_objects = F)
 NegativeBinomial$set("public", "name", "NegativeBinomial")
 NegativeBinomial$set("public", "short_name", "NBinom")
 NegativeBinomial$set("private",".form",NULL)
-NegativeBinomial$set("public","package","distr6")
 
 NegativeBinomial$set("public", "mean", function(){
   return(self$getParameterValue("mean"))
@@ -261,5 +260,5 @@ NegativeBinomial$set("public","initialize", function(size = 10, prob = 0.5, qpro
                               data.table::data.table(ShortName = "NBinom", ClassName = "NegativeBinomial",
                                                      Type = "\u21150", ValueSupport = "discrete",
                                                      VariateForm = "univariate",
-                                                     Package = "distr6"))
+                                                     Package = "-"))
 

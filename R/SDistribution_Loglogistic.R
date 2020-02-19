@@ -1,4 +1,4 @@
-#' @include SetInterval_SpecialSet.R ParameterSet.R
+
 #-------------------------------------------------------------
 # Log-Logistic Distribution Documentation
 #-------------------------------------------------------------
@@ -46,11 +46,10 @@ NULL
 #-------------------------------------------------------------
 # Loglogistic Distribution Definition
 #-------------------------------------------------------------
-Loglogistic <- R6::R6Class("Loglogistic", inherit = SDistribution, lock_objects = F)
+Loglogistic <- R6Class("Loglogistic", inherit = SDistribution, lock_objects = F)
 Loglogistic$set("public","name","Loglogistic")
 Loglogistic$set("public","short_name","LLogis")
 Loglogistic$set("public","description","Log-Logistic Probability Distribution.")
-Loglogistic$set("public","package","distr6")
 
 Loglogistic$set("public","mean",function(){
   return(self$getParameterValue("location") +
@@ -149,4 +148,4 @@ Loglogistic$set("public","initialize",function(scale = 1, shape = 1, location = 
                               data.table::data.table(ShortName = "LLogis", ClassName = "Loglogistic",
                                                      Type = "\u211D+", ValueSupport = "continuous",
                                                      VariateForm = "univariate",
-                                                     Package = "distr6"))
+                                                     Package = "-"))

@@ -1,4 +1,4 @@
-#' @include SetInterval_SpecialSet.R ParameterSet.R
+
 #-------------------------------------------------------------
 # Laplace Distribution Documentation
 #-------------------------------------------------------------
@@ -46,11 +46,10 @@ NULL
 #-------------------------------------------------------------
 # Laplace Distribution Definition
 #-------------------------------------------------------------
-Laplace <- R6::R6Class("Laplace", inherit = SDistribution, lock_objects = F)
+Laplace <- R6Class("Laplace", inherit = SDistribution, lock_objects = F)
 Laplace$set("public","name","Laplace")
 Laplace$set("public","short_name","Lap")
 Laplace$set("public","description","Laplace Probability Distribution.")
-Laplace$set("public","package","distr6")
 
 Laplace$set("public","mean",function(){
   self$getParameterValue("mean")
@@ -137,4 +136,4 @@ Laplace$set("public","initialize",function(mean = 0, scale = 1, var = NULL,
                               data.table::data.table(ShortName = "Lap", ClassName = "Laplace",
                                                      Type = "\u211D", ValueSupport = "continuous",
                                                      VariateForm = "univariate",
-                                                     Package = "distr6"))
+                                                     Package = "-"))

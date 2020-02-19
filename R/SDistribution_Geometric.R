@@ -1,4 +1,4 @@
-#' @include SetInterval_SpecialSet.R ParameterSet.R
+
 #-------------------------------------------------------------
 # Geometric Distribution Documentation
 #-------------------------------------------------------------
@@ -57,13 +57,13 @@ NULL
 #-------------------------------------------------------------
 # Geometric Distribution Definition
 #-------------------------------------------------------------
-Geometric <-  R6::R6Class("Geometric", inherit = SDistribution, lock_objects = F)
+Geometric <-  R6Class("Geometric", inherit = SDistribution, lock_objects = F)
 
 Geometric$set("private",".trials",NULL)
 
 Geometric$set("public","name","Geometric")
 Geometric$set("public","short_name","Geom")
-Geometric$set("public","package","stats")
+Geometric$set("public","packages","stats")
 
 Geometric$set("public","mean",function(){
     if(private$.trials)
@@ -149,7 +149,8 @@ Geometric$set("public","initialize",function(prob = 0.5, qprob = NULL, trials = 
 
     super$initialize(decorators = decorators, pdf = pdf, cdf = cdf, quantile = quantile,
                      rand = rand, support = support,
-                     symmetric  = FALSE, description = description,type = Naturals$new(),
+                     symmetric  = FALSE, description = description,
+                     type = Naturals$new(),
                      valueSupport = "discrete",
                      variateForm = "univariate")
 

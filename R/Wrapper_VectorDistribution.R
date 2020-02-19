@@ -40,6 +40,8 @@
 #' @return Returns an R6 object of class VectorDistribution.
 #'
 #' @examples
+#' # not run to save time
+#' \dontrun{
 #' vecDist <- VectorDistribution$new(list(Binomial$new(prob = 0.5,
 #'                            size = 10), Normal$new(mean = 15)))
 #' vecDist$pdf(x1 = 2, x2 =3)
@@ -78,18 +80,20 @@
 #' vecdist = VectorDistribution$new(distribution = "Distribution", params = params,
 #'                                    shared_params = shared_params)
 #' vecdist$pdf(1)
+#' }
 #'
 #' @export
 NULL
-VectorDistribution <- R6::R6Class("VectorDistribution", inherit = DistributionWrapper, lock_objects = FALSE)
+VectorDistribution <- R6Class("VectorDistribution", inherit = DistributionWrapper, lock_objects = FALSE)
 .distr6$wrappers <- append(.distr6$wrappers, list(VectorDistribution = VectorDistribution))
 
 VectorDistribution$set("public","initialize",function(distlist = NULL, distribution = NULL, params = NULL,
                                                       shared_params = NULL, name = NULL, short_name = NULL, description = NULL,
                                                       decorators = NULL){
 
-  if(!is.null(decorators))
-    private$.decorators <- unlist(decorators)
+  if(!is.null(decorators)) {
+    suppressMessages(decorate(self, decorators))
+  }
 
   if(is.null(distlist)){
     if(is.null(distribution) | (is.null(params) & is.null(shared_params)))
@@ -216,8 +220,8 @@ VectorDistribution$set("public","initialize",function(distlist = NULL, distribut
     return(rand)
   }
 
-  type = Reals$new(dim = ndist)
-  support = Reals$new(dim = ndist)
+  type = setpower(Reals$new(), ndist)
+  support = setpower(Reals$new(), ndist)
 
   super$initialize(pdf = pdf, cdf = cdf, quantile = quantile, rand = rand, name = name,
                    short_name = short_name, description = description, support = support,
@@ -369,9 +373,11 @@ Extract.VectorDistribution <- function(vecdist, i){
   } else {
     if(length(i) == 1){
       dec = vecdist$decorators()
-      if(!is.null(dec))
-        return(suppressMessages(decorate(vecdist$modelTable()[i, 1][[1]][[1]], dec)))
-      else
+      if(!is.null(dec)) {
+        dist = vecdist$modelTable()[i, 1][[1]][[1]]
+        suppressMessages(decorate(dist, dec))
+        return(dist)
+      } else
         return(vecdist$modelTable()[i, 1][[1]][[1]])
     } else
       return(VectorDistribution$new(distlist = unlist(vecdist$modelTable()[i, 1])))

@@ -1,4 +1,4 @@
-#' @include SetInterval_SpecialSet.R ParameterSet.R
+
 #-------------------------------------------------------------
 # Hypergeometric Distribution Documentation
 #-------------------------------------------------------------
@@ -49,11 +49,11 @@ NULL
 #-------------------------------------------------------------
 # Hypergeometric Distribution Definition
 #-------------------------------------------------------------
-Hypergeometric <- R6::R6Class("Hypergeometric", inherit = SDistribution, lock_objects = FALSE)
+Hypergeometric <- R6Class("Hypergeometric", inherit = SDistribution, lock_objects = FALSE)
 Hypergeometric$set("public", "name", "Hypergeometric")
 Hypergeometric$set("public", "short_name", "Hyper")
 Hypergeometric$set("public", "description", "Hypergeometric Probability Distribution")
-Hypergeometric$set("public","package","stats")
+Hypergeometric$set("public","packages","stats")
 
 Hypergeometric$set("public", "mean", function(){
     return(self$getParameterValue("draws")*self$getParameterValue("successes")/self$getParameterValue("size"))
@@ -141,7 +141,7 @@ Hypergeometric$set("public","initialize",function(size = 50, successes = 5, fail
                               self$getParameterValue("failures"),
                               self$getParameterValue("draws"))
 
-    support <- Set$new(max(0, draws + successes - size):min(draws,successes))
+    support <- Set$new(max(0, draws + successes - size):min(draws,successes), class = "integer")
 
     super$initialize(decorators = decorators, pdf = pdf, cdf = cdf, quantile = quantile,
                      rand = rand, support = support,

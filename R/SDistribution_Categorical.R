@@ -1,4 +1,4 @@
-#' @include SetInterval_SpecialSet.R ParameterSet.R
+
 #-------------------------------------------------------------
 #  Distribution Documentation
 #-------------------------------------------------------------
@@ -42,17 +42,16 @@ NULL
 #-------------------------------------------------------------
 # Categorical Distribution Definition
 #-------------------------------------------------------------
-Categorical <- R6::R6Class("Categorical", inherit = SDistribution, lock_objects = F)
+Categorical <- R6Class("Categorical", inherit = SDistribution, lock_objects = F)
 Categorical$set("public","name","Categorical")
 Categorical$set("public","short_name","Cat")
 Categorical$set("public","description","Categorical Probability Distribution.")
-Categorical$set("public","package","distr6")
 
 Categorical$set("public","mode",function(which = "all"){
   if(which == "all")
-    return(self$support()$elements()[self$getParameterValue("probs")==max(self$getParameterValue("probs"))])
+    return(unlist(self$support()$elements)[self$getParameterValue("probs")==max(self$getParameterValue("probs"))])
   else
-    return(self$support()$elements()[self$getParameterValue("probs")==max(self$getParameterValue("probs"))][which])
+    return(unlist(self$support()$elements)[self$getParameterValue("probs")==max(self$getParameterValue("probs"))][which])
 })
 Categorical$set("public","mean",function(){
   return(NaN)
@@ -96,14 +95,15 @@ Categorical$set("private",".getRefParams", function(paramlst){
 
 Categorical$set("public","initialize",function(..., probs, decorators = NULL, verbose = FALSE){
 
-  dots = list(...)
 
-  if(length(dots)==0){
+  if(...length() == 0){
     probs = 1
     dots = 1
     support = Set$new(1)
-  } else
+  } else {
+    dots = list(...)
     support = Set$new(...)
+  }
 
   checkmate::assert(length(dots) == length(probs))
 
@@ -111,17 +111,17 @@ Categorical$set("public","initialize",function(..., probs, decorators = NULL, ve
   self$setParameterValue(probs = probs)
 
   pdf <- function(x1){
-    return(self$getParameterValue("probs")[self$support()$elements() %in% x1])
+    return(self$getParameterValue("probs")[self$support()$elements %in% x1])
   }
   cdf <- function(x1){
-    return(cumsum(self$pdf(self$support()$elements()))[self$support()$elements() %in% x1])
+    return(cumsum(self$pdf(self$support()$elements))[self$support()$elements %in% x1])
   }
   quantile <- function(p){
-    cdf = matrix(self$cdf(self$support()$elements()), ncol = length(self$support()$elements()), nrow = length(p), byrow = T)
-    return(self$support()$elements()[apply(cdf >= p, 1, function(x) min(which(x)))])
+    cdf = matrix(self$cdf(self$support()$elements), ncol = self$support()$length, nrow = length(p), byrow = T)
+    return(self$support()$elements[apply(cdf >= p, 1, function(x) min(which(x)))])
   }
   rand <- function(n){
-    return(sample(self$support()$elements(), n, TRUE, self$getParameterValue("probs")))
+    return(sample(self$support()$elements, n, TRUE, self$getParameterValue("probs")))
   }
 
   super$initialize(decorators = decorators, pdf = pdf, cdf = cdf, quantile = quantile, rand = rand,
@@ -136,4 +136,4 @@ Categorical$set("public","initialize",function(..., probs, decorators = NULL, ve
                               data.table::data.table(ShortName = "Cat", ClassName = "Categorical",
                                                      Type = "\u2102", ValueSupport = "discrete",
                                                      VariateForm = "univariate",
-                                                     Package = "distr6"))
+                                                     Package = "-"))

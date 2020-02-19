@@ -1,4 +1,4 @@
-#' @include SetInterval_SpecialSet.R ParameterSet.R
+
 #-------------------------------------------------------------
 # Epanechnikov Kernel
 #-------------------------------------------------------------
@@ -31,7 +31,7 @@ NULL
 #-------------------------------------------------------------
 # Uniform Kernel Definition
 #-------------------------------------------------------------
-Epanechnikov <- R6::R6Class("Epanechnikov", inherit = Kernel, lock_objects = F)
+Epanechnikov <- R6Class("Epanechnikov", inherit = Kernel, lock_objects = F)
 Epanechnikov$set("public","name","Epanechnikov")
 Epanechnikov$set("public","short_name","Epan")
 Epanechnikov$set("public","description","Epanechnikov Kernel")
@@ -55,4 +55,4 @@ Epanechnikov$set("public","initialize",function(decorators = NULL){
   invisible(self)
 })
 
-.distr6$kernels = rbind(.distr6$kernels, data.table::data.table(ShortName = "Epan", ClassName = "Epanechnikov", Support = "[-1,1]"))
+.distr6$kernels = rbind(.distr6$kernels, data.table::data.table(ShortName = "Epan", ClassName = "Epanechnikov", Support = "[-1,1]", Packages = "-"))

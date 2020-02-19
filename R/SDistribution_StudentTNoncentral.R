@@ -1,4 +1,4 @@
-#' @include SetInterval_SpecialSet.R ParameterSet.R
+
 #-------------------------------------------------------------
 # Noncentral Student's t Distribution Documentation
 #-------------------------------------------------------------
@@ -44,11 +44,11 @@ NULL
 #-------------------------------------------------------------
 # Noncentral Student's t Distribution Definition
 #-------------------------------------------------------------
-StudentTNoncentral <- R6::R6Class("StudentTNoncentral", inherit = SDistribution, lock_objects = F)
+StudentTNoncentral <- R6Class("StudentTNoncentral", inherit = SDistribution, lock_objects = F)
 StudentTNoncentral$set("public","name","StudentTNoncentral")
 StudentTNoncentral$set("public","short_name","TNC")
 StudentTNoncentral$set("public","description","Student's t Probability Distribution.")
-StudentTNoncentral$set("public","package","stats")
+StudentTNoncentral$set("public","packages","stats")
 
 StudentTNoncentral$set("public", "mean", function(){
   df <- self$getParameterValue("df")
@@ -84,7 +84,7 @@ StudentTNoncentral$set("public","initialize",function(df = 1, location = 0, deco
   rand <- function(n) rt(n, self$getParameterValue("df"), self$getParameterValue("location"))
 
   super$initialize(decorators = decorators, pdf = pdf, cdf = cdf, quantile = quantile,
-                   rand = rand, support = Reals$new(zero = T),
+                   rand = rand, support = Reals$new(),
                    symmetric  = TRUE,type = Reals$new(),
                    valueSupport = "continuous",
                    variateForm = "univariate")

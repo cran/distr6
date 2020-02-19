@@ -1,4 +1,4 @@
-#' @include SetInterval_SpecialSet.R ParameterSet.R
+
 #-------------------------------------------------------------
 # Noncentral F Distribution Documentation
 #-------------------------------------------------------------
@@ -44,7 +44,7 @@ NULL
 #-------------------------------------------------------------
 # Noncentral F Distribution Definition
 #-------------------------------------------------------------
-FDistributionNoncentral <- R6::R6Class("FDistributionNoncentral", inherit = SDistribution, lock_objects = FALSE)
+FDistributionNoncentral <- R6Class("FDistributionNoncentral", inherit = SDistribution, lock_objects = FALSE)
 FDistributionNoncentral$set("public", "name", "FDistributionNoncentral")
 FDistributionNoncentral$set("public", "short_name", "FNC")
 FDistributionNoncentral$set("public", "description", "F Probability Distribution")

@@ -1,4 +1,4 @@
-#' @include SetInterval_SpecialSet.R ParameterSet.R
+
 #-------------------------------------------------------------
 # Cosine Kernel
 #-------------------------------------------------------------
@@ -28,7 +28,7 @@ NULL
 #-------------------------------------------------------------
 # Cosine Kernel Definition
 #-------------------------------------------------------------
-Cosine <- R6::R6Class("Cosine", inherit = Kernel, lock_objects = F)
+Cosine <- R6Class("Cosine", inherit = Kernel, lock_objects = F)
 Cosine$set("public","name","Cosine")
 Cosine$set("public","short_name","Cos")
 Cosine$set("public","description","Cosine Kernel")
@@ -55,4 +55,4 @@ Cosine$set("public","initialize",function(decorators = NULL){
   invisible(self)
 })
 
-.distr6$kernels = rbind(.distr6$kernels, data.table::data.table(ShortName = "Cos", ClassName = "Cosine", Support = "[-1,1]"))
+.distr6$kernels = rbind(.distr6$kernels, data.table::data.table(ShortName = "Cos", ClassName = "Cosine", Support = "[-1,1]", Packages = "-"))

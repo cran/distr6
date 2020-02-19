@@ -39,8 +39,8 @@
 #'
 #' @examples
 #' x = Distribution$new("Test", pdf = function(x) 1/(4-1),
-#' support = Interval$new(1,4),
-#' type = Reals$new())
+#' support = set6::Interval$new(1,4),
+#' type = set6::Reals$new())
 #' decorate(x, FunctionImputation)
 #' x$pdf(0:5)
 #' x$cdf(0:5)
@@ -48,9 +48,9 @@
 #' @export
 NULL
 
-FunctionImputation <- R6::R6Class("FunctionImputation", inherit = DistributionDecorator)
+FunctionImputation <- R6Class("FunctionImputation", inherit = DistributionDecorator)
 .distr6$decorators <- append(.distr6$decorators, list(FunctionImputation = FunctionImputation))
-
+FunctionImputation$set("public","packages",c("pracma","GoFKernel"))
 
 FunctionImputation$set("public","pdf",function(x1){
   # CDF2PDF

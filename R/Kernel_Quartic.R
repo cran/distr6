@@ -1,4 +1,4 @@
-#' @include SetInterval_SpecialSet.R ParameterSet.R
+
 #-------------------------------------------------------------
 # Quartic Kernel
 #-------------------------------------------------------------
@@ -31,7 +31,7 @@ NULL
 #-------------------------------------------------------------
 # Uniform Kernel Definition
 #-------------------------------------------------------------
-Quartic <- R6::R6Class("Quartic", inherit = Kernel, lock_objects = F)
+Quartic <- R6Class("Quartic", inherit = Kernel, lock_objects = F)
 Quartic$set("public","name","Quartic")
 Quartic$set("public","short_name","Quart")
 Quartic$set("public","description","Quartic Kernel")
@@ -55,4 +55,4 @@ Quartic$set("public","initialize",function(decorators = NULL){
   invisible(self)
 }) # QUANTILE & VAR MISSING
 
-.distr6$kernels = rbind(.distr6$kernels, data.table::data.table(ShortName = "Quart", ClassName = "Quartic", Support = "[-1,1]"))
+.distr6$kernels = rbind(.distr6$kernels, data.table::data.table(ShortName = "Quart", ClassName = "Quartic", Support = "[-1,1]", Packages = "-"))

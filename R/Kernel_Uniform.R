@@ -1,4 +1,4 @@
-#' @include SetInterval_SpecialSet.R ParameterSet.R
+
 #-------------------------------------------------------------
 # Uniform Kernel
 #-------------------------------------------------------------
@@ -28,7 +28,7 @@ NULL
 #-------------------------------------------------------------
 # Uniform Kernel Definition
 #-------------------------------------------------------------
-UniformKernel <- R6::R6Class("UniformKernel", inherit = Kernel, lock_objects = F)
+UniformKernel <- R6Class("UniformKernel", inherit = Kernel, lock_objects = F)
 UniformKernel$set("public","name","UniformKernel")
 UniformKernel$set("public","short_name","Unif")
 UniformKernel$set("public","description","Uniform Kernel")
@@ -55,4 +55,4 @@ UniformKernel$set("public","initialize",function(decorators = NULL){
   invisible(self)
 })
 
-.distr6$kernels = rbind(.distr6$kernels, data.table::data.table(ShortName = "Unif", ClassName = "UniformKernel", Support = "[-1,1]"))
+.distr6$kernels = rbind(.distr6$kernels, data.table::data.table(ShortName = "Unif", ClassName = "UniformKernel", Support = "[-1,1]", Packages = "-"))

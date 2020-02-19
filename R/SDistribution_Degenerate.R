@@ -1,4 +1,4 @@
-#' @include SetInterval_SpecialSet.R ParameterSet.R
+
 #-------------------------------------------------------------
 # Degenerate Distribution Documentation
 #-------------------------------------------------------------
@@ -42,11 +42,10 @@ NULL
 #-------------------------------------------------------------
 # Degenerate Distribution Definition
 #-------------------------------------------------------------
-Degenerate <- R6::R6Class("Degenerate", inherit = SDistribution, lock_objects = F)
+Degenerate <- R6Class("Degenerate", inherit = SDistribution, lock_objects = F)
 Degenerate$set("public","name","Degenerate")
 Degenerate$set("public","short_name","Degen")
 Degenerate$set("public","description","Degenerate Probability Distribution.")
-Degenerate$set("public","package","distr6")
 
 Degenerate$set("public","mean",function(){
   return(self$getParameterValue("mean"))
@@ -97,7 +96,7 @@ Degenerate$set("public","initialize",function(mean = 0, decorators = NULL, verbo
   rand <- function(n) return(rep(self$getParameterValue("mean"), n))
 
   super$initialize(decorators = decorators, pdf = pdf, cdf = cdf, quantile = quantile,
-                   rand = rand, support = Set$new(mean),
+                   rand = rand, support = Set$new(mean, class = "integer"),
                    symmetric = TRUE,type = Reals$new(),
                    valueSupport = "discrete",
                    variateForm = "univariate")
@@ -108,4 +107,4 @@ Degenerate$set("public","initialize",function(mean = 0, decorators = NULL, verbo
                               data.table::data.table(ShortName = "Degen", ClassName = "Degenerate",
                                                      Type = "\u211D", ValueSupport = "discrete",
                                                      VariateForm = "univariate",
-                                                     Package = "distr6"))
+                                                     Package = "-"))

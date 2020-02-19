@@ -1,4 +1,4 @@
-#' @include SetInterval_SpecialSet.R ParameterSet.R
+
 #-------------------------------------------------------------
 # Lognormal Distribution Documentation
 #-------------------------------------------------------------
@@ -63,11 +63,11 @@ NULL
 #-------------------------------------------------------------
 # Lognormal Distribution Definition
 #-------------------------------------------------------------
-Lognormal <- R6::R6Class("Lognormal", inherit = SDistribution, lock_objects = F)
+Lognormal <- R6Class("Lognormal", inherit = SDistribution, lock_objects = F)
 Lognormal$set("public","name","Log-Normal")
 Lognormal$set("public","short_name","Lnorm")
 Lognormal$set("public","description","Log-Normal Probability Distribution.")
-Lognormal$set("public","package","stats")
+Lognormal$set("public","packages","stats")
 
 Lognormal$set("public","mean",function(){
   return(self$getParameterValue("mean"))

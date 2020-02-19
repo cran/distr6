@@ -1,4 +1,4 @@
-#' @include SetInterval_SpecialSet.R ParameterSet.R
+
 #-------------------------------------------------------------
 # Normal Kernel
 #-------------------------------------------------------------
@@ -31,10 +31,11 @@ NULL
 #-------------------------------------------------------------
 # NormalKernel Kernel Definition
 #-------------------------------------------------------------
-NormalKernel <- R6::R6Class("NormalKernel", inherit = Kernel, lock_objects = F)
+NormalKernel <- R6Class("NormalKernel", inherit = Kernel, lock_objects = F)
 NormalKernel$set("public","name","NormalKernel")
 NormalKernel$set("public","short_name","Norm")
 NormalKernel$set("public","description","Normal Kernel")
+NormalKernel$set("public","packages", "pracma")
 NormalKernel$set("public","squared2Norm",function(){
   return((2*sqrt(pi))^-1)
 })

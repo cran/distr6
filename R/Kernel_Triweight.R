@@ -1,4 +1,4 @@
-#' @include SetInterval_SpecialSet.R ParameterSet.R
+
 #-------------------------------------------------------------
 # Triweight Kernel
 #-------------------------------------------------------------
@@ -31,7 +31,7 @@ NULL
 #-------------------------------------------------------------
 # Triweight Kernel Definition
 #-------------------------------------------------------------
-Triweight <- R6::R6Class("Triweight", inherit = Kernel, lock_objects = F)
+Triweight <- R6Class("Triweight", inherit = Kernel, lock_objects = F)
 Triweight$set("public","name","Triweight")
 Triweight$set("public","short_name","Triw")
 Triweight$set("public","description","Triweight Kernel")
@@ -55,4 +55,4 @@ Triweight$set("public","initialize",function(decorators = NULL){
   invisible(self)
 }) # QUANTILE & VAR MISSING
 
-.distr6$kernels = rbind(.distr6$kernels, data.table::data.table(ShortName = "Triw", ClassName = "Triweight", Support = "[-1,1]"))
+.distr6$kernels = rbind(.distr6$kernels, data.table::data.table(ShortName = "Triw", ClassName = "Triweight", Support = "[-1,1]", Packages = "-"))

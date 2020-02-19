@@ -1,4 +1,4 @@
-#' @include SetInterval_SpecialSet.R ParameterSet.R
+
 #-------------------------------------------------------------
 # Tricube Kernel
 #-------------------------------------------------------------
@@ -31,7 +31,7 @@ NULL
 #-------------------------------------------------------------
 # Tricube Kernel Definition
 #-------------------------------------------------------------
-Tricube <- R6::R6Class("Tricube", inherit = Kernel, lock_objects = F)
+Tricube <- R6Class("Tricube", inherit = Kernel, lock_objects = F)
 Tricube$set("public","name","Tricube")
 Tricube$set("public","short_name","Tric")
 Tricube$set("public","description","Tricube Kernel")
@@ -52,4 +52,4 @@ Tricube$set("public","initialize",function(decorators = NULL){
   invisible(self)
 }) # CDF, QUANTILE & VAR MISSING
 
-.distr6$kernels = rbind(.distr6$kernels, data.table::data.table(ShortName = "Tric", ClassName = "Tricube", Support = "[-1,1]"))
+.distr6$kernels = rbind(.distr6$kernels, data.table::data.table(ShortName = "Tric", ClassName = "Tricube", Support = "[-1,1]", Packages = "-"))

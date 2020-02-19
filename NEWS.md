@@ -1,3 +1,15 @@
+# distr6 1.3.4
+
+- Bug fix in `VectorDistribution` that was causing decorators not to be added properly
+- Bug fix in `VectorDistribution` that was causing an error when extracting decorated wrapped distributions
+- Moved package `pracma` to suggests. Removed `utils` dependency.
+- Added checks to assert all packages are installed when required by distributions
+- Deprecated `package` field in distributions, now called `packages`
+- `packages` lists all packages required to be installed for a distribution, if `NULL` only distr6 required
+- Abstracted SetInterval and related classes to the `set6` package
+- Deprecated `listSpecialSets`, use `set6::listSpecialSets` instead
+- Removed secondary checks on `update` of `ParameterSet` , any properly defined distributions will have this covered in primary parameter, thus increasing speed.
+
 # distr6 1.3.3
 
 - `as.data.table` has been moved from a `ParameterSet` method to an S3 dispatch. Fixes an important bug of overloading `as.data.table` but may affect backwards compatibility.

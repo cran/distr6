@@ -1,4 +1,4 @@
-#' @include SetInterval_SpecialSet.R ParameterSet.R
+
 #-------------------------------------------------------------
 # Normal Distribution Documentation
 #-------------------------------------------------------------
@@ -50,11 +50,11 @@ NULL
 #-------------------------------------------------------------
 # Normal Distribution Definition
 #-------------------------------------------------------------
-Normal <- R6::R6Class("Normal", inherit = SDistribution, lock_objects = F)
+Normal <- R6Class("Normal", inherit = SDistribution, lock_objects = F)
 Normal$set("public","name","Normal")
 Normal$set("public","short_name","Norm")
 Normal$set("public","description","Normal Probability Distribution.")
-Normal$set("public","package","stats")
+Normal$set("public","packages","stats")
 
 Normal$set("public","mean",function(){
   return(self$getParameterValue("mean"))
@@ -108,7 +108,7 @@ Normal$set("public","initialize",function(mean = 0, var = 1, sd = NULL, prec = N
   rand <- function(n) rnorm(n, self$getParameterValue("mean"), self$getParameterValue("sd"))
 
   super$initialize(decorators = decorators, pdf = pdf, cdf = cdf, quantile = quantile,
-                   rand = rand, support = Reals$new(zero = T),
+                   rand = rand, support = Reals$new(),
                    symmetric = TRUE,type = Reals$new(),
                    valueSupport = "continuous",
                    variateForm = "univariate")

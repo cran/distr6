@@ -1,4 +1,4 @@
-#' @include SetInterval_SpecialSet.R ParameterSet.R
+
 #-------------------------------------------------------------
 #  Distribution Documentation
 #-------------------------------------------------------------
@@ -47,11 +47,11 @@ NULL
 #-------------------------------------------------------------
 # Multinomial Distribution Definition
 #-------------------------------------------------------------
-Multinomial <- R6::R6Class("Multinomial", inherit = SDistribution, lock_objects = F)
+Multinomial <- R6Class("Multinomial", inherit = SDistribution, lock_objects = F)
 Multinomial$set("public","name","Multinomial")
 Multinomial$set("public","short_name","Multinom")
 Multinomial$set("public","description","Multinomial Probability Distribution.")
-Multinomial$set("public","package","stats")
+Multinomial$set("public","packages","stats")
 
 Multinomial$set("public","mean",function(){
   return(self$getParameterValue("size") * self$getParameterValue("probs"))
@@ -154,8 +154,8 @@ Multinomial$set("public","initialize",function(size = 10, probs = c(0.5, 0.5), d
   }
 
   super$initialize(decorators = decorators, pdf = pdf, rand = rand,
-                   support = Set$new(0:size, dim = length(probs)),
-                   symmetric = FALSE, type = Naturals$new(dim = "K"),
+                   support = setpower(Set$new(0:size, class = "integer"), length(probs)),
+                   symmetric = FALSE, type = setpower(Naturals$new(), length(probs)),
                    valueSupport = "discrete",
                    variateForm = "multivariate")
   invisible(self)

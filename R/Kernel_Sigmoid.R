@@ -1,4 +1,4 @@
-#' @include SetInterval_SpecialSet.R ParameterSet.R
+
 #-------------------------------------------------------------
 # Sigmoid Kernel
 #-------------------------------------------------------------
@@ -31,7 +31,7 @@ NULL
 #-------------------------------------------------------------
 # Sigmoid Kernel Definition
 #-------------------------------------------------------------
-Sigmoid <- R6::R6Class("Sigmoid", inherit = Kernel, lock_objects = F)
+Sigmoid <- R6Class("Sigmoid", inherit = Kernel, lock_objects = F)
 Sigmoid$set("public","name","Sigmoid")
 Sigmoid$set("public","short_name","Sigm")
 Sigmoid$set("public","description","Sigmoid Kernel")
@@ -52,4 +52,4 @@ Sigmoid$set("public","initialize",function(decorators = NULL){
   invisible(self)
 }) # CDF, QUANTILE & VAR MISSING
 
-.distr6$kernels = rbind(.distr6$kernels, data.table::data.table(ShortName = "Sigm", ClassName = "Sigmoid", Support = "\u211D"))
+.distr6$kernels = rbind(.distr6$kernels, data.table::data.table(ShortName = "Sigm", ClassName = "Sigmoid", Support = "\u211D", Packages = "-"))

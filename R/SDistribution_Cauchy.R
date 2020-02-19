@@ -1,4 +1,4 @@
-#' @include SetInterval_SpecialSet.R ParameterSet.R
+
 #-------------------------------------------------------------
 # Cauchy Distribution Documentation
 #-------------------------------------------------------------
@@ -43,11 +43,11 @@ NULL
 #-------------------------------------------------------------
 # Cauchy Distribution Definition
 #-------------------------------------------------------------
-Cauchy <- R6::R6Class("Cauchy", inherit = SDistribution, lock_objects = F)
+Cauchy <- R6Class("Cauchy", inherit = SDistribution, lock_objects = F)
 Cauchy$set("public","name","Cauchy")
 Cauchy$set("public","short_name","Cauchy")
 Cauchy$set("public","description","Cauchy Probability Distribution.")
-Cauchy$set("public","package","stats")
+Cauchy$set("public","packages","stats")
 
 Cauchy$set("public","mean",function(){
   return(NaN)

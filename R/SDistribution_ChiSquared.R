@@ -1,4 +1,4 @@
-#' @include SetInterval_SpecialSet.R ParameterSet.R
+
 #-------------------------------------------------------------
 # Chi-Squared Distribution Documentation
 #-------------------------------------------------------------
@@ -41,11 +41,11 @@ NULL
 #-------------------------------------------------------------
 # ChiSquared Distribution Definition
 #-------------------------------------------------------------
-ChiSquared <- R6::R6Class("ChiSquared", inherit = SDistribution, lock_objects = FALSE)
+ChiSquared <- R6Class("ChiSquared", inherit = SDistribution, lock_objects = FALSE)
 ChiSquared$set("public", "name", "ChiSquared")
 ChiSquared$set("public", "short_name", "ChiSq")
 ChiSquared$set("public", "description", "ChiSquared Probability Distribution")
-ChiSquared$set("public","package","stats")
+ChiSquared$set("public","packages","stats")
 
 ChiSquared$set("public", "mean", function(){
   return(self$getParameterValue("df"))

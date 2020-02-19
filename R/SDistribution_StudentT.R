@@ -1,4 +1,4 @@
-#' @include SetInterval_SpecialSet.R ParameterSet.R
+
 #-------------------------------------------------------------
 # Student's t Distribution Documentation
 #-------------------------------------------------------------
@@ -42,11 +42,11 @@ NULL
 #-------------------------------------------------------------
 # Student's t Distribution Definition
 #-------------------------------------------------------------
-StudentT <- R6::R6Class("StudentT", inherit = SDistribution, lock_objects = F)
+StudentT <- R6Class("StudentT", inherit = SDistribution, lock_objects = F)
 StudentT$set("public","name","StudentT")
 StudentT$set("public","short_name","T")
 StudentT$set("public","description","Student's t Probability Distribution.")
-StudentT$set("public","package","stats")
+StudentT$set("public","packages","stats")
 
 StudentT$set("public", "mean", function(){
   df <- self$getParameterValue("df")
@@ -115,7 +115,7 @@ StudentT$set("public","initialize",function(df = 1, decorators = NULL, verbose =
   rand <- function(n) rt(n, self$getParameterValue("df"))
 
   super$initialize(decorators = decorators, pdf = pdf, cdf = cdf, quantile = quantile,
-                   rand = rand, support = Reals$new(zero = T),
+                   rand = rand, support = Reals$new(),
                    symmetric  = TRUE,type = Reals$new(),
                    valueSupport = "continuous",
                    variateForm = "univariate")

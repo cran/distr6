@@ -1,4 +1,4 @@
-#' @include SetInterval_SpecialSet.R ParameterSet.R
+
 #-------------------------------------------------------------
 # Rayleigh Distribution Documentation
 #-------------------------------------------------------------
@@ -41,11 +41,10 @@ NULL
 #-------------------------------------------------------------
 # Rayleigh Distribution Definition
 #-------------------------------------------------------------
-Rayleigh <- R6::R6Class("Rayleigh", inherit = SDistribution, lock_objects = F)
+Rayleigh <- R6Class("Rayleigh", inherit = SDistribution, lock_objects = F)
 Rayleigh$set("public","name","Rayleigh")
 Rayleigh$set("public","short_name","Rayl")
 Rayleigh$set("public","description","Rayleigh Probability Distribution.")
-Rayleigh$set("public","package","distr6")
 
 Rayleigh$set("public","mean",function(){
   return(self$getParameterValue("mode")*sqrt(pi/2))
@@ -108,4 +107,4 @@ Rayleigh$set("public","initialize",function(mode = 1, decorators = NULL, verbose
                               data.table::data.table(ShortName = "Rayl", ClassName = "Rayleigh",
                                                      Type = "\u211D+", ValueSupport = "continuous",
                                                      VariateForm = "univariate",
-                                                     Package = "distr6"))
+                                                     Package = "-"))

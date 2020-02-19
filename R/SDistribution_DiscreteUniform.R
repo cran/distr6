@@ -1,4 +1,4 @@
-#' @include SetInterval_SpecialSet.R ParameterSet.R
+
 #-------------------------------------------------------------
 # DiscreteUniform Distribution Documentation
 #-------------------------------------------------------------
@@ -42,11 +42,10 @@ NULL
 #-------------------------------------------------------------
 # DiscreteUniform Distribution Definition
 #-------------------------------------------------------------
-DiscreteUniform <- R6::R6Class("DiscreteUniform", inherit = SDistribution, lock_objects = F)
+DiscreteUniform <- R6Class("DiscreteUniform", inherit = SDistribution, lock_objects = F)
 DiscreteUniform$set("public","name","DiscreteUniform")
 DiscreteUniform$set("public","short_name","DUnif")
 DiscreteUniform$set("public","description","DiscreteUniform Probability Distribution.")
-DiscreteUniform$set("public","package","distr6")
 
 DiscreteUniform$set("public","mean",function(){
   return((self$getParameterValue("lower") + self$getParameterValue("upper")) / 2)
@@ -119,7 +118,7 @@ DiscreteUniform$set("public","initialize",function(lower = 0, upper = 1, decorat
   rand = function(n) return(self$quantile(runif(n)))
 
   super$initialize(decorators = decorators, pdf = pdf, cdf = cdf, quantile = quantile,
-                   rand = rand, support = Set$new(lower:upper),
+                   rand = rand, support = Interval$new(lower, upper, class = "integer"),
                    symmetric = TRUE, type = Integers$new(),
                    valueSupport = "discrete",
                    variateForm = "univariate")
@@ -130,5 +129,5 @@ DiscreteUniform$set("public","initialize",function(lower = 0, upper = 1, decorat
                               data.table::data.table(ShortName = "DUnif", ClassName = "DiscreteUniform",
                                                      Type = "\u2124", ValueSupport = "discrete",
                                                      VariateForm = "univariate",
-                                                     Package = "distr6"))
+                                                     Package = "-"))
 

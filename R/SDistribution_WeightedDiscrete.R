@@ -1,4 +1,4 @@
-#' @include SetInterval_SpecialSet.R ParameterSet.R
+
 #-------------------------------------------------------------
 #  Distribution Documentation
 #-------------------------------------------------------------
@@ -38,11 +38,10 @@ NULL
 #-------------------------------------------------------------
 # WeightedDiscrete Distribution Definition
 #-------------------------------------------------------------
-WeightedDiscrete <- R6::R6Class("WeightedDiscrete", inherit = SDistribution, lock_objects = F)
+WeightedDiscrete <- R6Class("WeightedDiscrete", inherit = SDistribution, lock_objects = F)
 WeightedDiscrete$set("public","name","WeightedDiscrete")
 WeightedDiscrete$set("public","short_name","WeightDisc")
 WeightedDiscrete$set("public","description","WeightedDiscrete Probability Distribution.")
-WeightedDiscrete$set("public","package","distr6")
 
 WeightedDiscrete$set("public","mode",function(which = "all"){
   if(which == "all")
@@ -155,7 +154,7 @@ WeightedDiscrete$set("public","initialize",function(data, decorators = NULL, ver
   }
 
   super$initialize(decorators = decorators, pdf = pdf, cdf = cdf, quantile = quantile, rand = rand,
-                   support = Set$new(private$.data$x),
+                   support = Set$new(private$.data$x, class = "numeric"),
                    symmetric = FALSE, type = Reals$new(),
                    valueSupport = "discrete",
                    variateForm = "univariate")
@@ -166,4 +165,4 @@ WeightedDiscrete$set("public","initialize",function(data, decorators = NULL, ver
                               data.table::data.table(ShortName = "WeightDisc", ClassName = "WeightedDiscrete",
                                                      Type = "\u211D", ValueSupport = "discrete",
                                                      VariateForm = "univariate",
-                                                     Package = "distr6"))
+                                                     Package = "-"))

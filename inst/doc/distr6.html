@@ -11,7 +11,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
-<meta name="date" content="2020-01-29" />
+<meta name="date" content="2020-02-19" />
 
 <title>Introduction to distr6</title>
 
@@ -301,7 +301,7 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 
 
 <h1 class="title toc-ignore">Introduction to distr6</h1>
-<h4 class="date">2020-01-29</h4>
+<h4 class="date">2020-02-19</h4>
 
 
 
@@ -388,13 +388,13 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <a class="sourceLine" id="cb10-6" data-line-number="6"><span class="co">#&gt; [1] &quot;no skew&quot;</span></a>
 <a class="sourceLine" id="cb10-7" data-line-number="7"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb10-8" data-line-number="8"><span class="co">#&gt; $support</span></a>
-<a class="sourceLine" id="cb10-9" data-line-number="9"><span class="co">#&gt; [1] &quot;ℝ&quot;</span></a>
+<a class="sourceLine" id="cb10-9" data-line-number="9"><span class="co">#&gt; ℝ </span></a>
 <a class="sourceLine" id="cb10-10" data-line-number="10"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb10-11" data-line-number="11"><span class="co">#&gt; $symmetry</span></a>
 <a class="sourceLine" id="cb10-12" data-line-number="12"><span class="co">#&gt; [1] &quot;symmetric&quot;</span></a>
 <a class="sourceLine" id="cb10-13" data-line-number="13">N<span class="op">$</span><span class="kw">traits</span>()</a>
 <a class="sourceLine" id="cb10-14" data-line-number="14"><span class="co">#&gt; $type</span></a>
-<a class="sourceLine" id="cb10-15" data-line-number="15"><span class="co">#&gt; [1] &quot;ℝ&quot;</span></a>
+<a class="sourceLine" id="cb10-15" data-line-number="15"><span class="co">#&gt; ℝ </span></a>
 <a class="sourceLine" id="cb10-16" data-line-number="16"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb10-17" data-line-number="17"><span class="co">#&gt; $valueSupport</span></a>
 <a class="sourceLine" id="cb10-18" data-line-number="18"><span class="co">#&gt; [1] &quot;continuous&quot;</span></a>
@@ -452,12 +452,12 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <p>Instead of having to worry about remembering every distribution in R, distr6 provides a way of listing all of these, and filtering by traits or package. We only show the first 5 rows of this to save space.</p>
 <div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1"><span class="kw">head</span>(<span class="kw">listDistributions</span>())</a>
 <a class="sourceLine" id="cb16-2" data-line-number="2"><span class="co">#&gt;    ShortName      ClassName Type ValueSupport VariateForm Package</span></a>
-<a class="sourceLine" id="cb16-3" data-line-number="3"><span class="co">#&gt; 1:       Arc        Arcsine    ℝ   continuous  univariate  distr6</span></a>
+<a class="sourceLine" id="cb16-3" data-line-number="3"><span class="co">#&gt; 1:       Arc        Arcsine    ℝ   continuous  univariate       -</span></a>
 <a class="sourceLine" id="cb16-4" data-line-number="4"><span class="co">#&gt; 2:      Bern      Bernoulli   ℕ0     discrete  univariate   stats</span></a>
 <a class="sourceLine" id="cb16-5" data-line-number="5"><span class="co">#&gt; 3:      Beta           Beta   ℝ+   continuous  univariate   stats</span></a>
 <a class="sourceLine" id="cb16-6" data-line-number="6"><span class="co">#&gt; 4:    BetaNC BetaNoncentral   ℝ+   continuous  univariate   stats</span></a>
 <a class="sourceLine" id="cb16-7" data-line-number="7"><span class="co">#&gt; 5:     Binom       Binomial   ℕ0     discrete  univariate   stats</span></a>
-<a class="sourceLine" id="cb16-8" data-line-number="8"><span class="co">#&gt; 6:       Cat    Categorical    ℂ     discrete  univariate  distr6</span></a>
+<a class="sourceLine" id="cb16-8" data-line-number="8"><span class="co">#&gt; 6:       Cat    Categorical    ℂ     discrete  univariate       -</span></a>
 <a class="sourceLine" id="cb16-9" data-line-number="9"><span class="kw">head</span>(<span class="kw">listDistributions</span>(<span class="dt">simplify =</span> <span class="ot">TRUE</span>))</a>
 <a class="sourceLine" id="cb16-10" data-line-number="10"><span class="co">#&gt; [1] &quot;Arcsine&quot;        &quot;Bernoulli&quot;      &quot;Beta&quot;           &quot;BetaNoncentral&quot;</span></a>
 <a class="sourceLine" id="cb16-11" data-line-number="11"><span class="co">#&gt; [5] &quot;Binomial&quot;       &quot;Categorical&quot;</span></a>
@@ -466,20 +466,14 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <a class="sourceLine" id="cb16-14" data-line-number="14"><span class="co">#&gt;    ShortName       ClassName Type ValueSupport VariateForm Package</span></a>
 <a class="sourceLine" id="cb16-15" data-line-number="15"><span class="co">#&gt; 1:      Bern       Bernoulli   ℕ0     discrete  univariate   stats</span></a>
 <a class="sourceLine" id="cb16-16" data-line-number="16"><span class="co">#&gt; 2:     Binom        Binomial   ℕ0     discrete  univariate   stats</span></a>
-<a class="sourceLine" id="cb16-17" data-line-number="17"><span class="co">#&gt; 3:       Cat     Categorical    ℂ     discrete  univariate  distr6</span></a>
-<a class="sourceLine" id="cb16-18" data-line-number="18"><span class="co">#&gt; 4:     Degen      Degenerate    ℝ     discrete  univariate  distr6</span></a>
-<a class="sourceLine" id="cb16-19" data-line-number="19"><span class="co">#&gt; 5:     DUnif DiscreteUniform    ℤ     discrete  univariate  distr6</span></a>
-<a class="sourceLine" id="cb16-20" data-line-number="20"><span class="co">#&gt; 6:       Emp       Empirical    ℝ     discrete  univariate  distr6</span></a>
+<a class="sourceLine" id="cb16-17" data-line-number="17"><span class="co">#&gt; 3:       Cat     Categorical    ℂ     discrete  univariate       -</span></a>
+<a class="sourceLine" id="cb16-18" data-line-number="18"><span class="co">#&gt; 4:     Degen      Degenerate    ℝ     discrete  univariate       -</span></a>
+<a class="sourceLine" id="cb16-19" data-line-number="19"><span class="co">#&gt; 5:     DUnif DiscreteUniform    ℤ     discrete  univariate       -</span></a>
+<a class="sourceLine" id="cb16-20" data-line-number="20"><span class="co">#&gt; 6:       Emp       Empirical    ℝ     discrete  univariate       -</span></a>
 <a class="sourceLine" id="cb16-21" data-line-number="21"></a>
 <a class="sourceLine" id="cb16-22" data-line-number="22"><span class="co"># Multiple filters can be used, note this is case-insensitive</span></a>
 <a class="sourceLine" id="cb16-23" data-line-number="23"><span class="kw">head</span>(<span class="kw">listDistributions</span>(<span class="dt">filter =</span> <span class="kw">list</span>(<span class="dt">VaLueSupport =</span> <span class="st">&quot;continuous&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;distr6&quot;</span>)))</a>
-<a class="sourceLine" id="cb16-24" data-line-number="24"><span class="co">#&gt;    ShortName ClassName    Type ValueSupport  VariateForm Package</span></a>
-<a class="sourceLine" id="cb16-25" data-line-number="25"><span class="co">#&gt; 1:       Arc   Arcsine       ℝ   continuous   univariate  distr6</span></a>
-<a class="sourceLine" id="cb16-26" data-line-number="26"><span class="co">#&gt; 2:      Diri Dirichlet [0,1]^K   continuous multivariate  distr6</span></a>
-<a class="sourceLine" id="cb16-27" data-line-number="27"><span class="co">#&gt; 3:      Frec   Frechet       ℝ   continuous   univariate  distr6</span></a>
-<a class="sourceLine" id="cb16-28" data-line-number="28"><span class="co">#&gt; 4:      Gomp  Gompertz      ℝ+   continuous   univariate  distr6</span></a>
-<a class="sourceLine" id="cb16-29" data-line-number="29"><span class="co">#&gt; 5:      Gumb    Gumbel      ℝ+   continuous   univariate  distr6</span></a>
-<a class="sourceLine" id="cb16-30" data-line-number="30"><span class="co">#&gt; 6:       Lap   Laplace       ℝ   continuous   univariate  distr6</span></a></code></pre></div>
+<a class="sourceLine" id="cb16-24" data-line-number="24"><span class="co">#&gt; Empty data.table (0 rows and 6 cols): ShortName,ClassName,Type,ValueSupport,VariateForm,Package</span></a></code></pre></div>
 </div>
 <div id="r6-s3-and-magrittr" class="section level3">
 <h3>R6, S3 and Magrittr</h3>

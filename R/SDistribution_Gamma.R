@@ -1,4 +1,4 @@
-#' @include SetInterval_SpecialSet.R ParameterSet.R
+
 #-------------------------------------------------------------
 # Gamma Distribution Documentation
 #-------------------------------------------------------------
@@ -49,11 +49,11 @@ NULL
 #-------------------------------------------------------------
 # Gamma Distribution Definition
 #-------------------------------------------------------------
-Gamma <- R6::R6Class("Gamma", inherit = SDistribution, lock_objects = F)
+Gamma <- R6Class("Gamma", inherit = SDistribution, lock_objects = F)
 Gamma$set("public","name","Gamma")
 Gamma$set("public","short_name","Gamma")
 Gamma$set("public","description","Gamma Probability Distribution.")
-Gamma$set("public","package","stats")
+Gamma$set("public","packages","stats")
 
 Gamma$set("public","mean",function(){
   return(self$getParameterValue("mean"))

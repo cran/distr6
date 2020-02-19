@@ -1,4 +1,4 @@
-#' @include SetInterval_SpecialSet.R ParameterSet.R
+
 #-------------------------------------------------------------
 # Binomial Distribution Documentation
 #-------------------------------------------------------------
@@ -47,11 +47,11 @@ NULL
 #-------------------------------------------------------------
 # Binomial Distribution Definition
 #-------------------------------------------------------------
-Binomial <- R6::R6Class("Binomial", inherit = SDistribution, lock_objects = F)
+Binomial <- R6Class("Binomial", inherit = SDistribution, lock_objects = F)
 Binomial$set("public","name","Binomial")
 Binomial$set("public","short_name","Binom")
 Binomial$set("public","description","Binomial Probability Distribution.")
-Binomial$set("public","package","stats")
+Binomial$set("public","packages","stats")
 
 Binomial$set("public","mean",function(){
   self$getParameterValue("size") * self$getParameterValue("prob")
@@ -120,7 +120,7 @@ Binomial$set("public","initialize",function(size = 10, prob = 0.5, qprob = NULL,
   rand = function(n) rbinom(n, self$getParameterValue("size"), self$getParameterValue("prob"))
 
   super$initialize(decorators = decorators, pdf = pdf, cdf = cdf, quantile = quantile,
-                   rand = rand, support = Set$new(0:size),
+                   rand = rand, support = Set$new(0:size, class = "integer"),
                    symmetric = symmetric,type = Naturals$new(),
                    valueSupport = "discrete",
                    variateForm = "univariate")

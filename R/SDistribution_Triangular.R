@@ -1,4 +1,4 @@
-#' @include SetInterval_SpecialSet.R ParameterSet.R
+
 #-------------------------------------------------------------
 # Triangular Distribution Documentation
 #-------------------------------------------------------------
@@ -53,10 +53,9 @@ NULL
 #-------------------------------------------------------------
 # Triangular Distribution Definition
 #-------------------------------------------------------------
-Triangular <- R6::R6Class("Triangular", inherit = SDistribution, lock_objects = F)
+Triangular <- R6Class("Triangular", inherit = SDistribution, lock_objects = F)
 Triangular$set("public","name","Triangular")
 Triangular$set("public","short_name","Tri")
-Triangular$set("public","package","distr6")
 Triangular$set("private",".type","symmetric")
 
 Triangular$set("public","mean",function(){
@@ -230,4 +229,4 @@ Triangular$set("public","initialize",function(lower = 0, upper = 1, mode = (lowe
                               data.table::data.table(ShortName = "Tri", ClassName = "Triangular",
                                                      Type = "\u211D", ValueSupport = "continuous",
                                                      VariateForm = "univariate",
-                                                     Package = "distr6"))
+                                                     Package = "-"))

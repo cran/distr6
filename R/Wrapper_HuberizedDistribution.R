@@ -45,7 +45,7 @@
 #'
 #' @export
 NULL
-HuberizedDistribution <- R6::R6Class("HuberizedDistribution", inherit = DistributionWrapper, lock_objects = FALSE)
+HuberizedDistribution <- R6Class("HuberizedDistribution", inherit = DistributionWrapper, lock_objects = FALSE)
 .distr6$wrappers <- append(.distr6$wrappers, list(HuberizedDistribution = HuberizedDistribution))
 
 HuberizedDistribution$set("public","initialize",function(distribution, lower = NULL, upper = NULL){
@@ -96,13 +96,14 @@ HuberizedDistribution$set("public","initialize",function(distribution, lower = N
   }
 
   private$.outerParameters <- ParameterSet$new(id = list("hubLower", "hubUpper"), value = list(lower, upper),
-                         support = list(Reals$new(), Reals$new()), settable = list(FALSE, FALSE),
-                         description = list("Lower limit of huberization.",
-                                            "Upper limit of huberization."))
+                                               support = list(Reals$new() + Set$new(-Inf,Inf), Reals$new() + Set$new(-Inf,Inf)),
+                                               settable = list(FALSE, FALSE),
+                                               description = list("Lower limit of huberization.",
+                                                                  "Upper limit of huberization."))
 
   if(testDiscrete(distribution)){
 
-    support <- Set$new(lower:upper)
+    support <- Interval$new(lower, upper, class = "integer")
 
     pdf <- function(x1){
       pdf = x1
@@ -146,8 +147,8 @@ HuberizedDistribution$set("public","setParameterValue",function(..., lst = NULL,
 
 
   super$setParameterValue(lst = lst, error = error)
-  if(inherits(self$support(),"Set"))
-    private$.properties$support <- Set$new(self$getParameterValue("hubLower"):self$getParameterValue("hubUpper"))
+  if(self$support()$class == "integer")
+    private$.properties$support <- Interval$new(self$getParameterValue("hubLower"), self$getParameterValue("hubUpper"), class = "integer")
   else
     private$.properties$support <- Interval$new(self$getParameterValue("hubLower"), self$getParameterValue("hubUpper"))
 

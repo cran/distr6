@@ -1,4 +1,4 @@
-#' @include SetInterval_SpecialSet.R ParameterSet.R
+
 #-------------------------------------------------------------
 # Logarithmic Distribution Documentation
 #-------------------------------------------------------------
@@ -43,11 +43,11 @@ NULL
 #-------------------------------------------------------------
 # Logarithmic Distribution Definition
 #-------------------------------------------------------------
-Logarithmic <- R6::R6Class("Logarithmic", inherit = SDistribution, lock_objects = F)
+Logarithmic <- R6Class("Logarithmic", inherit = SDistribution, lock_objects = F)
 Logarithmic$set("public","name","Logarithmic")
 Logarithmic$set("public","short_name","Log")
 Logarithmic$set("public","description","Logarithmic Probability Distribution.")
-Logarithmic$set("public","package","extraDistr")
+Logarithmic$set("public","packages","extraDistr")
 
 Logarithmic$set("public","mean",function(){
   theta = self$getParameterValue("theta")

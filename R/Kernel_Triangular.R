@@ -1,4 +1,4 @@
-#' @include SetInterval_SpecialSet.R ParameterSet.R
+
 #-------------------------------------------------------------
 # Triangular Kernel
 #-------------------------------------------------------------
@@ -28,7 +28,7 @@ NULL
 #-------------------------------------------------------------
 # Uniform Kernel Definition
 #-------------------------------------------------------------
-TriangularKernel <- R6::R6Class("TriangularKernel", inherit = Kernel, lock_objects = F)
+TriangularKernel <- R6Class("TriangularKernel", inherit = Kernel, lock_objects = F)
 TriangularKernel$set("public","name","TriangularKernel")
 TriangularKernel$set("public","short_name","Tri")
 TriangularKernel$set("public","description","Triangular Kernel")
@@ -63,4 +63,4 @@ TriangularKernel$set("public","initialize",function(decorators = NULL){
   invisible(self)
 }) # CDF, QUANTILE & VAR MISSING
 
-.distr6$kernels = rbind(.distr6$kernels, data.table::data.table(ShortName = "Tri", ClassName = "TriangularKernel", Support = "[-1,1]"))
+.distr6$kernels = rbind(.distr6$kernels, data.table::data.table(ShortName = "Tri", ClassName = "TriangularKernel", Support = "[-1,1]", Packages = "-"))

@@ -39,7 +39,7 @@
 #'
 #' @export
 NULL
-TruncatedDistribution <- R6::R6Class("TruncatedDistribution", inherit = DistributionWrapper, lock_objects = FALSE)
+TruncatedDistribution <- R6Class("TruncatedDistribution", inherit = DistributionWrapper, lock_objects = FALSE)
 .distr6$wrappers <- append(.distr6$wrappers, list(TruncatedDistribution = TruncatedDistribution))
 
 TruncatedDistribution$set("public","initialize",function(distribution, lower = NULL, upper = NULL){
@@ -79,12 +79,13 @@ TruncatedDistribution$set("public","initialize",function(distribution, lower = N
   description = paste0(distribution$description, " Truncated between ",lower," and ",upper,".")
 
   private$.outerParameters <- ParameterSet$new(id = list("truncLower", "truncUpper"), value = list(lower, upper),
-                                               support = list(Reals$new(), Reals$new()), settable = list(FALSE, FALSE),
+                                               support = list(Reals$new() + Set$new(-Inf,Inf), Reals$new() + Set$new(-Inf,Inf)),
+                                               settable = list(FALSE, FALSE),
                                                description = list("Lower limit of truncation.",
                                                                   "Upper limit of truncation."))
 
   if(testDiscrete(distribution))
-    support <- Set$new(lower:upper)
+    support <- Interval$new(lower,upper,class="integer")
   else
     support <- Interval$new(lower,upper)
 
@@ -107,8 +108,8 @@ TruncatedDistribution$set("public","setParameterValue",function(..., lst = NULL,
 
 
   super$setParameterValue(lst = lst, error = error)
-  if(inherits(self$support(),"Set"))
-    private$.properties$support <- Set$new(self$getParameterValue("truncLower"):self$getParameterValue("truncUpper"))
+  if(self$support()$class == "integer")
+    private$.properties$support <- Interval$new(self$getParameterValue("truncLower"), self$getParameterValue("truncUpper"), class = "integer")
   else
     private$.properties$support <- Interval$new(self$getParameterValue("truncLower"), self$getParameterValue("truncUpper"))
 

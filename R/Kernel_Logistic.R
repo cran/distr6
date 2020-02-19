@@ -1,4 +1,4 @@
-#' @include SetInterval_SpecialSet.R ParameterSet.R
+
 #-------------------------------------------------------------
 # Logistic Kernel
 #-------------------------------------------------------------
@@ -28,7 +28,7 @@ NULL
 #-------------------------------------------------------------
 # LogisticKernel Kernel Definition
 #-------------------------------------------------------------
-LogisticKernel <- R6::R6Class("LogisticKernel", inherit = Kernel, lock_objects = F)
+LogisticKernel <- R6Class("LogisticKernel", inherit = Kernel, lock_objects = F)
 LogisticKernel$set("public","name","LogisticKernel")
 LogisticKernel$set("public","short_name","Logis")
 LogisticKernel$set("public","description","Logistic Kernel")
@@ -55,4 +55,4 @@ LogisticKernel$set("public","initialize",function(decorators = NULL){
   invisible(self)
 })
 
-.distr6$kernels = rbind(.distr6$kernels, data.table::data.table(ShortName = "Logis", ClassName = "LogisticKernel", Support = "\u211D"))
+.distr6$kernels = rbind(.distr6$kernels, data.table::data.table(ShortName = "Logis", ClassName = "LogisticKernel", Support = "\u211D", Packages = "-"))
