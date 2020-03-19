@@ -8,7 +8,7 @@ Returns an R6 object inheriting from class SDistribution.
 }
 \description{
 Mathematical and statistical functions for the Weibull distribution, which
-is commonly used in survival analysis and is a special case of the Generalized Extreme Value distribution.
+is commonly used in survival analysis as it satisfies both PH and AFT requirements.
 }
 \details{
 The Weibull distribution parameterised with  shape, \eqn{\alpha}, and scale, \eqn{\beta}, is defined by the pdf, \deqn{f(x) = (\alpha/\beta)(x/\beta)^{\alpha-1}exp(-x/\beta)^\alpha} for \eqn{\alpha, \beta > 0}.
@@ -55,20 +55,20 @@ omitted as no closed form analytic expression could be found, decorate with \cod
 
 \tabular{ll}{
 \strong{Accessor Methods} \tab \strong{Link} \cr
-\code{decorators()} \tab \code{\link{decorators}} \cr
-\code{traits()} \tab \code{\link{traits}} \cr
-\code{valueSupport()} \tab \code{\link{valueSupport}} \cr
-\code{variateForm()} \tab \code{\link{variateForm}} \cr
-\code{type()} \tab \code{\link{type}} \cr
-\code{properties()} \tab \code{\link{properties}} \cr
-\code{support()} \tab \code{\link{support}} \cr
-\code{symmetry()} \tab \code{\link{symmetry}} \cr
-\code{sup()}  \tab \code{\link{sup}} \cr
-\code{inf()} \tab \code{\link{inf}} \cr
-\code{dmax()}  \tab \code{\link{dmax}} \cr
-\code{dmin()} \tab \code{\link{dmin}} \cr
-\code{skewnessType()} \tab \code{\link{skewnessType}} \cr
-\code{kurtosisType()} \tab \code{\link{kurtosisType}} \cr
+\code{decorators} \tab \code{\link{decorators}} \cr
+\code{traits} \tab \code{\link{traits}} \cr
+\code{valueSupport} \tab \code{\link{valueSupport}} \cr
+\code{variateForm} \tab \code{\link{variateForm}} \cr
+\code{type} \tab \code{\link{type}} \cr
+\code{properties} \tab \code{\link{properties}} \cr
+\code{support} \tab \code{\link{support}} \cr
+\code{symmetry} \tab \code{\link{symmetry}} \cr
+\code{sup}  \tab \code{\link{sup}} \cr
+\code{inf} \tab \code{\link{inf}} \cr
+\code{dmax}  \tab \code{\link{dmax}} \cr
+\code{dmin} \tab \code{\link{dmin}} \cr
+\code{skewnessType} \tab \code{\link{skewnessType}} \cr
+\code{kurtosisType} \tab \code{\link{kurtosisType}} \cr
 
 \tab \cr \tab \cr \tab \cr
 

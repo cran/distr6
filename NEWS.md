@@ -1,3 +1,10 @@
+# distr6 1.3.5
+
+* Added Erlang distribution
+* Fixed mistake in documentation for `Weibull`, thanks to Paul Northrop (@paulnorthrop) for pointing this out.
+* Fixed bug in `plot` preventing only `quantile` being plotted on its own
+* Converted descriptive public methods to active bindings. Unfortunately this will break reverse dependencies as there's no way to soft deprecate these. Affected methods are:  `decorators, traits, valueSupport, variateForm, type, properties, support, symmetry, sup, inf, dmax, dmin, kurtosisType, skewnessType`
+
 # distr6 1.3.4
 
 - Bug fix in `VectorDistribution` that was causing decorators not to be added properly

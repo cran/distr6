@@ -1,6 +1,6 @@
 Package: distr6
 Title: The Complete R6 Probability Distributions Interface
-Version: 1.3.4
+Version: 1.3.5
 Authors@R: 
       c(person(given = "Raphael",
              family = "Sonabend",
@@ -92,7 +92,8 @@ Collate: 'helpers.R' 'distr6_globals.R' 'Distribution.R'
         'SDistribution_ChiSquaredNoncentral.R'
         'SDistribution_Degenerate.R' 'SDistribution_Dirichlet.R'
         'SDistribution_DiscreteUniform.R' 'SDistribution_Empirical.R'
-        'SDistribution_Exponential.R' 'SDistribution_FDistribution.R'
+        'SDistribution_Erlang.R' 'SDistribution_Exponential.R'
+        'SDistribution_FDistribution.R'
         'SDistribution_FDistributionNoncentral.R'
         'SDistribution_Frechet.R' 'SDistribution_Gamma.R'
         'SDistribution_Geometric.R' 'SDistribution_Gompertz.R'
@@ -124,7 +125,7 @@ Collate: 'helpers.R' 'distr6_globals.R' 'Distribution.R'
         'plot_discrete.R' 'plot.R' 'qqplot.R'
         'simulateEmpiricalDistribution.R' 'skewType.R' 'zzz.R'
 NeedsCompilation: no
-Packaged: 2020-02-19 19:52:43 UTC; raphael
+Packaged: 2020-03-18 21:49:58 UTC; raphael
 Author: Raphael Sonabend [aut, cre] (<https://orcid.org/0000-0001-9225-4654>),
   Franz Kiraly [aut],
   Peter Ruckdeschel [ctb] (Author of distr),
@@ -141,4 +142,4 @@ Author: Raphael Sonabend [aut, cre] (<https://orcid.org/0000-0001-9225-4654>),
   Qian Zhou [ctb]
 Maintainer: Raphael Sonabend <raphael.sonabend.15@ucl.ac.uk>
 Repository: CRAN
-Date/Publication: 2020-02-19 23:30:02 UTC
+Date/Publication: 2020-03-19 15:10:14 UTC
