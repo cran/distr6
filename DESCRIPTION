@@ -1,6 +1,6 @@
 Package: distr6
 Title: The Complete R6 Probability Distributions Interface
-Version: 1.3.5
+Version: 1.3.6
 Authors@R: 
       c(person(given = "Raphael",
              family = "Sonabend",
@@ -74,7 +74,7 @@ URL: https://alan-turing-institute.github.io/distr6/,
 BugReports: https://github.com/alan-turing-institute/distr6/issues
 VignetteBuilder: knitr
 Encoding: UTF-8
-RoxygenNote: 7.0.2
+RoxygenNote: 7.1.0
 Collate: 'helpers.R' 'distr6_globals.R' 'Distribution.R'
         'DistributionDecorator.R'
         'DistributionDecorator_CoreStatistics.R'
@@ -122,10 +122,11 @@ Collate: 'helpers.R' 'distr6_globals.R' 'Distribution.R'
         'lines.R' 'listDecorators.R' 'listDistributions.R'
         'listKernels.R' 'listSpecialSets.R' 'listWrappers.R'
         'makeUniqueDistributions.R' 'measures.R' 'plot_continuous.R'
-        'plot_discrete.R' 'plot.R' 'qqplot.R'
+        'plot_discrete.R' 'plot_distribution.R'
+        'plot_vectordistribution.R' 'qqplot.R'
         'simulateEmpiricalDistribution.R' 'skewType.R' 'zzz.R'
-NeedsCompilation: no
-Packaged: 2020-03-18 21:49:58 UTC; raphael
+NeedsCompilation: yes
+Packaged: 2020-04-15 19:08:14 UTC; raphael
 Author: Raphael Sonabend [aut, cre] (<https://orcid.org/0000-0001-9225-4654>),
   Franz Kiraly [aut],
   Peter Ruckdeschel [ctb] (Author of distr),
@@ -142,4 +143,4 @@ Author: Raphael Sonabend [aut, cre] (<https://orcid.org/0000-0001-9225-4654>),
   Qian Zhou [ctb]
 Maintainer: Raphael Sonabend <raphael.sonabend.15@ucl.ac.uk>
 Repository: CRAN
-Date/Publication: 2020-03-19 15:10:14 UTC
+Date/Publication: 2020-04-16 05:20:03 UTC
