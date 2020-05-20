@@ -1,6 +1,6 @@
 Package: distr6
 Title: The Complete R6 Probability Distributions Interface
-Version: 1.3.6
+Version: 1.3.7
 Authors@R: 
       c(person(given = "Raphael",
              family = "Sonabend",
@@ -63,7 +63,7 @@ Authors@R:
              email = "zcakqz1@ucl.ac.uk") 
         )
 Description: An R6 object oriented distributions package. Unified interface for 42 probability distributions and 11 kernels including functionality for multiple scientific types. Additionally functionality for composite distributions and numerical imputation. Design patterns including wrappers and decorators are described in Gamma et al. (1994, ISBN:0-201-63361-2). For quick reference of probability distributions including d/p/q/r functions and results we refer to McLaughlin, M. P. (2001). Additionally Devroye (1986, ISBN:0-387-96305-7) for sampling the Dirichlet distribution, Gentle (2009) <doi:10.1007/978-0-387-98144-4> for sampling the Multivariate Normal distribution and Michael et al. (1976) <doi:10.2307/2683801> for sampling the Wald distribution.
-Imports: checkmate, data.table, R6, R62S3 (>= 1.4.0), set6 (>= 0.1.2),
+Imports: checkmate, data.table, R6, R62S3 (>= 1.4.0), set6 (>= 0.1.4),
         stats
 Suggests: expint, GoFKernel, knitr, testthat, devtools, rmarkdown,
         magrittr, extraDistr, actuar, remotes, pracma
@@ -125,8 +125,8 @@ Collate: 'helpers.R' 'distr6_globals.R' 'Distribution.R'
         'plot_discrete.R' 'plot_distribution.R'
         'plot_vectordistribution.R' 'qqplot.R'
         'simulateEmpiricalDistribution.R' 'skewType.R' 'zzz.R'
-NeedsCompilation: yes
-Packaged: 2020-04-15 19:08:14 UTC; raphael
+NeedsCompilation: no
+Packaged: 2020-05-20 10:25:19 UTC; raphael
 Author: Raphael Sonabend [aut, cre] (<https://orcid.org/0000-0001-9225-4654>),
   Franz Kiraly [aut],
   Peter Ruckdeschel [ctb] (Author of distr),
@@ -143,4 +143,4 @@ Author: Raphael Sonabend [aut, cre] (<https://orcid.org/0000-0001-9225-4654>),
   Qian Zhou [ctb]
 Maintainer: Raphael Sonabend <raphael.sonabend.15@ucl.ac.uk>
 Repository: CRAN
-Date/Publication: 2020-04-16 05:20:03 UTC
+Date/Publication: 2020-05-20 12:50:03 UTC
