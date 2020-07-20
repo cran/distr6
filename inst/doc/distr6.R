@@ -12,7 +12,7 @@ Normal$new(mean = 2, sd = 2)
 Normal$new(mean = 3, prec = 0.5)
 
 ## -----------------------------------------------------------------------------
-N <- Normal$new(verbose = TRUE)
+N <- Normal$new()
 N$print()
 N$parameters()
 
@@ -24,7 +24,7 @@ N$getParameterValue("prec")
 N$parameters()
 
 ## -----------------------------------------------------------------------------
-N$parameters()$print(update = T)
+N$parameters()$print(hide_cols = NULL)
 
 ## -----------------------------------------------------------------------------
 N$setParameterValue(list(var = 3))$getParameterValue("var")
@@ -41,20 +41,16 @@ N$properties
 N$traits
 
 ## -----------------------------------------------------------------------------
-N$valueSupport
-N$skewnessType
-
-## -----------------------------------------------------------------------------
 N$pdf(2) # dnorm(2)
 N$cdf(2) # pnorm(2)
-N$quantile(2) # qnorm(2)
+N$quantile(0.42) # qnorm(2)
 N$rand(2) # rnorm(2)
 
 ## -----------------------------------------------------------------------------
 B <- Beta$new(shape1 = 0.582, shape2 = 1.2490)
 B$pdf(2) # dbeta(2, 0.582, 1.2490)
 B$cdf(2) # pbeta(2, 0.582, 1.2490)
-B$quantile(2) # qbeta(2, 0.582, 1.2490)
+B$quantile(0.42) # qbeta(2, 0.582, 1.2490)
 B$rand(2) # rbeta(2, 0.582, 1.2490)
 
 ## -----------------------------------------------------------------------------

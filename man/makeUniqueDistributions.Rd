@@ -10,11 +10,12 @@ makeUniqueDistributions(distlist)
 \item{distlist}{list of Distributions.}
 }
 \value{
-The list of inputted distributions except with the \code{short_name}s manipulated as necessary to
-make them unique.
+The list of inputted distributions except with the \code{short_name}s manipulated as
+necessary to make them unique.
 }
 \description{
-Helper function to lapply over the given distribution list, and make the \code{short_name}s unique.
+Helper function to lapply over the given distribution list, and make the
+\code{short_name}s unique.
 }
 \details{
 The \code{short_name}s are made unique by suffixing each with a consecutive
@@ -22,5 +23,4 @@ number so that the names are no longer duplicated.
 }
 \examples{
 makeUniqueDistributions(list(Binomial$new(), Binomial$new()))
-
 }

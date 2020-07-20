@@ -11,9 +11,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 
 
-<meta name="date" content="2020-05-20" />
+<meta name="date" content="2020-07-20" />
 
-<title>Introduction to distr6</title>
+<title>distr6</title>
 
 
 
@@ -298,8 +298,8 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 
 
 
-<h1 class="title toc-ignore">Introduction to distr6</h1>
-<h4 class="date">2020-05-20</h4>
+<h1 class="title toc-ignore">distr6</h1>
+<h4 class="date">2020-07-20</h4>
 
 
 
@@ -311,30 +311,30 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <h3>Construction and Parameterisation</h3>
 <p>All distributions are constructed using R6 dollar sign notation The default Normal distribution is the Standard Normal parameterised with mean and var</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1">Normal<span class="op">$</span><span class="kw">new</span>()</a>
-<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="co">#&gt; Norm(mean = 0, var = 1)</span></a></code></pre></div>
+<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="co">#&gt; Norm(mean = 0, var = 1, sd = 1, prec = 1)</span></a></code></pre></div>
 <p>But we could also parameterise with standard deviation or precision. Note that whichever we choose is clearly printed.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">Normal<span class="op">$</span><span class="kw">new</span>(<span class="dt">mean =</span> <span class="dv">2</span>, <span class="dt">sd =</span> <span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="co">#&gt; Norm(mean = 2, sd = 2)</span></a>
+<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="co">#&gt; Norm(mean = 2, var = 4, sd = 2, prec = 0.25)</span></a>
 <a class="sourceLine" id="cb2-3" data-line-number="3">Normal<span class="op">$</span><span class="kw">new</span>(<span class="dt">mean =</span> <span class="dv">3</span>, <span class="dt">prec =</span> <span class="fl">0.5</span>)</a>
-<a class="sourceLine" id="cb2-4" data-line-number="4"><span class="co">#&gt; Norm(mean = 3, prec = 0.5)</span></a></code></pre></div>
-<p>But all parameters are available to us via the parameters method. The verbose option displays a parameterisation message in construction. Note how all available parameters are displayed, but only the ones chosen in construction are shown in the print method.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">N &lt;-<span class="st"> </span>Normal<span class="op">$</span><span class="kw">new</span>(<span class="dt">verbose =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="co">#&gt; Parameterised with mean and var.</span></a>
-<a class="sourceLine" id="cb3-3" data-line-number="3">N<span class="op">$</span><span class="kw">print</span>()</a>
-<a class="sourceLine" id="cb3-4" data-line-number="4"><span class="co">#&gt; Norm(mean = 0, var = 1)</span></a>
-<a class="sourceLine" id="cb3-5" data-line-number="5">N<span class="op">$</span><span class="kw">parameters</span>()</a>
-<a class="sourceLine" id="cb3-6" data-line-number="6"><span class="co">#&gt;      id value support                                 description</span></a>
-<a class="sourceLine" id="cb3-7" data-line-number="7"><span class="co">#&gt; 1: mean     0       ℝ                   Mean - Location Parameter</span></a>
-<a class="sourceLine" id="cb3-8" data-line-number="8"><span class="co">#&gt; 2:  var     1      ℝ+          Variance - Squared Scale Parameter</span></a>
-<a class="sourceLine" id="cb3-9" data-line-number="9"><span class="co">#&gt; 3:   sd     1      ℝ+        Standard Deviation - Scale Parameter</span></a>
-<a class="sourceLine" id="cb3-10" data-line-number="10"><span class="co">#&gt; 4: prec     1      ℝ+ Precision - Inverse Squared Scale Parameter</span></a></code></pre></div>
+<a class="sourceLine" id="cb2-4" data-line-number="4"><span class="co">#&gt; Norm(mean = 3, var = 2, sd = 1.4142135623731, prec = 0.5)</span></a></code></pre></div>
+<p>But all parameters are available to us via the parameters method. Note how all available parameters are displayed, but only the ones chosen in construction are shown in the print method.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">N &lt;-<span class="st"> </span>Normal<span class="op">$</span><span class="kw">new</span>()</a>
+<a class="sourceLine" id="cb3-2" data-line-number="2">N<span class="op">$</span><span class="kw">print</span>()</a>
+<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="co">#&gt; Norm(mean = 0, var = 1, sd = 1, prec = 1)</span></a>
+<a class="sourceLine" id="cb3-4" data-line-number="4">N<span class="op">$</span><span class="kw">parameters</span>()</a>
+<a class="sourceLine" id="cb3-5" data-line-number="5"><span class="co">#&gt;      id value support                                 description</span></a>
+<a class="sourceLine" id="cb3-6" data-line-number="6"><span class="co">#&gt; 1: mean     0       ℝ                   Mean - Location Parameter</span></a>
+<a class="sourceLine" id="cb3-7" data-line-number="7"><span class="co">#&gt; 2:  var     1      ℝ+          Variance - Squared Scale Parameter</span></a>
+<a class="sourceLine" id="cb3-8" data-line-number="8"><span class="co">#&gt; 3:   sd     1      ℝ+        Standard Deviation - Scale Parameter</span></a>
+<a class="sourceLine" id="cb3-9" data-line-number="9"><span class="co">#&gt; 4: prec     1      ℝ+ Precision - Inverse Squared Scale Parameter</span></a></code></pre></div>
 </div>
 <div id="parameters-in-distr6" class="section level3">
 <h3>Parameters in distr6</h3>
 <p>Parameters are accessed with getParameterValue and edited with setParameterValue</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">N<span class="op">$</span><span class="kw">setParameterValue</span>(<span class="kw">list</span>(<span class="dt">prec =</span> <span class="dv">2</span>))</a>
-<a class="sourceLine" id="cb4-2" data-line-number="2">N<span class="op">$</span><span class="kw">getParameterValue</span>(<span class="st">&quot;prec&quot;</span>)</a>
-<a class="sourceLine" id="cb4-3" data-line-number="3"><span class="co">#&gt; [1] 1</span></a></code></pre></div>
+<a class="sourceLine" id="cb4-2" data-line-number="2"><span class="co">#&gt; Warning: Parameter names and new values must be provided.</span></a>
+<a class="sourceLine" id="cb4-3" data-line-number="3">N<span class="op">$</span><span class="kw">getParameterValue</span>(<span class="st">&quot;prec&quot;</span>)</a>
+<a class="sourceLine" id="cb4-4" data-line-number="4"><span class="co">#&gt; [1] 1</span></a></code></pre></div>
 <p>Note how all parameters that are related also update</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">N<span class="op">$</span><span class="kw">parameters</span>()</a>
 <a class="sourceLine" id="cb5-2" data-line-number="2"><span class="co">#&gt;      id value support                                 description</span></a>
@@ -343,25 +343,26 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <a class="sourceLine" id="cb5-5" data-line-number="5"><span class="co">#&gt; 3:   sd     1      ℝ+        Standard Deviation - Scale Parameter</span></a>
 <a class="sourceLine" id="cb5-6" data-line-number="6"><span class="co">#&gt; 4: prec     1      ℝ+ Precision - Inverse Squared Scale Parameter</span></a></code></pre></div>
 <p>To view the functions that relate these parameters add the following</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">N<span class="op">$</span><span class="kw">parameters</span>()<span class="op">$</span><span class="kw">print</span>(<span class="dt">update =</span> T)</a>
-<a class="sourceLine" id="cb6-2" data-line-number="2"><span class="co">#&gt;      id value support                                 description</span></a>
-<a class="sourceLine" id="cb6-3" data-line-number="3"><span class="co">#&gt; 1: mean     0       ℝ                   Mean - Location Parameter</span></a>
-<a class="sourceLine" id="cb6-4" data-line-number="4"><span class="co">#&gt; 2:  var     1      ℝ+          Variance - Squared Scale Parameter</span></a>
-<a class="sourceLine" id="cb6-5" data-line-number="5"><span class="co">#&gt; 3:   sd     1      ℝ+        Standard Deviation - Scale Parameter</span></a>
-<a class="sourceLine" id="cb6-6" data-line-number="6"><span class="co">#&gt; 4: prec     1      ℝ+ Precision - Inverse Squared Scale Parameter</span></a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">N<span class="op">$</span><span class="kw">parameters</span>()<span class="op">$</span><span class="kw">print</span>(<span class="dt">hide_cols =</span> <span class="ot">NULL</span>)</a>
+<a class="sourceLine" id="cb6-2" data-line-number="2"><span class="co">#&gt;      id value support settable                                 description</span></a>
+<a class="sourceLine" id="cb6-3" data-line-number="3"><span class="co">#&gt; 1: mean     0       ℝ     TRUE                   Mean - Location Parameter</span></a>
+<a class="sourceLine" id="cb6-4" data-line-number="4"><span class="co">#&gt; 2:  var     1      ℝ+     TRUE          Variance - Squared Scale Parameter</span></a>
+<a class="sourceLine" id="cb6-5" data-line-number="5"><span class="co">#&gt; 3:   sd     1      ℝ+     TRUE        Standard Deviation - Scale Parameter</span></a>
+<a class="sourceLine" id="cb6-6" data-line-number="6"><span class="co">#&gt; 4: prec     1      ℝ+     TRUE Precision - Inverse Squared Scale Parameter</span></a></code></pre></div>
 <p>The line above introduces ‘method chaining’, this occurs when one method is added to another. As another example, let’s edit and then access another parameter in the Normal distribution</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">N<span class="op">$</span><span class="kw">setParameterValue</span>(<span class="kw">list</span>(<span class="dt">var =</span> <span class="dv">3</span>))<span class="op">$</span><span class="kw">getParameterValue</span>(<span class="st">&quot;var&quot;</span>)</a>
-<a class="sourceLine" id="cb7-2" data-line-number="2"><span class="co">#&gt; [1] 1</span></a></code></pre></div>
+<a class="sourceLine" id="cb7-2" data-line-number="2"><span class="co">#&gt; Warning: Parameter names and new values must be provided.</span></a>
+<a class="sourceLine" id="cb7-3" data-line-number="3"><span class="co">#&gt; [1] 1</span></a></code></pre></div>
 </div>
 <div id="representing-a-distribution" class="section level3">
 <h3>Representing a distribution</h3>
 <p>In keeping with R conventions, distributions have a print and summary method to view key details. We have already seen how the print method displays the distribution short_name and the parameterisation.</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1">N<span class="op">$</span><span class="kw">print</span>()</a>
-<a class="sourceLine" id="cb8-2" data-line-number="2"><span class="co">#&gt; Norm(mean = 0, var = 1)</span></a></code></pre></div>
+<a class="sourceLine" id="cb8-2" data-line-number="2"><span class="co">#&gt; Norm(mean = 0, var = 1, sd = 1, prec = 1)</span></a></code></pre></div>
 <p>The summary method can also show basic statistics and distribution properties and traits. Adding the argument full = F, suppresses the output slightly.</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1">N<span class="op">$</span><span class="kw">summary</span>()</a>
 <a class="sourceLine" id="cb9-2" data-line-number="2"><span class="co">#&gt; Normal Probability Distribution. Parameterised with:</span></a>
-<a class="sourceLine" id="cb9-3" data-line-number="3"><span class="co">#&gt;   c(&quot;mean&quot;, &quot;var&quot;) = c(0, 1)</span></a>
+<a class="sourceLine" id="cb9-3" data-line-number="3"><span class="co">#&gt;   mean = 0, var = 1, sd = 1, prec = 1</span></a>
 <a class="sourceLine" id="cb9-4" data-line-number="4"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb9-5" data-line-number="5"><span class="co">#&gt;   Quick Statistics </span></a>
 <a class="sourceLine" id="cb9-6" data-line-number="6"><span class="co">#&gt;  Mean:       0</span></a>
@@ -374,7 +375,7 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <a class="sourceLine" id="cb9-13" data-line-number="13"><span class="co">#&gt;  Traits: continuous; univariate</span></a>
 <a class="sourceLine" id="cb9-14" data-line-number="14"><span class="co">#&gt;  Properties: symmetric; mesokurtic; no skew</span></a>
 <a class="sourceLine" id="cb9-15" data-line-number="15">N<span class="op">$</span><span class="kw">summary</span>(<span class="dt">full =</span> F)</a>
-<a class="sourceLine" id="cb9-16" data-line-number="16"><span class="co">#&gt; Norm(mean = 0, var = 1)</span></a>
+<a class="sourceLine" id="cb9-16" data-line-number="16"><span class="co">#&gt; Norm(mean = 0, var = 1, sd = 1, prec = 1)</span></a>
 <a class="sourceLine" id="cb9-17" data-line-number="17"><span class="co">#&gt; Scientific Type: ℝ    See $traits for more</span></a>
 <a class="sourceLine" id="cb9-18" data-line-number="18"><span class="co">#&gt; Support: ℝ    See $properties for more</span></a></code></pre></div>
 <p>All distributions are also comprised of properties and traits. Traits are ways of describing a class whereas properties describe an object. In simpler terms, this means that a trait is present independent of the distribution’s parameterisation whereas a property depends on the constructed parameters.</p>
@@ -391,105 +392,100 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <a class="sourceLine" id="cb10-11" data-line-number="11"><span class="co">#&gt; $symmetry</span></a>
 <a class="sourceLine" id="cb10-12" data-line-number="12"><span class="co">#&gt; [1] &quot;symmetric&quot;</span></a>
 <a class="sourceLine" id="cb10-13" data-line-number="13">N<span class="op">$</span>traits</a>
-<a class="sourceLine" id="cb10-14" data-line-number="14"><span class="co">#&gt; $type</span></a>
-<a class="sourceLine" id="cb10-15" data-line-number="15"><span class="co">#&gt; ℝ </span></a>
+<a class="sourceLine" id="cb10-14" data-line-number="14"><span class="co">#&gt; $valueSupport</span></a>
+<a class="sourceLine" id="cb10-15" data-line-number="15"><span class="co">#&gt; [1] &quot;continuous&quot;</span></a>
 <a class="sourceLine" id="cb10-16" data-line-number="16"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb10-17" data-line-number="17"><span class="co">#&gt; $valueSupport</span></a>
-<a class="sourceLine" id="cb10-18" data-line-number="18"><span class="co">#&gt; [1] &quot;continuous&quot;</span></a>
+<a class="sourceLine" id="cb10-17" data-line-number="17"><span class="co">#&gt; $variateForm</span></a>
+<a class="sourceLine" id="cb10-18" data-line-number="18"><span class="co">#&gt; [1] &quot;univariate&quot;</span></a>
 <a class="sourceLine" id="cb10-19" data-line-number="19"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb10-20" data-line-number="20"><span class="co">#&gt; $variateForm</span></a>
-<a class="sourceLine" id="cb10-21" data-line-number="21"><span class="co">#&gt; [1] &quot;univariate&quot;</span></a></code></pre></div>
-<p>Finally individual properties and traits are accessible via their own ‘getters’ for example:</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1">N<span class="op">$</span>valueSupport</a>
-<a class="sourceLine" id="cb11-2" data-line-number="2"><span class="co">#&gt; [1] &quot;continuous&quot;</span></a>
-<a class="sourceLine" id="cb11-3" data-line-number="3">N<span class="op">$</span>skewnessType</a>
-<a class="sourceLine" id="cb11-4" data-line-number="4"><span class="co">#&gt; [1] &quot;no skew&quot;</span></a></code></pre></div>
+<a class="sourceLine" id="cb10-20" data-line-number="20"><span class="co">#&gt; $type</span></a>
+<a class="sourceLine" id="cb10-21" data-line-number="21"><span class="co">#&gt; ℝ</span></a></code></pre></div>
 </div>
 <div id="dpqr" class="section level3">
 <h3>d/p/q/r</h3>
 <p>distr6 is intended not to replace R stats distributions but to be a different way of interfacing them. All distributions in R stats can be found in distr6 and all their d/p/q/r functions which refer to density/cumulative distribution/quantile/random are all available in distr6. Continuing our Normal distribution example:</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1">N<span class="op">$</span><span class="kw">pdf</span>(<span class="dv">2</span>) <span class="co"># dnorm(2)</span></a>
-<a class="sourceLine" id="cb12-2" data-line-number="2"><span class="co">#&gt; [1] 0.05399097</span></a>
-<a class="sourceLine" id="cb12-3" data-line-number="3">N<span class="op">$</span><span class="kw">cdf</span>(<span class="dv">2</span>) <span class="co"># pnorm(2)</span></a>
-<a class="sourceLine" id="cb12-4" data-line-number="4"><span class="co">#&gt; [1] 0.9772499</span></a>
-<a class="sourceLine" id="cb12-5" data-line-number="5">N<span class="op">$</span><span class="kw">quantile</span>(<span class="dv">2</span>) <span class="co"># qnorm(2)</span></a>
-<a class="sourceLine" id="cb12-6" data-line-number="6"><span class="co">#&gt; [1] NaN</span></a>
-<a class="sourceLine" id="cb12-7" data-line-number="7">N<span class="op">$</span><span class="kw">rand</span>(<span class="dv">2</span>) <span class="co"># rnorm(2)</span></a>
-<a class="sourceLine" id="cb12-8" data-line-number="8"><span class="co">#&gt; [1]  1.3709584 -0.5646982</span></a></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1">N<span class="op">$</span><span class="kw">pdf</span>(<span class="dv">2</span>) <span class="co"># dnorm(2)</span></a>
+<a class="sourceLine" id="cb11-2" data-line-number="2"><span class="co">#&gt; [1] 0.05399097</span></a>
+<a class="sourceLine" id="cb11-3" data-line-number="3">N<span class="op">$</span><span class="kw">cdf</span>(<span class="dv">2</span>) <span class="co"># pnorm(2)</span></a>
+<a class="sourceLine" id="cb11-4" data-line-number="4"><span class="co">#&gt; [1] 0.9772499</span></a>
+<a class="sourceLine" id="cb11-5" data-line-number="5">N<span class="op">$</span><span class="kw">quantile</span>(<span class="fl">0.42</span>) <span class="co"># qnorm(2)</span></a>
+<a class="sourceLine" id="cb11-6" data-line-number="6"><span class="co">#&gt; [1] -0.2018935</span></a>
+<a class="sourceLine" id="cb11-7" data-line-number="7">N<span class="op">$</span><span class="kw">rand</span>(<span class="dv">2</span>) <span class="co"># rnorm(2)</span></a>
+<a class="sourceLine" id="cb11-8" data-line-number="8"><span class="co">#&gt; [1]  1.3709584 -0.5646982</span></a></code></pre></div>
 <p>distr6 makes it easy to query these results by only requiring the distribution to be constructed once and then the specific parameterisation can be forgotten. In the case of the Normal distribution this may not seem like a big difference to R stats but now look at the difference when we construct a distribution without default parameters</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1">B &lt;-<span class="st"> </span>Beta<span class="op">$</span><span class="kw">new</span>(<span class="dt">shape1 =</span> <span class="fl">0.582</span>, <span class="dt">shape2 =</span> <span class="fl">1.2490</span>)</a>
-<a class="sourceLine" id="cb13-2" data-line-number="2">B<span class="op">$</span><span class="kw">pdf</span>(<span class="dv">2</span>) <span class="co"># dbeta(2, 0.582, 1.2490)</span></a>
-<a class="sourceLine" id="cb13-3" data-line-number="3"><span class="co">#&gt; [1] 0</span></a>
-<a class="sourceLine" id="cb13-4" data-line-number="4">B<span class="op">$</span><span class="kw">cdf</span>(<span class="dv">2</span>) <span class="co"># pbeta(2, 0.582, 1.2490)</span></a>
-<a class="sourceLine" id="cb13-5" data-line-number="5"><span class="co">#&gt; [1] 1</span></a>
-<a class="sourceLine" id="cb13-6" data-line-number="6">B<span class="op">$</span><span class="kw">quantile</span>(<span class="dv">2</span>) <span class="co"># qbeta(2, 0.582, 1.2490)</span></a>
-<a class="sourceLine" id="cb13-7" data-line-number="7"><span class="co">#&gt; [1] NaN</span></a>
-<a class="sourceLine" id="cb13-8" data-line-number="8">B<span class="op">$</span><span class="kw">rand</span>(<span class="dv">2</span>) <span class="co"># rbeta(2, 0.582, 1.2490)</span></a>
-<a class="sourceLine" id="cb13-9" data-line-number="9"><span class="co">#&gt; [1] 0.14613311 0.07374848</span></a></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1">B &lt;-<span class="st"> </span>Beta<span class="op">$</span><span class="kw">new</span>(<span class="dt">shape1 =</span> <span class="fl">0.582</span>, <span class="dt">shape2 =</span> <span class="fl">1.2490</span>)</a>
+<a class="sourceLine" id="cb12-2" data-line-number="2">B<span class="op">$</span><span class="kw">pdf</span>(<span class="dv">2</span>) <span class="co"># dbeta(2, 0.582, 1.2490)</span></a>
+<a class="sourceLine" id="cb12-3" data-line-number="3"><span class="co">#&gt; [1] 0</span></a>
+<a class="sourceLine" id="cb12-4" data-line-number="4">B<span class="op">$</span><span class="kw">cdf</span>(<span class="dv">2</span>) <span class="co"># pbeta(2, 0.582, 1.2490)</span></a>
+<a class="sourceLine" id="cb12-5" data-line-number="5"><span class="co">#&gt; [1] 1</span></a>
+<a class="sourceLine" id="cb12-6" data-line-number="6">B<span class="op">$</span><span class="kw">quantile</span>(<span class="fl">0.42</span>) <span class="co"># qbeta(2, 0.582, 1.2490)</span></a>
+<a class="sourceLine" id="cb12-7" data-line-number="7"><span class="co">#&gt; [1] 0.1790523</span></a>
+<a class="sourceLine" id="cb12-8" data-line-number="8">B<span class="op">$</span><span class="kw">rand</span>(<span class="dv">2</span>) <span class="co"># rbeta(2, 0.582, 1.2490)</span></a>
+<a class="sourceLine" id="cb12-9" data-line-number="9"><span class="co">#&gt; [1] 0.14613311 0.07374848</span></a></code></pre></div>
 <p>Finally distr6 includes log/log.p and lower.tail arguments to be consistent with R stats.</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1">N<span class="op">$</span><span class="kw">cdf</span>(<span class="dv">3</span>, <span class="dt">lower.tail =</span> <span class="ot">FALSE</span>, <span class="dt">log.p =</span> <span class="ot">TRUE</span>) <span class="op">==</span><span class="st"> </span><span class="kw">pnorm</span>(<span class="dv">3</span>, <span class="dt">lower.tail =</span> <span class="ot">FALSE</span>, <span class="dt">log.p =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb14-2" data-line-number="2"><span class="co">#&gt; [1] FALSE</span></a></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1">N<span class="op">$</span><span class="kw">cdf</span>(<span class="dv">3</span>, <span class="dt">lower.tail =</span> <span class="ot">FALSE</span>, <span class="dt">log.p =</span> <span class="ot">TRUE</span>) <span class="op">==</span><span class="st"> </span><span class="kw">pnorm</span>(<span class="dv">3</span>, <span class="dt">lower.tail =</span> <span class="ot">FALSE</span>, <span class="dt">log.p =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb13-2" data-line-number="2"><span class="co">#&gt; [1] TRUE</span></a></code></pre></div>
 </div>
 <div id="mathematical-and-statistical-results" class="section level3">
 <h3>Mathematical and Statistical Results</h3>
 <p>The final part of this tutorial looks at how to access mathematical and statistical results for probability distributions. This is another advantage of distr6 as it collects not only the results for the 17 distributions in R stats but also for all others implemented in distr6. Continuing with the Normal distribution:</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1">N<span class="op">$</span><span class="kw">mean</span>()</a>
-<a class="sourceLine" id="cb15-2" data-line-number="2"><span class="co">#&gt; [1] 0</span></a>
-<a class="sourceLine" id="cb15-3" data-line-number="3">N<span class="op">$</span><span class="kw">variance</span>()</a>
-<a class="sourceLine" id="cb15-4" data-line-number="4"><span class="co">#&gt; [1] 1</span></a>
-<a class="sourceLine" id="cb15-5" data-line-number="5">N<span class="op">$</span><span class="kw">entropy</span>() <span class="co"># Note default is base 2</span></a>
-<a class="sourceLine" id="cb15-6" data-line-number="6"><span class="co">#&gt; [1] 2.047096</span></a>
-<a class="sourceLine" id="cb15-7" data-line-number="7">N<span class="op">$</span><span class="kw">mgf</span>(<span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb15-8" data-line-number="8"><span class="co">#&gt; [1] 7.389056</span></a>
-<a class="sourceLine" id="cb15-9" data-line-number="9">N<span class="op">$</span><span class="kw">cf</span>(<span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb15-10" data-line-number="10"><span class="co">#&gt; [1] 0.6065307+0i</span></a></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1">N<span class="op">$</span><span class="kw">mean</span>()</a>
+<a class="sourceLine" id="cb14-2" data-line-number="2"><span class="co">#&gt; [1] 0</span></a>
+<a class="sourceLine" id="cb14-3" data-line-number="3">N<span class="op">$</span><span class="kw">variance</span>()</a>
+<a class="sourceLine" id="cb14-4" data-line-number="4"><span class="co">#&gt; [1] 1</span></a>
+<a class="sourceLine" id="cb14-5" data-line-number="5">N<span class="op">$</span><span class="kw">entropy</span>() <span class="co"># Note default is base 2</span></a>
+<a class="sourceLine" id="cb14-6" data-line-number="6"><span class="co">#&gt; [1] 2.047096</span></a>
+<a class="sourceLine" id="cb14-7" data-line-number="7">N<span class="op">$</span><span class="kw">mgf</span>(<span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb14-8" data-line-number="8"><span class="co">#&gt; [1] 7.389056</span></a>
+<a class="sourceLine" id="cb14-9" data-line-number="9">N<span class="op">$</span><span class="kw">cf</span>(<span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb14-10" data-line-number="10"><span class="co">#&gt; [1] 0.6065307+0i</span></a></code></pre></div>
 <p>For a full list of methods available use the help documentation for any distribution</p>
 </div>
 <div id="listing-in-distr6" class="section level3">
 <h3>Listing in distr6</h3>
 <p>Instead of having to worry about remembering every distribution in R, distr6 provides a way of listing all of these, and filtering by traits or package. We only show the first 5 rows of this to save space.</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1"><span class="kw">head</span>(<span class="kw">listDistributions</span>())</a>
-<a class="sourceLine" id="cb16-2" data-line-number="2"><span class="co">#&gt;    ShortName      ClassName Type ValueSupport VariateForm Package</span></a>
-<a class="sourceLine" id="cb16-3" data-line-number="3"><span class="co">#&gt; 1:       Arc        Arcsine    ℝ   continuous  univariate       -</span></a>
-<a class="sourceLine" id="cb16-4" data-line-number="4"><span class="co">#&gt; 2:      Bern      Bernoulli   ℕ0     discrete  univariate   stats</span></a>
-<a class="sourceLine" id="cb16-5" data-line-number="5"><span class="co">#&gt; 3:      Beta           Beta   ℝ+   continuous  univariate   stats</span></a>
-<a class="sourceLine" id="cb16-6" data-line-number="6"><span class="co">#&gt; 4:    BetaNC BetaNoncentral   ℝ+   continuous  univariate   stats</span></a>
-<a class="sourceLine" id="cb16-7" data-line-number="7"><span class="co">#&gt; 5:     Binom       Binomial   ℕ0     discrete  univariate   stats</span></a>
-<a class="sourceLine" id="cb16-8" data-line-number="8"><span class="co">#&gt; 6:       Cat    Categorical    ℂ     discrete  univariate       -</span></a>
-<a class="sourceLine" id="cb16-9" data-line-number="9"><span class="kw">head</span>(<span class="kw">listDistributions</span>(<span class="dt">simplify =</span> <span class="ot">TRUE</span>))</a>
-<a class="sourceLine" id="cb16-10" data-line-number="10"><span class="co">#&gt; [1] &quot;Arcsine&quot;        &quot;Bernoulli&quot;      &quot;Beta&quot;           &quot;BetaNoncentral&quot;</span></a>
-<a class="sourceLine" id="cb16-11" data-line-number="11"><span class="co">#&gt; [5] &quot;Binomial&quot;       &quot;Categorical&quot;</span></a>
-<a class="sourceLine" id="cb16-12" data-line-number="12"><span class="co"># Lists discrete distributions only</span></a>
-<a class="sourceLine" id="cb16-13" data-line-number="13"><span class="kw">head</span>(<span class="kw">listDistributions</span>(<span class="dt">filter =</span> <span class="kw">list</span>(<span class="dt">valuesupport =</span> <span class="st">&quot;discrete&quot;</span>)))</a>
-<a class="sourceLine" id="cb16-14" data-line-number="14"><span class="co">#&gt;    ShortName       ClassName Type ValueSupport VariateForm Package</span></a>
-<a class="sourceLine" id="cb16-15" data-line-number="15"><span class="co">#&gt; 1:      Bern       Bernoulli   ℕ0     discrete  univariate   stats</span></a>
-<a class="sourceLine" id="cb16-16" data-line-number="16"><span class="co">#&gt; 2:     Binom        Binomial   ℕ0     discrete  univariate   stats</span></a>
-<a class="sourceLine" id="cb16-17" data-line-number="17"><span class="co">#&gt; 3:       Cat     Categorical    ℂ     discrete  univariate       -</span></a>
-<a class="sourceLine" id="cb16-18" data-line-number="18"><span class="co">#&gt; 4:     Degen      Degenerate    ℝ     discrete  univariate       -</span></a>
-<a class="sourceLine" id="cb16-19" data-line-number="19"><span class="co">#&gt; 5:     DUnif DiscreteUniform    ℤ     discrete  univariate       -</span></a>
-<a class="sourceLine" id="cb16-20" data-line-number="20"><span class="co">#&gt; 6:       Emp       Empirical    ℝ     discrete  univariate       -</span></a>
-<a class="sourceLine" id="cb16-21" data-line-number="21"></a>
-<a class="sourceLine" id="cb16-22" data-line-number="22"><span class="co"># Multiple filters can be used, note this is case-insensitive</span></a>
-<a class="sourceLine" id="cb16-23" data-line-number="23"><span class="kw">head</span>(<span class="kw">listDistributions</span>(<span class="dt">filter =</span> <span class="kw">list</span>(<span class="dt">VaLueSupport =</span> <span class="st">&quot;continuous&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;distr6&quot;</span>)))</a>
-<a class="sourceLine" id="cb16-24" data-line-number="24"><span class="co">#&gt; Empty data.table (0 rows and 6 cols): ShortName,ClassName,Type,ValueSupport,VariateForm,Package</span></a></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1"><span class="kw">head</span>(<span class="kw">listDistributions</span>())</a>
+<a class="sourceLine" id="cb15-2" data-line-number="2"><span class="co">#&gt;    ShortName      ClassName Type ValueSupport VariateForm Package   Tags</span></a>
+<a class="sourceLine" id="cb15-3" data-line-number="3"><span class="co">#&gt; 1:       Arc        Arcsine    ℝ   continuous  univariate       - limits</span></a>
+<a class="sourceLine" id="cb15-4" data-line-number="4"><span class="co">#&gt; 2:      Bern      Bernoulli   ℕ0     discrete  univariate   stats       </span></a>
+<a class="sourceLine" id="cb15-5" data-line-number="5"><span class="co">#&gt; 3:      Beta           Beta   ℝ+   continuous  univariate   stats       </span></a>
+<a class="sourceLine" id="cb15-6" data-line-number="6"><span class="co">#&gt; 4:    BetaNC BetaNoncentral   ℝ+   continuous  univariate   stats       </span></a>
+<a class="sourceLine" id="cb15-7" data-line-number="7"><span class="co">#&gt; 5:     Binom       Binomial   ℕ0     discrete  univariate   stats limits</span></a>
+<a class="sourceLine" id="cb15-8" data-line-number="8"><span class="co">#&gt; 6:       Cat    Categorical    V     discrete  univariate       -</span></a>
+<a class="sourceLine" id="cb15-9" data-line-number="9"><span class="kw">head</span>(<span class="kw">listDistributions</span>(<span class="dt">simplify =</span> <span class="ot">TRUE</span>))</a>
+<a class="sourceLine" id="cb15-10" data-line-number="10"><span class="co">#&gt; [1] &quot;Arcsine&quot;        &quot;Bernoulli&quot;      &quot;Beta&quot;           &quot;BetaNoncentral&quot;</span></a>
+<a class="sourceLine" id="cb15-11" data-line-number="11"><span class="co">#&gt; [5] &quot;Binomial&quot;       &quot;Categorical&quot;</span></a>
+<a class="sourceLine" id="cb15-12" data-line-number="12"><span class="co"># Lists discrete distributions only</span></a>
+<a class="sourceLine" id="cb15-13" data-line-number="13"><span class="kw">head</span>(<span class="kw">listDistributions</span>(<span class="dt">filter =</span> <span class="kw">list</span>(<span class="dt">valuesupport =</span> <span class="st">&quot;discrete&quot;</span>)))</a>
+<a class="sourceLine" id="cb15-14" data-line-number="14"><span class="co">#&gt;    ShortName       ClassName Type ValueSupport VariateForm    Package   Tags</span></a>
+<a class="sourceLine" id="cb15-15" data-line-number="15"><span class="co">#&gt; 1:      Bern       Bernoulli   ℕ0     discrete  univariate      stats       </span></a>
+<a class="sourceLine" id="cb15-16" data-line-number="16"><span class="co">#&gt; 2:     Binom        Binomial   ℕ0     discrete  univariate      stats limits</span></a>
+<a class="sourceLine" id="cb15-17" data-line-number="17"><span class="co">#&gt; 3:       Cat     Categorical    V     discrete  univariate          -       </span></a>
+<a class="sourceLine" id="cb15-18" data-line-number="18"><span class="co">#&gt; 4:     Degen      Degenerate    ℝ     discrete  univariate          - limits</span></a>
+<a class="sourceLine" id="cb15-19" data-line-number="19"><span class="co">#&gt; 5:     DUnif DiscreteUniform    ℤ     discrete  univariate extraDistr limits</span></a>
+<a class="sourceLine" id="cb15-20" data-line-number="20"><span class="co">#&gt; 6:       Emp       Empirical    ℝ     discrete  univariate          -</span></a>
+<a class="sourceLine" id="cb15-21" data-line-number="21"></a>
+<a class="sourceLine" id="cb15-22" data-line-number="22"><span class="co"># Multiple filters can be used, note this is case-insensitive</span></a>
+<a class="sourceLine" id="cb15-23" data-line-number="23"><span class="kw">head</span>(<span class="kw">listDistributions</span>(<span class="dt">filter =</span> <span class="kw">list</span>(<span class="dt">VaLueSupport =</span> <span class="st">&quot;continuous&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;distr6&quot;</span>)))</a>
+<a class="sourceLine" id="cb15-24" data-line-number="24"><span class="co">#&gt; Empty data.table (0 rows and 7 cols): ShortName,ClassName,Type,ValueSupport,VariateForm,Package...</span></a></code></pre></div>
 </div>
 <div id="r6-s3-and-magrittr" class="section level3">
 <h3>R6, S3 and Magrittr</h3>
 <p>As a final point, distr6 allows the use of R6 or S3 to call methods, which means that the package magrittr can also be used for ‘piping’. Returning to the Normal distribution</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1"><span class="kw">library</span>(magrittr)</a>
-<a class="sourceLine" id="cb17-2" data-line-number="2">N<span class="op">$</span><span class="kw">print</span>()</a>
-<a class="sourceLine" id="cb17-3" data-line-number="3"><span class="co">#&gt; Norm(mean = 0, var = 1)</span></a>
-<a class="sourceLine" id="cb17-4" data-line-number="4"><span class="kw">print</span>(N)</a>
-<a class="sourceLine" id="cb17-5" data-line-number="5"><span class="co">#&gt; Norm(mean = 0, var = 1)</span></a>
-<a class="sourceLine" id="cb17-6" data-line-number="6">N <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">print</span>()</a>
-<a class="sourceLine" id="cb17-7" data-line-number="7"><span class="co">#&gt; Norm(mean = 0, var = 1)</span></a>
-<a class="sourceLine" id="cb17-8" data-line-number="8"></a>
-<a class="sourceLine" id="cb17-9" data-line-number="9">N<span class="op">$</span><span class="kw">pdf</span>(<span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb17-10" data-line-number="10"><span class="co">#&gt; [1] 0.05399097</span></a>
-<a class="sourceLine" id="cb17-11" data-line-number="11"><span class="kw">pdf</span>(N, <span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb17-12" data-line-number="12"><span class="co">#&gt; [1] 0.05399097</span></a>
-<a class="sourceLine" id="cb17-13" data-line-number="13">N <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">pdf</span>(<span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb17-14" data-line-number="14"><span class="co">#&gt; [1] 0.05399097</span></a></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1"><span class="kw">library</span>(magrittr)</a>
+<a class="sourceLine" id="cb16-2" data-line-number="2">N<span class="op">$</span><span class="kw">print</span>()</a>
+<a class="sourceLine" id="cb16-3" data-line-number="3"><span class="co">#&gt; Norm(mean = 0, var = 1, sd = 1, prec = 1)</span></a>
+<a class="sourceLine" id="cb16-4" data-line-number="4"><span class="kw">print</span>(N)</a>
+<a class="sourceLine" id="cb16-5" data-line-number="5"><span class="co">#&gt; Norm(mean = 0, var = 1, sd = 1, prec = 1)</span></a>
+<a class="sourceLine" id="cb16-6" data-line-number="6">N <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">print</span>()</a>
+<a class="sourceLine" id="cb16-7" data-line-number="7"><span class="co">#&gt; Norm(mean = 0, var = 1, sd = 1, prec = 1)</span></a>
+<a class="sourceLine" id="cb16-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb16-9" data-line-number="9">N<span class="op">$</span><span class="kw">pdf</span>(<span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb16-10" data-line-number="10"><span class="co">#&gt; [1] 0.05399097</span></a>
+<a class="sourceLine" id="cb16-11" data-line-number="11"><span class="kw">pdf</span>(N, <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb16-12" data-line-number="12"><span class="co">#&gt; [1] 0.05399097</span></a>
+<a class="sourceLine" id="cb16-13" data-line-number="13">N <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">pdf</span>(<span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb16-14" data-line-number="14"><span class="co">#&gt; [1] 0.05399097</span></a></code></pre></div>
 </div>
 </div>
 <div id="further-documentation" class="section level2">

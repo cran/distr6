@@ -4,7 +4,7 @@
 \alias{print.ParameterSet}
 \title{Print a ParameterSet}
 \usage{
-\method{print}{ParameterSet}(x, hide_cols = c("updateFunc", "settable"), ...)
+\method{print}{ParameterSet}(x, hide_cols = c("settable"), ...)
 }
 \arguments{
 \item{x}{ParameterSet}
@@ -15,15 +15,4 @@
 }
 \description{
 Prints a ParameterSet as a data.table with strprint variants of R6 classes.
-}
-\details{
-If given the \code{hide_cols} argument can be used to hide specific columns from the
-data.table.
-}
-\section{R6 Usage}{
- $print(hide_cols = c("updateFunc","settable"))
-}
-
-\seealso{
-\code{\link{ParameterSet}}
 }

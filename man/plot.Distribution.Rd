@@ -17,15 +17,18 @@
 \arguments{
 \item{x}{\code{distr6} object.}
 
-\item{fun}{vector of functions to plot, one or more of: "pdf","cdf","quantile", "survival", "hazard", "cumhazard", and "all"; partial matching available.}
+\item{fun}{vector of functions to plot, one or more of: "pdf","cdf","quantile", "survival",
+"hazard", "cumhazard", and "all"; partial matching available.}
 
 \item{npoints}{number of evaluation points.}
 
-\item{plot}{logical; if TRUE (default), figures are displayed in the plot window; otherwise a \code{data.table} of points and calculated values is returned.}
+\item{plot}{logical; if TRUE (default), figures are displayed in the plot window; otherwise a
+\code{\link[data.table:data.table]{data.table::data.table()}} of points and calculated values is returned.}
 
-\item{ask}{logical; if TRUE, the user is asked before each plot, see \code{\link[graphics]{par}}.}
+\item{ask}{logical; if TRUE, the user is asked before each plot, see \code{\link[graphics:par]{graphics::par()}}.}
 
-\item{arrange}{logical; if TRUE (default), margins are automatically adjusted with \code{\link[graphics]{layout}} to accommodate all plotted functions.}
+\item{arrange}{logical; if TRUE (default), margins are automatically adjusted with
+\code{\link[graphics:layout]{graphics::layout()}} to accommodate all plotted functions.}
 
 \item{...}{graphical parameters, see details.}
 }
@@ -35,21 +38,22 @@ continuous univariate distributions: pdf, cdf, quantile, survival, hazard and cu
 hazard. By default, the first two are plotted side by side.
 }
 \details{
-The evaluation points are calculated using inverse transform on a uniform grid between 0 and 1 with
-length given by \code{npoints}. Therefore any distribution without an analytical \code{quantile} method
-will first need to be imputed with the \code{\link{FunctionImputation}} decorator.
+The evaluation points are calculated using inverse transform on a uniform grid between 0 and 1
+with length given by \code{npoints}. Therefore any distribution without an analytical \code{quantile}
+method will first need to be imputed with the \link{FunctionImputation} decorator.
 
 The order that the functions are supplied to \code{fun} determines the order in which they are
 plotted, however this is ignored if \code{ask} is \code{TRUE}. If \code{ask} is \code{TRUE} then
 \code{arrange} is ignored. For maximum flexibility in plotting layouts, set \code{arrange} and
 \code{ask} to \code{FALSE}.
 
-The graphical parameters passed to \code{...} can either apply to all plots or selected plots. If
-parameters in \code{\link[graphics]{par}} are prefixed with the plotted function name, then the
-parameter only applies to that function, otherwise it applies to them all. See examples for a clearer
-description.
+The graphical parameters passed to \code{...} can either apply to all plots or selected plots.
+If parameters in \code{\link[graphics]{par}} are prefixed with the plotted function name, then
+the parameter only applies to that function, otherwise it applies to them all. See examples for
+a clearer description.
 }
 \examples{
+\dontrun{
 # Plot pdf and cdf of Normal
 plot(Normal$new())
 
@@ -60,17 +64,18 @@ plot(Normal$new(), col = "red")
 plot(Normal$new(), pdf_col = "red", cdf_col = "green")
 
 # Interactive plotting in order - par still works here
-plot(Geometric$new(), fun = "all", ask = TRUE, pdf_col = "black",
+plot(Geometric$new(),
+  fun = "all", ask = TRUE, pdf_col = "black",
   cdf_col = "red", quantile_col = "blue", survival_col = "purple",
-  hazard_col = "brown", cumhazard_col = "yellow")
+  hazard_col = "brown", cumhazard_col = "yellow"
+)
 
 # Return plotting structure
-x = plot(Gamma$new(), plot = FALSE)
-
+x <- plot(Gamma$new(), plot = FALSE)
+}
 }
 \seealso{
-\code{\link{lines.Distribution}} for superimposing a distr6 object and \code{\link{listDistributions}}
-for plottable distributions.
+\link{lines.Distribution}
 }
 \author{
 Chengyang Gao, Runlong Yu and Shuhan Liu

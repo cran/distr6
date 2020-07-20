@@ -1,45 +1,47 @@
 library(testthat)
 
-context("Arcsine distribution")
-
-
-test_that("properties & traits",{
-  expect_equal(Arcsine$new()$valueSupport, "continuous")
-  expect_equal(Arcsine$new()$variateForm, "univariate")
-  expect_equal(Arcsine$new()$symmetry, "symmetric")
-  expect_equal(Arcsine$new()$sup, 1)
-  expect_equal(Arcsine$new()$inf, 0)
-  expect_equal(Arcsine$new()$dmax, 1)
-  expect_equal(Arcsine$new()$dmin, 0)
+test_that("autotest", {
+  autotest_sdistribution(
+    sdist = Arcsine,
+    pars = list(lower = 0, upper = 1),
+    traits = list(
+      valueSupport = "continuous",
+      variateForm = "univariate",
+      type = Reals$new()
+    ),
+    support = Interval$new(0, 1),
+    symmetry = "symmetric",
+    mean = 0.5,
+    mode = 0:1,
+    median = 0.5,
+    variance = 1 / 8,
+    skewness = 0,
+    exkur = -1.5,
+    entropy = log(pi / 4, 2),
+    pgf = NaN,
+    pdf = dbeta(1:3, 0.5, 0.5),
+    cdf = pbeta(1:3, 0.5, 0.5),
+    quantile = qbeta(c(0.24, 0.42, 0.5), 0.5, 0.5)
+  )
 })
 
-a = Arcsine$new()
-test_that("parameters",{
-  expect_silent(a$setParameterValue(lst = list(lower = 2, upper = 6)))
-  expect_error(a$setParameterValue(lst = list(lower = 7, upper = 6)))
-  expect_error(a$setParameterValue(lst = list(upper = -10)))
-  expect_error(a$setParameterValue(lst = list(lower = 10)))
+test_that("manual", {
+  dist <- Arcsine$new(lower = 0, upper = 1)
+  expect_equal(dist$pdf(0.5), 1 / (pi * sqrt(0.25)))
+  expect_equal(dist$pdf(0.5, log = TRUE), -log(pi * sqrt(0.25)))
+  expect_equal(dist$cdf(0.5), 2 / pi * asin(sqrt(0.5)))
+  expect_equal(dist$quantile(c(0, 1)), c(0, 1))
 })
 
-a = Arcsine$new()
-test_that("statistics",{
-  expect_equal(a$mean(), 1/2)
-  expect_equal(a$variance(), 1/8)
-  expect_equal(a$skewness(), 0)
-  expect_equal(a$kurtosis(T), -1.5)
-  expect_equal(a$kurtosis(F), 1.5)
-  expect_equal(a$entropy(), log(pi/4,2))
-  expect_error(a$mgf(0))
-  expect_error(a$cf(1))
-  expect_equal(a$mode(),c(0,1))
-  expect_equal(a$mode(2),1)
-  expect_equal(a$pgf(1), NaN)
-  expect_equal(a$pdf(1), dbeta(1,0.5,0.5))
-  expect_equal(a$cdf(1), pbeta(1,0.5,0.5))
-  expect_equal(a$quantile(0.324), qbeta(0.324,0.5,0.5))
-  expect_silent(a$rand(10))
-  expect_equal(Arcsine$new(2,5)$pdf(3), 1/(pi*sqrt(2)))
-  expect_equal(Arcsine$new(2,5)$cdf(3), asin(sqrt(1/3))*2/pi)
-  expect_equal(Arcsine$new(2,5)$quantile(0.324), (3*(sin(0.324 * pi * 0.5)^2))+2)
-  expect_silent(Arcsine$new(2,5)$rand(10))
+test_that("vector", {
+  d <- VectorDistribution$new(distribution = "Arcsine",
+                              params = data.frame(lower = 1:2, upper = 3:4))
+  expect_equal(d$mode(), data.table(Arc1 = list(1, 3), Arc2 = list(2, 4)))
+})
+
+test_that("cpp", {
+  expect_equal(as.numeric(C_ArcsineCdf(-2, 0, 1, TRUE, FALSE)), 0)
+  expect_equal(as.numeric(C_ArcsineQuantile(-2, 0, 1, TRUE, FALSE)), NaN)
+  expect_equal(as.numeric(C_ArcsineQuantile(0, 0, 1, TRUE, FALSE)), 0)
+  expect_equal(as.numeric(C_ArcsineQuantile(1, 0, 1, TRUE, FALSE)), 1)
 })

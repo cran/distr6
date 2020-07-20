@@ -16,22 +16,10 @@ liesInType(object, x, all = TRUE, bound = FALSE)
 \item{bound}{logical, if FALSE (default) uses dmin/dmax otherwise inf/sup.}
 }
 \value{
-Either a vector of logicals if \code{all} is FALSE otherwise returns TRUE if every element
-lies in the distribution type or FALSE otherwise.
+Either a vector of logicals if \code{all} is FALSE otherwise returns TRUE if every
+element lies in the distribution type or FALSE otherwise.
 }
 \description{
 Tests if the given data lies in the type of the Distribution, either tests if all
 data lies in the type or any of it.
-}
-\details{
-If \code{all} is \code{TRUE} (default) returns \code{TRUE} only if every element in \code{x}
-lies in the type. If \code{all} is \code{FALSE} then returns a vector of logicals for each corresponding element
-in the vector \code{x}.
-}
-\section{R6 Usage}{
- $liesInType(x, all = TRUE, bound = FALSE)
-}
-
-\seealso{
-\code{\link{liesInSupport}}
 }

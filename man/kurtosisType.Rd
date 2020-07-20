@@ -2,7 +2,7 @@
 % Please edit documentation in R/Distribution.R
 \name{kurtosisType}
 \alias{kurtosisType}
-\title{Type of Kurtosis Accessor}
+\title{Type of Kurtosis Accessor - Deprecated}
 \usage{
 kurtosisType(object)
 }
@@ -10,16 +10,9 @@ kurtosisType(object)
 \item{object}{Distribution.}
 }
 \value{
-If the distribution kurtosis is present in properties, returns one of "platykurtic"/"mesokurtic"/"leptokurtic",
-otherwise returns NULL.
+If the distribution kurtosis is present in properties, returns one of
+"platykurtic"/"mesokurtic"/"leptokurtic", otherwise returns NULL.
 }
 \description{
-Returns the type of kurtosis (in relation to Normal distribution)
-}
-\section{R6 Usage}{
- $kurtosisType
-}
-
-\seealso{
-\code{\link{kurtosis}}, \code{\link{properties}} and \code{\link{skewnessType}}
+Deprecated. Use $properties$kurtosis.
 }

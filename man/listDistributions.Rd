@@ -7,17 +7,18 @@
 listDistributions(simplify = FALSE, filter = NULL)
 }
 \arguments{
-\item{simplify}{logical. If FALSE (default) returns distributions with traits as a data.table, otherwise returns
-distribution names as characters.}
+\item{simplify}{logical. If FALSE (default) returns distributions with traits as a data.table,
+otherwise returns distribution names as characters.}
 
 \item{filter}{list to filter distributions by. See examples.}
 }
 \value{
-Either a list of characters (if \code{simplify} is TRUE) or a data.table of \code{SDistribution}s and their traits.
+Either a list of characters (if \code{simplify} is TRUE) or a data.table of
+\code{SDistribution}s and their traits.
 }
 \description{
 Lists distr6 distributions in a data.table or a character vector, can be filtered by
-traits and implemented package.
+traits, implemented package, and tags.
 }
 \examples{
 listDistributions()
@@ -30,7 +31,6 @@ listDistributions(filter = list(VaLuESupport = "discrete"))
 
 # Multiple filters
 listDistributions(filter = list(VaLuESupport = "discrete", package = "extraDistr"))
-
 }
 \seealso{
 \code{\link{SDistribution}}

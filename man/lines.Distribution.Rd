@@ -9,7 +9,8 @@
 \arguments{
 \item{x}{\code{distr6} object.}
 
-\item{fun}{vector of functions to plot, one or more of: "pdf","cdf","quantile", "survival", "hazard", and "cumhazard"; partial matching available.}
+\item{fun}{vector of functions to plot, one or more of: "pdf","cdf","quantile", "survival",
+"hazard", and "cumhazard"; partial matching available.}
 
 \item{npoints}{number of evaluation points.}
 
@@ -21,13 +22,12 @@ including: pdf, cdf, quantile, survival, hazard and cumulative hazard.
 }
 \details{
 Unlike the \code{\link{plot.Distribution}} function, no internal checks are performed
-to ensure that the added plot makes sense in the context of the current plotting window. Therefore
-this function assumes that the current plot is of the same value support, see examples.
+to ensure that the added plot makes sense in the context of the current plotting window.
+Therefore this function assumes that the current plot is of the same value support, see examples.
 }
 \examples{
 plot(Normal$new(mean = 2), "pdf")
 lines(Normal$new(mean = 3), "pdf", col = "red", lwd = 2)
-
 \dontrun{
 # The code below gives examples of how not to use this function.
 # Different value supports
@@ -39,7 +39,7 @@ plot(Binomial$new(), "pdf")
 lines(Binomial$new(), "cdf")
 
 # Too many functions
-plot(Binomial$new(), c("pdf","cdf"))
+plot(Binomial$new(), c("pdf", "cdf"))
 lines(Binomial$new(), "cdf")
 }
 

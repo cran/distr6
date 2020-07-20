@@ -12,22 +12,9 @@ wrappedModels(object, model = NULL)
 \item{model}{character, see details.}
 }
 \value{
-If \code{model} is NULL then returns list of models that are wrapped by the wrapper. Otherwise
-returns model given in \code{model}.
+If \code{model} is NULL then returns list of models that are wrapped by the wrapper.
+Otherwise returns model given in \code{model}.
 }
 \description{
 Returns either a list of all the wrapped models or the models named by parameters.
-}
-\details{
-Accessor for internally wrapped models. If the \code{model} parameter is matched by a single named
-wrapped model, this model is returned. If a vector is supplied to \code{model} parameter then a list
-of internal models is returned if matched, otherwise a list of all internal models is returned. If
-\code{model} is NULL (default) then a list of all internal models are returned.
-}
-\section{R6 Usage}{
- $wrappedModels(model = NULL)
-}
-
-\seealso{
-\code{\link{DistributionWrapper}}
 }

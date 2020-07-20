@@ -4,47 +4,43 @@
 \alias{decorate}
 \title{Decorate Distributions}
 \usage{
-decorate(distribution, decorators)
+decorate(distribution, decorators, ...)
 }
 \arguments{
-\item{distribution}{distribution to decorate}
+\item{distribution}{\verb{([Distribution])}\cr
+\link{Distribution} to decorate.}
 
-\item{decorators}{list or vector of decorators. See Details.}
+\item{decorators}{\code{(character())}
+Vector of \link{DistributionDecorator} names to decorate the \link{Distribution} with.}
+
+\item{...}{\code{ANY} \cr
+Extra arguments passed down to specific decorators.}
 }
 \value{
-Returns a decorated R6 object inheriting from class SDistribution with the methods listed
-from one of the available decorators added to the SDistribution methods.
+Returns a \link{Distribution} with additional methods from the chosen
+\link{DistributionDecorator}.
 }
 \description{
 Functionality to decorate R6 Distributions (and child classes) with extra methods.
 }
 \details{
 Decorating is the process of adding methods to classes that are not part of the core
-interface (Gamma et al. 1994). Use \code{listDecorators} to see which decorators are currently available. The primary
-use-cases are to add numeric results when analytic ones are missing, to add complex modelling functions and
-to impute missing d/p/q/r functions.
-
-The \code{decorators} parameter should either be a list of decorator classes or their names
-or a single decorator class; see examples.
+interface (Gamma et al. 1994). Use \code{listDecorators} to see which decorators are currently
+available. The primary use-cases are to add numeric results when analytic ones are missing,
+to add complex modelling functions and to impute missing d/p/q/r functions.
 }
 \examples{
 B <- Binomial$new()
-decorate(B, CoreStatistics)
-
-E <- Exponential$new()
-decorate(E, list(CoreStatistics, ExoticStatistics))
-
-E <- Exponential$new()
-decorate(E, list(CoreStatistics, "ExoticStatistics"))
+decorate(B, "CoreStatistics")
 
 E <- Exponential$new()
 decorate(E, c("CoreStatistics", "ExoticStatistics"))
-
 }
 \references{
 Gamma, Erich, Richard Helm, Ralph Johnson, and John Vlissides. 1994. “Design Patterns: Elements
 of Reusable Object-Oriented Software.” Addison-Wesley.
 }
 \seealso{
-\code{\link{listDecorators}} for available decorators.
+\code{\link[=listDecorators]{listDecorators()}} for available decorators and \link{DistributionDecorator} for the parent
+class.
 }

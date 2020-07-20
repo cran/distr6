@@ -1,13 +1,71 @@
+
+
+# distr6 1.4.0
+
+## Minor Updates
+
+### Added/Edited Functionality
+
+* Multivariate functions in `VectorDistribution` now return arrays
+* Analytical `median` now available for `SDistribution`s where closed form expressions are known
+* Kernels now implemented in `Rcpp` with analytical log-pdf expressions. Analytical lower.tail and log.p will come in future versions.
+* Adding plotting for bivariate distributions using `{plotly}`
+* Added `EmpiricalMV` for empirical multivariate distributions
+* All documentation now uses roxygen R6
+* Distribution `type` is now required in construction custom `Distribution`s as the previous method of 'guessing' was inefficient.
+* Added `ParameterSetCollection` for `Wrapper`s. Same functionality as before but much more efficient.
+* Added `$addDeps` and `$deps` to `ParameterSet`s to replace `updateFunc`. This allows faster and more precise control over parameter updates.
+* Added `$addChecks` and `$checks` to `ParameterSet`s to replace custom checks in distributions, and  `$addTrafos` and `$trafos` to replace custom parameter transformations before setting. These allows clearner control over parameter setting.
+* `categories` parameter in `Categorical` now called `nCategories`
+* Constructor of `Categorical` now requires elements to be provided as a `list` to `elements`
+* `settable` in `ParameterSet` now refers to the more intuitive flag that describes if a parameter can be set after construction
+* Added `length` active binding to `ParameterSet` to return number of parameters in the set.
+* Renamed `squared2Norm` in `Kernel`s to `pdfSquared2Norm` and added `x` to arguments to allow for shifted norms.
+
+### Deprecated Functions/Fields/Methods
+
+* Individual property and trait accessors deprecated: `$support, $symmetry, $kurtosisType, $skewnessType, $valueSupport, $variateForm, $type`
+* Separated `Loglogistic` and `ShiftedLoglogistic` so only the latter has a `location` parameter. Additionally added an analytical `rand` expression to `ShiftedLoglogistic`, and `Loglogistic` now implemented from package `actuar`
+* Removed deprecated classes: `ArrayDistribution`
+* Removed deprecated functions: `listSpecialSets`
+* `WeighedDiscrete` distribution now stores samples and probabilities as parameters.
+* Removed `verbose` argument from distribution constructor
+* Public `update` method in `ParameterSet` moved to `private`
+* Removed `squared2Norm` from the `ExoticStatistics` decorator
+* Deprecated `updateFunc` from `ParameterSet`
+* Removed `.getRefParams` from `SDistribution`s and added `deps`
+
+## Patches
+
+* Bugfix in `decorate` function that was overwriting the `decorators` private field instead of appending
+* Vastly improved speed of construction of `SDistribution` and `Kernel`
+* Bugfix in `$rand` for `Geometric` distribution with `trials == TRUE` , previously was randomising between $[1, Inf)$ not $[0, Inf)$
+* Changed default `form` parameter in `NegativeBinomial`, now errors if supplied argument is not in one of the four choices (previously reverted to "fbs")
+* Fixed bug in `MultivariateNormal` `rand()` which was not adding the `mean` correctly
+* Massive bottleneck in `VectorDistribution` for same distribution type removed in d/p/q/r functions as well as non-generating function methods
+* Improved speed in `VectorDistribution` when only one row or column of data passed to d/p/q
+* `Dirichlet, DiscreteUniform, Frechet Gumbel, Pareto, Rayleigh, Triangular, Wald` now implemented from package `extraDistr`
+* Bug fix in `Frechet` `$cdf`
+* Analytical `log` and `lower.tail` now available for all `SDistributions` and imputation possible for customs with `CoreStatistics`
+* `NegativeBinomial` now uses Rcpp for d/p/q/r
+* Distributions from `stats` are now vectorised across parameters in C
+* `Degenerate`, `ShiftedLoglogistic` now Rcpp
+* Removed redundant `K` parameter from `MultivariateNormal`
+* Bugfix in `Wald`, symmetry was incorrectly flagged as "symmetric"
+* Fixed bug in `TruncatedDistribution` support - previously support interval type was `"[]"` instead of `"(]"`. An important implication is that even if truncating at or outside of the distribution limits, the support will still be changed if the distribution was left-closed to become left-open. 
+* Improved speed of assertions by using package `{checkmate}`
+
 # distr6 1.3.7
 
-* Minor internal updates
+* Minor internal Updates
 * Next release will be 1.4.0, due to nature of R6 this will break dependencies.
+
 
 # distr6 1.3.6
 
 * Bugfix in `decorate` function that was overwriting the `decorators` private field instead of appending
-* Two bug fixes in `MultivariateNormal$rand()` . i) the distribution mean wasn't being added to the transformation correctly; ii) the Choleskey decomposition wasn't transposed causing incorrect simulations
 * Added `plot.VectorDistribution` for more efficient plotting of mutiple distributions at the same time
+* Two bug fixes in `MultivariateNormal$rand()` . i) the distribution mean wasn't being added to the transformation correctly; ii) the Choleskey decomposition wasn't transposed causing incorrect simulations
 
 # distr6 1.3.5
 
