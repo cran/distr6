@@ -1,7 +1,7 @@
-ddbfc927d0dbf56f2c5e2dbdcb04c49e *DESCRIPTION
+f3419dd2a73adc7d0d29d063b89270fc *DESCRIPTION
 cf2ac1b6dff1ae6894fb2f357df37cbf *LICENSE
 d9bffbae422d273d36dc2a697f3bae80 *NAMESPACE
-59277b5d9783c63fed6ac6df7269c4c3 *NEWS.md
+2b26eadfcd1171fde7fd691b5bdce65e *NEWS.md
 2ccd19f3625cd8cc7ed5b0258205b113 *R/Distribution.R
 339b80078e818f53ce64074ea6409fcc *R/DistributionDecorator.R
 15378f27890d1afbcf5877ea909c881a *R/DistributionDecorator_CoreStatistics.R
@@ -110,11 +110,11 @@ adea454f501eb6957703924a047ee1f9 *R/plot_multivariate.R
 70a7de580536ca6ba257222602a91394 *R/qqplot.R
 65b86eb01d17f0affa4bd0f3f8b0c1ba *R/simulateEmpiricalDistribution.R
 3975ef64999f3da8b8ea2e1d1f1c20f6 *R/skewType.R
-2ffc3f03aabfd07337ac16f5c323077e *R/zzz.R
+26dfcfc167fff1eec45c50c40b648231 *R/zzz.R
 6c19d6400f7fa8447010977684021597 *README.md
 724b06a8a0638918dffa729865d2bfd6 *build/vignette.rds
 f42ffdafd1c21a2ca992dc1c37dfde61 *inst/doc/distr6.R
-c3e83b8166a9c052d7751c5f3890c449 *inst/doc/distr6.html
+2d29d7708ebb314fac388ea7df2e586e *inst/doc/distr6.html
 a9a67a6b17ae5afce1b7bb43060b0673 *inst/doc/distr6.rmd
 85ec0b6d80498062625695fa53f72451 *man/Arcsine.Rd
 15b6dab9ac6eb7aac872f8e3b7e6c1b9 *man/Bernoulli.Rd
@@ -296,7 +296,7 @@ c0579d7d32f909409b96088b4ca0b40a *src/Imputers.cpp
 3eca693a968aedb8422f83533d696b22 *src/base_dpq.cpp
 4dd4b2620b0665507815729297a602f2 *tests/testthat.R
 a2a1f2b472dd311afe17955575f5e8a9 *tests/testthat/Rplots.pdf
-5f53ca6af84d79b1faee121968d2a019 *tests/testthat/helpers.R
+04651103ea2f6dc37cea68c337788597 *tests/testthat/helpers.R
 8351ffb511d2784e2910db082b26de36 *tests/testthat/test-Assertions.R
 1353aa280d1fe98a494e65989389644a *tests/testthat/test-DistArcsine.R
 688ae5bbb51a8b7d51350b67d24e48b7 *tests/testthat/test-DistBernoulli.R
@@ -378,7 +378,7 @@ db683cafd35642f0b448c86090a30d27 *tests/testthat/test_decorator_exoticstatistics
 feb1493d7a35787e7d8220a6f1db3e25 *tests/testthat/test_decorator_functionimputation.R
 da639f1d80c3af412a54f4d66c5c6ac1 *tests/testthat/test_kernel.R
 286453246faf37a4751d146b72d7b077 *tests/testthat/test_kernel_cosine.R
-fbd35bd8a76c835e29fa0cffe2d9bc14 *tests/testthat/test_kernel_epanechnikov.R
+6fac6c86ece007fe81065b5850e7b179 *tests/testthat/test_kernel_epanechnikov.R
 9da66571dcea73709d1d349dbdeb29f7 *tests/testthat/test_kernel_logistic.R
 8178ab72e6e310ae067e2250f6ff8fee *tests/testthat/test_kernel_normal.R
 fa56882809e7e633e4e6a200e33f7291 *tests/testthat/test_kernel_quartic.R
