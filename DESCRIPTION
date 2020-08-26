@@ -1,6 +1,6 @@
 Package: distr6
 Title: The Complete R6 Probability Distributions Interface
-Version: 1.4.2
+Version: 1.4.3
 Authors@R: 
       c(person(given = "Raphael",
              family = "Sonabend",
@@ -125,11 +125,11 @@ Collate: 'helpers.R' 'distr6_globals.R' 'Distribution.R'
         'listWrappers.R' 'makeUniqueDistributions.R' 'measures.R'
         'mixturiseVector.R' 'plot_continuous.R' 'plot_discrete.R'
         'plot_distribution.R' 'plot_multivariate.R'
-        'plot_vectordistribution.R' 'qqplot.R'
+        'plot_vectordistribution.R' 'qqplot.R' 'sets.R'
         'simulateEmpiricalDistribution.R' 'skewType.R' 'zzz.R'
 LinkingTo: Rcpp
 NeedsCompilation: yes
-Packaged: 2020-07-22 08:54:08 UTC; raphael
+Packaged: 2020-08-24 14:49:03 UTC; raphael
 Author: Raphael Sonabend [aut, cre] (<https://orcid.org/0000-0001-9225-4654>),
   Franz Kiraly [aut],
   Peter Ruckdeschel [ctb] (Author of distr),
@@ -146,4 +146,4 @@ Author: Raphael Sonabend [aut, cre] (<https://orcid.org/0000-0001-9225-4654>),
   Qian Zhou [ctb]
 Maintainer: Raphael Sonabend <raphael.sonabend.15@ucl.ac.uk>
 Repository: CRAN
-Date/Publication: 2020-07-22 13:50:06 UTC
+Date/Publication: 2020-08-26 16:11:17 UTC

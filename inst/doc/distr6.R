@@ -17,7 +17,7 @@ N$print()
 N$parameters()
 
 ## -----------------------------------------------------------------------------
-N$setParameterValue(list(prec = 2))
+N$setParameterValue(prec = 2)
 N$getParameterValue("prec")
 
 ## -----------------------------------------------------------------------------
@@ -27,7 +27,7 @@ N$parameters()
 N$parameters()$print(hide_cols = NULL)
 
 ## -----------------------------------------------------------------------------
-N$setParameterValue(list(var = 3))$getParameterValue("var")
+N$setParameterValue(var = 3)$getParameterValue("var")
 
 ## -----------------------------------------------------------------------------
 N$print()
@@ -73,7 +73,7 @@ head(listDistributions(simplify = TRUE))
 head(listDistributions(filter = list(valuesupport = "discrete")))
 
 # Multiple filters can be used, note this is case-insensitive
-head(listDistributions(filter = list(VaLueSupport = "continuous", package = "distr6")))
+head(listDistributions(filter = list(VaLueSupport = "continuous", package = "extraDistr")))
 
 ## -----------------------------------------------------------------------------
 library(magrittr)

@@ -69,12 +69,27 @@ WeightedDiscrete <- R6Class("WeightedDiscrete",
     initialize = function(data = NULL, x = 1, pdf = 1,
                           cdf = NULL, decorators = NULL) {
 
+      if (any(duplicated(x))) {
+        stop("Values in 'x' must be unique.")
+      }
+
       if (!is.null(data)) {
         warning("'data' constructor now deprecated, use 'x', 'pdf', 'cdf' instead.")
         x <- data$x
         pdf <- data$pdf
         cdf <- data$cdf
       }
+
+      ord <- order(x)
+      x <- x[ord]
+
+      if (!is.null(pdf)) {
+        pdf <- pdf[ord]
+      }
+      if (!is.null(cdf)) {
+        cdf <- cdf[ord]
+      }
+
 
       private$.parameters <- getParameterSet(self, x = x, pdf = pdf, cdf = cdf)
       if (!is.null(cdf)) pdf <- rep(1, length(x))
@@ -279,6 +294,16 @@ WeightedDiscrete <- R6Class("WeightedDiscrete",
             matrix(pdf, nrow = nc, ncol = 1)
         ))
       }
+    },
+
+    # optional setParameterValue
+    #' @description
+    #' Sets the value(s) of the given parameter(s).
+    setParameterValue = function(..., lst = NULL, error = "warn") {
+      if (is.null(lst)) lst <- list(...)
+      if (!is.null(lst$cdf)) lst$pdf <- NULL
+      super$setParameterValue(lst = lst, error = error)
+      invisible(self)
     }
   ),
 
