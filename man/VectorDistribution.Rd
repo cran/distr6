@@ -17,6 +17,7 @@ only constructed when methods (e.g. d/p/q/r) are called.
 ## Method `VectorDistribution$new`
 ## ------------------------------------------------
 
+\dontrun{
 VectorDistribution$new(
   distribution = "Binomial",
   params = list(
@@ -39,6 +40,7 @@ VectorDistribution$new(
   Binomial$new(prob = 0.2, size = 6)
   )
 )
+}
 
 ## ------------------------------------------------
 ## Method `VectorDistribution$pdf`
@@ -151,6 +153,7 @@ Creates a new instance of this \link[R6:R6Class]{R6} class.
   name = NULL,
   short_name = NULL,
   decorators = NULL,
+  vecdist = NULL,
   ...
 )}\if{html}{\out{</div>}}
 }
@@ -186,6 +189,10 @@ Optional short name/ID of wrapped distribution.}
 \item{\code{decorators}}{\code{(character())} \cr
 Decorators to add to the distribution during construction.}
 
+\item{\code{vecdist}}{\link{VectorDistribution} \cr
+Alternative constructor to directly create this object from an object inheriting from
+\link{VectorDistribution}.}
+
 \item{\code{...}}{\code{ANY} \cr
 Named arguments of parameters to set values for. See examples.}
 }
@@ -193,7 +200,8 @@ Named arguments of parameters to set values for. See examples.}
 }
 \subsection{Examples}{
 \if{html}{\out{<div class="r example copy">}}
-\preformatted{VectorDistribution$new(
+\preformatted{\dontrun{
+VectorDistribution$new(
   distribution = "Binomial",
   params = list(
     list(prob = 0.1, size = 2),
@@ -215,6 +223,7 @@ VectorDistribution$new(
   Binomial$new(prob = 0.2, size = 6)
   )
 )
+}
 }
 \if{html}{\out{</div>}}
 

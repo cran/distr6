@@ -20,36 +20,32 @@ CoreStatistics <- R6Class("CoreStatistics",
   public = list(
     #' @description
     #' Numerically estimates the moment-generating function.
-    mgf = function(t) {
-      return(self$genExp(trafo = function(x) {
-        return(exp(x * t))
-      }))
+    #' @param ... `ANY` \cr
+    #' Passed to `$genExp`.
+    mgf = function(t, ...) {
+      return(self$genExp(trafo = function(x) exp(x * t), ...))
     },
 
     #' @description
     #' Numerically estimates the characteristic function.
-    cf = function(t) {
+    #' @param ... `ANY` \cr
+    #' Passed to `$genExp`.
+    cf = function(t, ...) {
       if (testDiscrete(self)) {
-        return(self$genExp(trafo = function(x) {
-          return(exp(x * t * 1i))
-        }))
+        return(self$genExp(trafo = function(x) exp(x * t * 1i), ...))
       } else {
-        return(self$genExp(trafo = function(x) {
-          return(Re(exp(x * t * 1i)))
-        }) +
-          1i * self$genExp(trafo = function(x) {
-            return(Im(exp(x * t * 1i)))
-          }))
+        return(self$genExp(trafo = function(x) Re(exp(x * t * 1i)), ...) +
+          1i * self$genExp(trafo = function(x) Im(exp(x * t * 1i)), ...))
       }
     },
 
     #' @description
     #' Numerically estimates the probability-generating function.
-    pgf = function(z) {
+    #' @param ... `ANY` \cr
+    #' Passed to `$genExp`.
+    pgf = function(z, ...) {
       if (testDiscrete(self)) {
-        x <- self$genExp(trafo = function(x) {
-          return(z^x)
-        })
+        x <- self$genExp(trafo = function(x) z^x, ...)
         return(x)
       } else {
         return(NaN)
@@ -58,21 +54,27 @@ CoreStatistics <- R6Class("CoreStatistics",
 
     #' @description
     #' Numerically estimates the entropy function.
-    entropy = function(base = 2) {
+    #' @param ... `ANY` \cr
+    #' Passed to `$genExp`.
+    entropy = function(base = 2, ...) {
       message(.distr6$message_numeric)
-      return(suppressMessages(self$genExp(trafo = function(x) -log(self$pdf(x), base))))
+      return(suppressMessages(self$genExp(trafo = function(x) -log(self$pdf(x), base), ...)))
     },
 
     #' @description
     #' Numerically estimates the distribution skewness.
-    skewness = function() {
-      return(self$kthmoment(k = 3, type = "standard"))
+    #' @param ... `ANY` \cr
+    #' Passed to `$genExp`.
+    skewness = function(...) {
+      return(self$kthmoment(k = 3, type = "standard", ...))
     },
 
     #' @description
     #' Numerically estimates the distribution kurtosis.
-    kurtosis = function(excess = TRUE) {
-      kurtosis <- suppressMessages(self$kthmoment(k = 4, type = "standard"))
+    #' @param ... `ANY` \cr
+    #' Passed to `$genExp`.
+    kurtosis = function(excess = TRUE, ...) {
+      kurtosis <- suppressMessages(self$kthmoment(k = 4, type = "standard", ...))
       if (testContinuous(self)) {
         message(.distr6$message_numeric)
       }
@@ -85,10 +87,12 @@ CoreStatistics <- R6Class("CoreStatistics",
 
     #' @description
     #' Numerically estimates the distribution variance.
-    variance = function() {
+    #' @param ... `ANY` \cr
+    #' Passed to `$genExp`.
+    variance = function(...) {
       if (testUnivariate(self)) {
         message(.distr6$message_numeric)
-        return(suppressMessages(self$genExp(trafo = function(x) x^2) - self$genExp()^2))
+        return(suppressMessages(self$genExp(trafo = function(x) x^2, ...) - self$genExp(...)^2))
       }
     },
 
@@ -105,7 +109,9 @@ CoreStatistics <- R6Class("CoreStatistics",
     #' The `k`-th moment to evaluate the distribution at.
     #' @param type `character(1)` \cr
     #' Type of moment to evaluate.
-    kthmoment = function(k, type = c("central", "standard", "raw")) {
+    #' @param ... `ANY` \cr
+    #' Passed to `$genExp`.
+    kthmoment = function(k, type = c("central", "standard", "raw"), ...) {
 
       if (testUnivariate(self)) {
 
@@ -123,14 +129,11 @@ CoreStatistics <- R6Class("CoreStatistics",
         message(.distr6$message_numeric)
 
         if (type == "raw") {
-          suppressMessages(return(self$genExp(trafo = function(x) {
-            return(x^k)
-          })))
+          suppressMessages(return(self$genExp(trafo = function(x) x^k, ...)))
         }
 
-        centralMoment <- suppressMessages(self$genExp(trafo = function(x) {
-          return((x - self$genExp())^k)
-        }))
+        centralMoment <- suppressMessages(self$genExp(trafo = function(x) (x - self$genExp(...))^k,
+                                                      ...))
 
         if (type == "central") {
           return(centralMoment)
@@ -144,7 +147,11 @@ CoreStatistics <- R6Class("CoreStatistics",
     #' Numerically estimates \eqn{E[f(X)]} for some function \eqn{f}.
     #' @param trafo `function()` \cr
     #' Transformation function to define the expectation, default is distribution mean.
-    genExp = function(trafo = NULL) {
+    #' @param cubature `logical(1)` \cr
+    #' If `TRUE` uses [cubature::cubintegrate] for approximation, otherwise [integrate].
+    #' @param ... `ANY` \cr
+    #' Passed to [cubature::cubintegrate].
+    genExp = function(trafo = NULL, cubature = FALSE, ...) {
       if (is.null(trafo)) {
         trafo <- function() {
           return(x)
@@ -162,12 +169,24 @@ CoreStatistics <- R6Class("CoreStatistics",
         return(sum(pdfs * xs))
       } else {
         message(.distr6$message_numeric)
-        return(suppressMessages(integrate(function(x) {
-          pdfs <- self$pdf(x)
-          xs <- trafo(x)
-          xs[pdfs == 0] <- 0
-          return(xs * pdfs)
-        }, lower = self$inf, upper = self$sup)$value))
+        if (cubature) {
+          requireNamespace("cubature")
+          return(suppressMessages(cubature::cubintegrate(function(x) {
+            pdfs <- self$pdf(x)
+            xs <- trafo(x)
+            xs[pdfs == 0] <- 0
+            return(xs * pdfs)
+          }, lower = self$inf,
+          upper = self$sup,
+          ...)$integral))
+        } else {
+          return(suppressMessages(integrate(function(x) {
+            pdfs <- self$pdf(x)
+            xs <- trafo(x)
+            xs[pdfs == 0] <- 0
+            return(xs * pdfs)
+          }, lower = self$inf, upper = self$sup)$value))
+        }
       }
     },
 
@@ -191,9 +210,9 @@ CoreStatistics <- R6Class("CoreStatistics",
     #' @description
     #' Numerically estimates the distribution mean.
     #' @param ... `ANY` \cr
-    #' Ignored, added for consistency.
+    #' Passed to `$genExp`.
     mean = function(...) {
-      return(self$genExp())
+      return(self$genExp(...))
     }
   )
 )
@@ -204,10 +223,11 @@ CoreStatistics <- R6Class("CoreStatistics",
 #' @name mgf
 #' @description Moment generating function of a distribution
 #'
-#' @usage mgf(object, t)
+#' @usage mgf(object, t, ...)
 #'
 #' @param object Distribution.
 #' @param t integer to evaluate moment generating function at.
+#' @param ... Passed to `$genExp`.
 #'
 #' @return Moment generating function evaluated at t as a numeric.
 #'
@@ -218,10 +238,11 @@ NULL
 #' @name cf
 #' @description Characteristic function of a distribution
 #'
-#' @usage cf(object, t)
+#' @usage cf(object, t, ...)
 #'
 #' @param object Distribution.
 #' @param t integer to evaluate characteristic function at.
+#' @param ... Passed to `$genExp`.
 #'
 #' @return Characteristic function evaluated at t as a numeric.
 #'
@@ -232,10 +253,11 @@ NULL
 #' @name pgf
 #' @description Probability generating function of a distribution
 #'
-#' @usage pgf(object, z)
+#' @usage pgf(object, z, ...)
 #'
 #' @param object Distribution.
 #' @param z integer to evaluate characteristic function at.
+#' @param ... Passed to `$genExp`.
 #'
 #' @return Probability generating function evaluated at z as a numeric if distribution is discrete,
 #' otherwise NaN.
@@ -249,8 +271,9 @@ NULL
 #'
 #' @param object Distribution.
 #' @param base base of the entropy logarithm, default = 2 (Shannon entropy)
+#' @param ... Passed to `$genExp`.
 #'
-#' @usage entropy(object, base = 2)
+#' @usage entropy(object, base = 2, ...)
 #'
 #' @return Entropy with given base as a numeric.
 #'
@@ -261,9 +284,10 @@ NULL
 #' @name skewness
 #' @description Skewness of a distribution
 #'
-#' @usage skewness(object)
+#' @usage skewness(object, ...)
 #'
 #' @param object Distribution.
+#' @param ... Passed to `$genExp`.
 #'
 #' @return Skewness as a numeric.
 #'
@@ -274,10 +298,11 @@ NULL
 #' @name kurtosis
 #' @description Kurtosis of a distribution
 #'
-#' @usage kurtosis(object, excess = TRUE)
+#' @usage kurtosis(object, excess = TRUE, ...)
 #'
 #' @param object Distribution.
-#' @param excess logical, if TRUE (default) excess Kurtosis returned
+#' @param excess logical, if TRUE (default) excess Kurtosis returned.
+#' @param ... Passed to `$genExp`.
 #'
 #' @return Kurtosis as a numeric.
 #'
@@ -289,9 +314,10 @@ NULL
 #' @description The variance or covariance of a distribution, either calculated analytically if
 #' or estimated numerically.
 #'
-#' @usage variance(object)
+#' @usage variance(object, ...)
 #'
 #' @param object Distribution.
+#' @param ... Passed to `$genExp`.
 #'
 #' @return Variance as a numeric.
 #'
@@ -302,11 +328,12 @@ NULL
 #' @name kthmoment
 #' @description Kth standardised or central moment of a distribution
 #'
-#' @usage kthmoment(object, k, type = c("central", "standard", "raw"))
+#' @usage kthmoment(object, k, type = c("central", "standard", "raw"), ...)
 #'
 #' @param object Distribution.
 #' @param k the kth moment to calculate
 #' @param type one of 'central', 'standard' or 'raw', abbreviations allowed
+#' @param ... Passed to `$genExp`.
 #'
 #' @return If univariate, the given k-moment as a numeric, otherwise NULL.
 #'
@@ -316,10 +343,12 @@ NULL
 #' @title Generalised Expectation of a Distribution
 #' @name genExp
 #'
-#' @usage genExp(object, trafo = NULL)
+#' @usage genExp(object, trafo = NULL, cubature = FALSE, ...)
 #'
 #' @param object Distribution.
 #' @param trafo transformation for expectation calculation, see details.
+#' @param cubature If `TRUE` uses [cubature::cubintegrate] for approximation, otherwise [integrate].
+#' @param ... Passed to [cubature::cubintegrate].
 #'
 #' @description A generalised expectation function for distributions, for arithmetic mean and more
 #' complex numeric calculations.
@@ -355,7 +384,7 @@ NULL
 #' @title Distribution Mean
 #'
 #' @param x Distribution.
-#' @param ... Additional arguments.
+#' @param ... Passed to `$genExp`.
 #'
 #' @description Arithmetic mean for the probability distribution.
 #'

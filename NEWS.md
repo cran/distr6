@@ -1,8 +1,16 @@
+# distr6 1.4.4
+
+* Added coercions from Vector/Mixture/ProductDistribution to Mixture/ProductDistribution via `as.MixtureDistribution` and `as.ProductDistribution`
+* Bugfix in `MixtureDistribution` parameter set
+* Uneven vectors of `WeightedDiscrete` distributions are now truncated at the minimum length in the vector for `pdf, cdf, quantile`
+* `CoreStatistics` methods now give the option to use `cubature::cubintegrate` and all associated parameters.
+* Remove `{pracma}` requirement in `ExoticStatistics`
+
 # distr6 1.4.3
 
 * Bugfix in `WeightedDiscrete`, `cdf` was previously positive when below distribution support, now zero.
 * Added discrete p-norms in `ExoticStatistics` decorator
-* Removed `suppressMoments` argument in `Distribution`, improving constuction speeds.
+* Removed `suppressMoments` argument in `Distribution` and computation of movements in constructor, improving construction speeds.
 * `kurtosis` and `skewness` type no longer included in properties. The kurtosis and skewness methods are still available as public methods, and the types are still in summary; to manually find these use `exkurtosisType` and `skewType`.
 * Empty `ParameterSet` now allowed
 

@@ -91,22 +91,21 @@ ParameterSetCollection <- R6Class("ParameterSetCollection",
     #' psc$getParameterValue("Binom1_prob")
     #' psc$getParameterValue("prob")
     getParameterValue = function(id, error = "warn") {
-      sep <- gregexpr("_", id)[[1]][[1]]
+      dt <- as.data.table(self)
+      id0 <- id
+      sep <- gregexpr("_", id0)[[1]][[1]]
 
       if (sep == -1) {
-        dt <- as.data.table(self)$id
-        spl <- unlist(strsplit(dt[grepl(paste0("_", id, "$"), dt)], "_"))
-        spl <- spl[!grepl(id, spl)]
-        spl <- spl[spl %in% names(private$.parametersets)]
-        if (length(spl) == 0) {
-          stopf("%s not in this ParameterSetCollection.", id)
+        dt = dt[grepl(paste0("_", id0, "$"), dt$id), c("id", "value")]
+        if (!nrow(dt)) {
+          stopf("%s is not in this ParameterSetCollection.", id)
         } else {
-          return(lapply(private$.parametersets[spl], function(x) x$getParameterValue(id)))
+          lst = as.list(dt$value)
+          names(lst) = unlist(strsplit(dt$id, split = paste0("_", id0)))
+          return(lst)
         }
       } else {
-        param <- substr(id, sep + 1, 1000)
-        dist <- substr(id, 1, sep - 1)
-        return(private$.parametersets[[dist]]$getParameterValue(param, error = error))
+        return(unname(unlist(subset(dt, id == id0, select = value))))
       }
     },
 
@@ -198,6 +197,12 @@ ParameterSetCollection <- R6Class("ParameterSetCollection",
       newlst <- c(selflst, mlst)
       checkmate::assertNames(names(newlst), "strict")
       private$.parametersets <- newlst
+
+      selflst <- private$.supports
+      mlst <- data.table::rbindlist(lapply(lst, function(x) x$.__enclos_env__$private$.supports))
+      newlst <- rbind(selflst, mlst)
+      private$.supports <- newlst
+
       invisible(self)
     },
 
@@ -233,7 +238,7 @@ ParameterSetCollection <- R6Class("ParameterSetCollection",
 
   private = list(
     .parametersets = list(),
-    .supports = list(),
+    .supports = data.table(),
     .contains = function() {
       apply(private$.supports, 1, function(x) {
         assertContains(x[[2]], as.Tuple(unlist(self$getParameterValue(x[[1]]))),
@@ -257,9 +262,14 @@ ParameterSetCollection <- R6Class("ParameterSetCollection",
 as.data.table.ParameterSetCollection <- function(x, ...) {
   paramsets <- x$.__enclos_env__$private$.parametersets
 
-  dt <- data.table::rbindlist(lapply(paramsets, as.data.table))
+  lst <- unlist(lapply(paramsets, function(.x) {
+    r = as.data.table(.x)
+    list(r, nrow(r))
+  }), recursive = FALSE)
+
+  dt <- data.table::rbindlist(lst[seq.int(1, length(lst), 2)])
   dt$id <- paste(rep(names(paramsets),
-                     times = rsapply(paramsets, "length", active = TRUE)),
+                     times = as.numeric(lst[seq.int(2, length(lst), 2)])),
                  dt$id, sep = "_")
 
   return(dt)

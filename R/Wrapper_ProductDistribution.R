@@ -1,6 +1,7 @@
-#' @title Product Distribution
-#' @description A wrapper for creating the joint distribution of multiple independent probability
+#' @title Product Distribution Wrapper
+#' @description A wrapper for creating the product distribution of multiple independent probability
 #' distributions.
+#'
 #' @template class_vecdist
 #' @template param_log
 #' @template param_logp
@@ -9,18 +10,11 @@
 #' @template param_lowertail
 #' @template param_decorators
 #'
-#' @details Exploits the following relationships of independent distributions
+#' @details A product distribution is defined by
 #'
 #' \deqn{F_P(X1 = x1,...,XN = xN) = F_{X1}(x1) * ... * F_{XN}(xn)}{F_P(X1 = x1,...,XN = xN) = F_X1(x1) * ... * F_XN(xn)} #nolint
-#' where \eqn{f_P}/\eqn{F_P} is the pdf/cdf of the joint (product) distribution
-#' \eqn{P} and \eqn{X1,...,XN} are independent distributions.
-#'
-#'
-#' @section Constructor Details: A product distribution can either be constructed by a list of
-#' distributions passed to \code{distlist} or by passing the name of a distribution
-#' to \code{distribution}, as well as a list or table of parameters to \code{params}. The former
-#' case provides more flexibility in the ability to use multiple distributions but the latter is
-#' useful for quickly combining many distributions of the same type. See examples.
+#' where \eqn{F_P} is the cdf of the product distribution and \eqn{X1,...,XN} are
+#' independent distributions.
 #'
 #' @export
 ProductDistribution <- R6Class("ProductDistribution",
@@ -30,6 +24,7 @@ ProductDistribution <- R6Class("ProductDistribution",
     #' @description
     #' Creates a new instance of this [R6][R6::R6Class] class.
     #' @examples
+    #' \dontrun{
     #' ProductDistribution$new(list(Binomial$new(
     #'   prob = 0.5,
     #'   size = 10
@@ -49,24 +44,61 @@ ProductDistribution <- R6Class("ProductDistribution",
     #'   distribution = "Binomial",
     #'   params = data.table::data.table(prob = c(0.1, 0.6, 0.2), size = c(2, 4, 6))
     #' )
+    #' }
     initialize = function(distlist = NULL, distribution = NULL, params = NULL,
                           shared_params = NULL,
                           name = NULL, short_name = NULL,
-                          decorators = NULL) {
+                          decorators = NULL,
+                          vecdist = NULL) {
 
-      super$initialize(
-        distlist = distlist,
-        distribution = distribution,
-        params = params,
-        shared_params = shared_params,
-        decorators = decorators,
-        name = name,
-        short_name = short_name
-      )
+      if (!is.null(vecdist)) {
+        checkmate::assertClass(vecdist, "VectorDistribution")
 
-      if (!is.null(name)) self$name <- gsub("Vector", "Product", self$name)
-      if (!is.null(short_name)) self$short_name <- gsub("Vec", "X", self$short_name)
-      self$description <- gsub("Vector", "Product", self$description)
+        if (!is.null(decorators)) {
+          suppressMessages(decorate(self, decorators))
+        }
+
+        private$.modelTable <- vecdist$modelTable
+        private$.distlist <- vecdist$distlist
+        private$.univariate <- vecdist$.__enclos_env__$private$.univariate
+        private$.pdf <- vecdist$.__enclos_env__$private$.pdf
+        private$.cdf <- vecdist$.__enclos_env__$private$.cdf
+        private$.quantile <- vecdist$.__enclos_env__$private$.quantile
+        private$.rand <- vecdist$.__enclos_env__$private$.rand
+
+        parameters  <- vecdist$parameters()
+
+        if (checkmate::testClass(vecdist, "MixtureDistribution")) {
+          parameters$.__enclos_env__$private$.parametersets$mix <- NULL
+        }
+
+        super$.__enclos_env__$super$initialize(
+          distlist = if (vecdist$distlist) vecdist$wrappedModels() else NULL,
+          name = vecdist$name,
+          short_name = vecdist$short_name,
+          description = vecdist$description,
+          support = vecdist$properties$support,
+          type = vecdist$traits$type,
+          valueSupport = vecdist$traits$valueSupport,
+          variateForm = "multivariate",
+          parameters = parameters
+        )
+
+      } else {
+        super$initialize(
+          distlist = distlist,
+          distribution = distribution,
+          params = params,
+          shared_params = shared_params,
+          decorators = decorators,
+          name = name,
+          short_name = short_name
+        )
+      }
+
+      if (is.null(name)) self$name <- gsub("Vector|Mixture", "Product", self$name)
+      if (is.null(short_name)) self$short_name <- gsub("Vec|Mix", "Prod", self$short_name)
+      self$description <- gsub("Vector|Mixture", "Product", self$description)
 
       invisible(self)
     },
@@ -147,4 +179,17 @@ ProductDistribution <- R6Class("ProductDistribution",
 #' @export
 `*.Distribution` <- function(x, y) {
   ProductDistribution$new(list(x, y))
+}
+
+#' @title Coercion to Product Distribution
+#' @description Helper functions to quickly convert compatible objects to
+#' a [ProductDistribution].
+#' @param object [MixtureDistribution] or [VectorDistribution]
+#' @export
+as.ProductDistribution <- function(object) {
+  if (checkmate::testClass(object, "VectorDistribution")) {
+    return(ProductDistribution$new(vecdist = object))
+  } else {
+    stop("Object must inherit from VectorDistribution.")
+  }
 }

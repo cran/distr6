@@ -3,7 +3,7 @@
 \name{ProductDistribution}
 \alias{ProductDistribution}
 \alias{*.Distribution}
-\title{Product Distribution}
+\title{Product Distribution Wrapper}
 \usage{
 \method{*}{Distribution}(x, y)
 }
@@ -11,30 +11,23 @@
 \item{x, y}{\link{Distribution}}
 }
 \description{
-A wrapper for creating the joint distribution of multiple independent probability
+A wrapper for creating the product distribution of multiple independent probability
 distributions.
 }
 \details{
-Exploits the following relationships of independent distributions
+A product distribution is defined by
 
 \deqn{F_P(X1 = x1,...,XN = xN) = F_{X1}(x1) * ... * F_{XN}(xn)}{F_P(X1 = x1,...,XN = xN) = F_X1(x1) * ... * F_XN(xn)} #nolint
-where \eqn{f_P}/\eqn{F_P} is the pdf/cdf of the joint (product) distribution
-\eqn{P} and \eqn{X1,...,XN} are independent distributions.
+where \eqn{F_P} is the cdf of the product distribution and \eqn{X1,...,XN} are
+independent distributions.
 }
-\section{Constructor Details}{
- A product distribution can either be constructed by a list of
-distributions passed to \code{distlist} or by passing the name of a distribution
-to \code{distribution}, as well as a list or table of parameters to \code{params}. The former
-case provides more flexibility in the ability to use multiple distributions but the latter is
-useful for quickly combining many distributions of the same type. See examples.
-}
-
 \examples{
 
 ## ------------------------------------------------
 ## Method `ProductDistribution$new`
 ## ------------------------------------------------
 
+\dontrun{
 ProductDistribution$new(list(Binomial$new(
   prob = 0.5,
   size = 10
@@ -54,6 +47,7 @@ ProductDistribution$new(
   distribution = "Binomial",
   params = data.table::data.table(prob = c(0.1, 0.6, 0.2), size = c(2, 4, 6))
 )
+}
 
 ## ------------------------------------------------
 ## Method `ProductDistribution$pdf`
@@ -145,7 +139,8 @@ Creates a new instance of this \link[R6:R6Class]{R6} class.
   shared_params = NULL,
   name = NULL,
   short_name = NULL,
-  decorators = NULL
+  decorators = NULL,
+  vecdist = NULL
 )}\if{html}{\out{</div>}}
 }
 
@@ -179,12 +174,17 @@ Optional short name/ID of wrapped distribution.}
 
 \item{\code{decorators}}{\code{(character())} \cr
 Decorators to add to the distribution during construction.}
+
+\item{\code{vecdist}}{\link{VectorDistribution} \cr
+Alternative constructor to directly create this object from an object inheriting from
+\link{VectorDistribution}.}
 }
 \if{html}{\out{</div>}}
 }
 \subsection{Examples}{
 \if{html}{\out{<div class="r example copy">}}
-\preformatted{ProductDistribution$new(list(Binomial$new(
+\preformatted{\dontrun{
+ProductDistribution$new(list(Binomial$new(
   prob = 0.5,
   size = 10
 ), Normal$new(mean = 15)))
@@ -203,6 +203,7 @@ ProductDistribution$new(
   distribution = "Binomial",
   params = data.table::data.table(prob = c(0.1, 0.6, 0.2), size = c(2, 4, 6))
 )
+}
 }
 \if{html}{\out{</div>}}
 
