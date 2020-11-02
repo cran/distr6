@@ -1,7 +1,7 @@
-cf9046cce2bf4c1354e741dbbe6eec90 *DESCRIPTION
+26bf9b55049b9067631e875f2a73adaf *DESCRIPTION
 cf2ac1b6dff1ae6894fb2f357df37cbf *LICENSE
 ad0e20459a2a44c800741520681afe73 *NAMESPACE
-d2c1ddec54579d1cd3e112527f8e9012 *NEWS.md
+97ed2cc1c87c4ccf53e113fe9cfce795 *NEWS.md
 bd8cea439d998c30a8c861266bef5387 *R/Distribution.R
 339b80078e818f53ce64074ea6409fcc *R/DistributionDecorator.R
 a68b3c3b8feaaefcffd2cfb29cc2e70a *R/DistributionDecorator_CoreStatistics.R
@@ -115,7 +115,7 @@ ea8fa0424cc36a09c9aa552662b263fd *R/zzz.R
 ead18d21eb0c56a6d133ca1653a7bb3a *README.md
 724b06a8a0638918dffa729865d2bfd6 *build/vignette.rds
 7a849ecf8d297360ad0c6b20127b837d *inst/doc/distr6.R
-72edcb9e78c79da294cb6f45ccbabb8b *inst/doc/distr6.html
+0f6e4df3f8eb2094858733f35f9c494d *inst/doc/distr6.html
 2e28f557c126c6a0344165a604e06e35 *inst/doc/distr6.rmd
 c6490a5aface0e782908cfbd2d7ef5b9 *man/Arcsine.Rd
 55bf9c5d9abb13ce815168214c928957 *man/Bernoulli.Rd
@@ -296,7 +296,7 @@ e6e293af2460ccdfb9730cc1e1b2ee5e *man/workingSupport.Rd
 71d7ee97a3cede45a5d6f3621fc5b294 *man/wrappedModels.Rd
 5f6a85b3b6c88895d388b9394bf0bdb6 *src/Distributions.cpp
 c0579d7d32f909409b96088b4ca0b40a *src/Imputers.cpp
-7e2eb007ebf1cc3b2609002f79d4bc0a *src/Kernels.cpp
+243439ae53da7e16e9bf7c21d1d97208 *src/Kernels.cpp
 6f5b0076fb635d4faccf8bd71ca634f8 *src/RcppExports.cpp
 3eca693a968aedb8422f83533d696b22 *src/base_dpq.cpp
 4dd4b2620b0665507815729297a602f2 *tests/testthat.R
