@@ -1,3 +1,7 @@
+# distr6 1.4.8
+
+* Fixes for R devel
+
 # distr6 1.4.7
 
 * Patch for set6

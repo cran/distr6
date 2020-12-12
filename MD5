@@ -1,7 +1,7 @@
-8b8c356c4c43b551626aa0988824ff06 *DESCRIPTION
+0bca5c7e9008b66731d900b51a63995b *DESCRIPTION
 cf2ac1b6dff1ae6894fb2f357df37cbf *LICENSE
 8ba48df32511dc9dd40151b1c11d86e0 *NAMESPACE
-7fdcab2c1d1a0e2c61b65221201cb854 *NEWS.md
+e847890306b30a9d5d8a1d18ed6631a4 *NEWS.md
 bd8cea439d998c30a8c861266bef5387 *R/Distribution.R
 339b80078e818f53ce64074ea6409fcc *R/DistributionDecorator.R
 a68b3c3b8feaaefcffd2cfb29cc2e70a *R/DistributionDecorator_CoreStatistics.R
@@ -116,7 +116,7 @@ ea8fa0424cc36a09c9aa552662b263fd *R/zzz.R
 ead18d21eb0c56a6d133ca1653a7bb3a *README.md
 724b06a8a0638918dffa729865d2bfd6 *build/vignette.rds
 7a849ecf8d297360ad0c6b20127b837d *inst/doc/distr6.R
-a9287237fbe0bc510d4fcd0ce23505ea *inst/doc/distr6.html
+331e07c9f85e1761d698ab8d20b79b50 *inst/doc/distr6.html
 2e28f557c126c6a0344165a604e06e35 *inst/doc/distr6.rmd
 c6490a5aface0e782908cfbd2d7ef5b9 *man/Arcsine.Rd
 55bf9c5d9abb13ce815168214c928957 *man/Bernoulli.Rd
@@ -307,7 +307,7 @@ f836ded2deb99093319736671880662e *tests/testthat/test_ParameterSet.R
 418855ea3b3983220f48e55e0ddb5049 *tests/testthat/test_ParameterSetCollection.R
 abbb0ca692faca041d762f0e4a23c387 *tests/testthat/test_R62S3.R
 8351ffb511d2784e2910db082b26de36 *tests/testthat/test_assertions.R
-f285fba44a3d9fbebfd0101083adb369 *tests/testthat/test_cDistribution.R
+b809e6b659ea7966bd9b37cc52b015a2 *tests/testthat/test_cDistribution.R
 5a49a3beeb730fddede41e57f4eea72c *tests/testthat/test_cpp_helpers.R
 0a64ddb46ce8fdfdb2b05ced768410d8 *tests/testthat/test_cpp_imputers.R
 bc507aec53a8c9fca2e7441ebba2b319 *tests/testthat/test_decorator.R
@@ -394,5 +394,5 @@ b61a2a6268f7107a1265a9b2394d7959 *tests/testthat/test_wrapper_mixture.R
 ee4cb8e3c651f3e7d8fb1439cd3e0284 *tests/testthat/test_wrapper_product.R
 6b522118c222ae2216f68946210a0935 *tests/testthat/test_wrapper_scale.R
 faaee6dc6d2934fd251334503d78a531 *tests/testthat/test_wrapper_truncation.R
-4b7bdd73f28258e900a917318417c3cc *tests/testthat/test_wrapper_vector.R
+57525ceba40660d3f99c001b2172f609 *tests/testthat/test_wrapper_vector.R
 2e28f557c126c6a0344165a604e06e35 *vignettes/distr6.rmd
