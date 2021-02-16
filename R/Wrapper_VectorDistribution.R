@@ -16,6 +16,7 @@
 #' @template param_lowertail
 #' @template param_n
 #' @template param_decorators
+#' @template param_ids
 #'
 #' @details A vector distribution is intented to vectorize distributions more efficiently than
 #' storing a list of distributions. To improve speed and reduce memory usage, distributions are
@@ -57,7 +58,16 @@ VectorDistribution <- R6Class("VectorDistribution",
     #' }
     initialize = function(distlist = NULL, distribution = NULL, params = NULL,
                           shared_params = NULL, name = NULL, short_name = NULL,
-                          decorators = NULL, vecdist = NULL, ...) {
+                          decorators = NULL, vecdist = NULL, ids = NULL, ...) {
+
+      if (!is.null(ids)) {
+        if (any(grepl("__", ids, fixed = TRUE))) {
+          stop("'__' is a reserved symbol in VectorDistributions and cannot be used in 'ids'.")
+        } else {
+          # 3.6 fix
+          ids <- as.character(ids)
+        }
+      }
 
       #-----------------
       # Decorate wrapper
@@ -71,8 +81,13 @@ VectorDistribution <- R6Class("VectorDistribution",
         if (checkmate::testList(vecdist)) {
 
           dist <- as.character(unlist(vecdist[[1]]$modelTable$Distribution[[1]]))
-          ids <- paste0(get(dist)$public_fields$short_name,
+          if (is.null(ids)) {
+            ids <- paste0(get(dist)$public_fields$short_name,
                        seq.int(sum(sapply(vecdist, function(.x) nrow(.x$modelTable)))))
+          } else {
+            checkmate::assertCharacter(ids, unique = TRUE)
+          }
+
           private$.modelTable <- as.data.table(data.frame(Distribution = dist, shortname = ids))
           private$.distlist <- FALSE
           private$.univariate <- vecdist[[1]]$.__enclos_env__$private$.univariate
@@ -182,6 +197,7 @@ or `distlist` should be used.")
               shared_params <- as.list(shared_params)
             }
           }
+          private$.sharedparams <- shared_params
 
           # create wrapper parameters by cloning distribution parameters and setting by given params
           # skip if no parameters
@@ -194,10 +210,17 @@ or `distlist` should be used.")
               paramlst[[i]] <- p$clone(deep = TRUE)
             }
 
-            names(paramlst) <- makeUniqueNames(rep(pdist$public_fields$short_name, length(params)))
+            if (is.null(ids)) {
+              names(paramlst) <- makeUniqueNames(rep(pdist$public_fields$short_name,
+                                                 length(params)))
+            } else {
+              names(paramlst) <- checkmate::assertCharacter(ids, unique = TRUE)
+            }
             names(params) <- names(paramlst)
             params <- unlist(params, recursive = FALSE)
-            names(params) <- gsub(".", "_", names(params), fixed = TRUE)
+            names(params) <- gsub(".", "__", names(params), fixed = TRUE)
+
+
             if (!is.null(shared_params)) {
               if (distribution == "Geometric") {
                 shared_params <- shared_params[!(names(shared_params) %in% "trials")]
@@ -208,14 +231,15 @@ or `distlist` should be used.")
               shared_params <- rep(list(shared_params), length(params))
               names(shared_params) <- names(paramlst)
               shared_params <- unlist(shared_params, recursive = FALSE)
-              names(shared_params) <- gsub(".", "_", names(shared_params), fixed = TRUE)
+              names(shared_params) <- gsub(".", "__", names(shared_params), fixed = TRUE)
               params <- c(params, shared_params)
             }
 
             support <- subset(as.data.table(p), select = c(id, support))
             support[, support := sapply(support, set6::setpower, power = length(paramlst))]
             parameters <- ParameterSetCollection$new(lst = paramlst, .checks = p$checks,
-                                                     .supports = support)$setParameterValue(lst = params)
+                                                     .supports = support)$
+              setParameterValue(lst = params, resolveConflicts = TRUE)
           } else {
             paramlst <- vector("list", length(params))
             names(paramlst) <- makeUniqueNames(rep(pdist$public_fields$short_name, length(params)))
@@ -234,7 +258,8 @@ or `distlist` should be used.")
           private$.univariate <- pdist$private_fields$.traits$variateForm == "univariate"
           # inheritance catch
           if (!length(private$.univariate)) {
-            private$.univariate <- pdist$get_inherit()$private_fields$.trait$variateForm == "univariate"
+            private$.univariate <-
+              pdist$get_inherit()$private_fields$.trait$variateForm == "univariate"
           }
           # set valueSupport
           valueSupport <- pdist$private_fields$.traits$valueSupport
@@ -374,7 +399,13 @@ or `distlist` should be used.")
         } else {
           # set flag to TRUE
           private$.distlist <- TRUE
-          shortname <- distribution <- c()
+          distribution <- c()
+
+          if (is.null(ids)) {
+            shortname <- character(0)
+          } else {
+            shortname <- checkmate::assertCharacter(ids, unique = TRUE)
+          }
 
           # get all parameters in a list
           # assert all variateForm the same
@@ -384,14 +415,19 @@ or `distlist` should be used.")
           vs <- distlist[[1]]$traits$valueSupport
           for (i in seq_along(distlist)) {
             stopifnot(distlist[[i]]$traits$variateForm == vf)
-            shortname <- c(shortname, distlist[[i]]$short_name)
+            if (is.null(ids)) {
+              shortname <- c(shortname, distlist[[i]]$short_name)
+            }
             distribution <- c(distribution, distlist[[i]]$name)
             if (!is.null(distlist[[i]]$parameters()))
               paramlst[[i]] <- distlist[[i]]$parameters()
             vs <- c(vs, distlist[[i]]$traits$valueSupport)
           }
           valueSupport <- if (length(unique(vs)) == 1) vs[[1]] else "mixture"
-          shortname <- makeUniqueNames(shortname)
+          if (is.null(ids)) {
+            shortname <- makeUniqueNames(shortname)
+          }
+
 
           if (is.null(unlist(paramlst))) {
             parameters <- ParameterSetCollection$new()
@@ -534,10 +570,11 @@ or `distlist` should be used.")
           distlist <- private$.wrappedModels
         } else {
           distlist <- lapply(private$.modelTable$shortname, function(x) {
-            do.call(
-              get(as.character(unlist(private$.modelTable$Distribution[[1]])))$new,
-              self$parameters()[paste0(x, "_")]$values()
-            )
+            dist <- do.call(get(as.character(unlist(private$.modelTable$Distribution[[1]])))$new,
+                            list(decorators = self$decorators))
+            do.call(dist$setParameterValue, c(resolveConflicts = TRUE,
+                                              self$parameters()[paste0(x, "__")]$values()))
+            return(dist)
           })
         }
       } else {
@@ -551,10 +588,11 @@ or `distlist` should be used.")
           distlist <- private$.wrappedModels[models]
         } else {
           distlist <- lapply(models, function(x) {
-            do.call(
-              get(as.character(unlist(private$.modelTable$Distribution[[1]])))$new,
-              self$parameters()[paste0(x, "_")]$values()
-            )
+            dist <- do.call(get(as.character(unlist(private$.modelTable$Distribution[[1]])))$new,
+                            list(decorators = self$decorators))
+            do.call(dist$setParameterValue, c(resolveConflicts = TRUE,
+                                              self$parameters()[paste0(x, "__")]$values()))
+            return(dist)
           })
         }
       }
@@ -598,7 +636,7 @@ or `distlist` should be used.")
         if (is.null(f)) {
           stop("Not implemented for this distribution.")
         }
-        formals(f) <- c(list(self = self), alist(... = ))
+        formals(f) <- c(list(self = self), alist(... = )) # nolint
         ret <- f()
         if (length(ret) == 1) {
           ret <- rep(ret, nrow(self$modelTable))
@@ -676,7 +714,7 @@ or `distlist` should be used.")
         if (is.null(f)) {
           stop("Not implemented for this distribution.")
         }
-        formals(f) <- c(list(self = self), alist(... = ))
+        formals(f) <- c(list(self = self), alist(... = )) # nolint
         ret <- f()
         if (length(ret) == 1) {
           ret <- rep(ret, nrow(self$modelTable))
@@ -710,7 +748,7 @@ or `distlist` should be used.")
         if (is.null(f)) {
           stop("Not implemented for this distribution.")
         }
-        formals(f) <- c(list(self = self), alist(... = ))
+        formals(f) <- c(list(self = self), alist(... = )) # nolint
         ret <- f()
         if (length(ret) == 1) {
           ret <- rep(ret, nrow(self$modelTable))
@@ -740,7 +778,7 @@ or `distlist` should be used.")
         if (is.null(f)) {
           stop("Not implemented for this distribution.")
         }
-        formals(f) <- c(list(self = self, excess = excess), alist(... = ))
+        formals(f) <- c(list(self = self, excess = excess), alist(... = )) # nolint
         ret <- f()
         if (length(ret) == 1) {
           ret <- rep(ret, nrow(self$modelTable))
@@ -766,7 +804,7 @@ or `distlist` should be used.")
           f <- get(as.character(unlist(self$modelTable$Distribution[[1]])))$get_inherit()$
             public_methods$entropy
         }
-        formals(f) <- c(list(self = self, base = base), alist(... = ))
+        formals(f) <- c(list(self = self, base = base), alist(... = )) # nolint
         ret <- f()
         if (length(ret) == 1) {
           ret <- rep(ret, nrow(self$modelTable))
@@ -1071,10 +1109,19 @@ or `distlist` should be used.")
 #' @description Once a \code{VectorDistribution} has been constructed, use \code{[}
 #' to extract one or more \code{Distribution}s from inside it.
 #' @param vecdist VectorDistribution from which to extract Distributions.
-#' @param i indices specifying distributions to extract.
+#' @param i indices specifying distributions to extract or ids of wrapped distributions.
 #' @usage \method{[}{VectorDistribution}(vecdist, i)
+#' @examples
+#' v <- VectorDistribution$new(distribution = "Binom", params = data.frame(size = 1:2))
+#' v[1]
+#' v["Binom1"]
+#'
 #' @export
 "[.VectorDistribution" <- function(vecdist, i) {
+  if (checkmate::testCharacter(i)) {
+    checkmate::assertSubset(i, as.character(unlist(vecdist$modelTable$shortname)))
+    i <- match(i, as.character(unlist(vecdist$modelTable$shortname)), 0)
+  }
   i <- i[i %in% (seq_len(nrow(vecdist$modelTable)))]
   if (length(i) == 0) {
     stop("Index i too large, should be less than or equal to ", nrow(vecdist$modelTable))
@@ -1086,11 +1133,13 @@ or `distlist` should be used.")
     distribution <- as.character(unlist(vecdist$modelTable[1, 1]))
     if (length(i) == 1) {
       id <- as.character(unlist(vecdist$modelTable[i, 2]))
-      pars <- vecdist$parameters()[paste0(id, "_")]$values(FALSE)
-      if (!is.null(decorators)) {
-        pars <- c(pars, list(decorators = decorators))
-      }
-      return(do.call(get(distribution)$new, pars))
+      pars <- vecdist$parameters()[paste0(id, "__")]$values()
+      shared_pars <-  vecdist$.__enclos_env__$private$.sharedparams
+      pars <- pars[!(names(pars) %in% names(shared_pars))]
+      # construct with shared parameters (no conflicts should be possible here)
+      dist <- do.call(get(distribution)$new, c(shared_pars, list(decorators = decorators)))
+      do.call(dist$setParameterValue, c(resolveConflicts = TRUE, pars))
+      return(dist)
     } else {
       id <- as.character(unlist(vecdist$modelTable[i, 2]))
       pars <- vecdist$parameters()$values()
@@ -1098,7 +1147,9 @@ or `distlist` should be used.")
 
       return(VectorDistribution$new(
         distribution = distribution, params = pars,
-        decorators = decorators
+        decorators = decorators,
+        shared_params = vecdist$.__enclos_env__$private$.sharedparams,
+        ids = vecdist$modelTable$shortname[i]
       ))
     }
   } else {
@@ -1111,7 +1162,8 @@ or `distlist` should be used.")
     } else {
       return(VectorDistribution$new(
         distlist = vecdist$wrappedModels()[i],
-        decorators = decorators
+        decorators = decorators,
+        ids = vecdist$modelTable$shortname[i]
       ))
     }
   }
@@ -1128,4 +1180,13 @@ as.VectorDistribution <- function(object) {
   } else {
     stop("Object must inherit from VectorDistribution.")
   }
+}
+
+#' @title Get Number of Distributions in Vector Distribution
+#' @description Gets the number of distributions in an object inheriting from
+#' [VectorDistribution].
+#' @param x [VectorDistribution]
+#' @export
+length.VectorDistribution <- function(x) {
+  nrow(x$modelTable)
 }

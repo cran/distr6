@@ -1,3 +1,40 @@
+# distr6 1.5.0
+
+### Minor Updates
+
+#### Added Functionality
+
+* Added `length.VectorDistribution`
+* Added `ids` parameter to `VectorDistribution` to allow specifying names for wrapped distributions. Extended `extract.VectorDistribution` so these ids can be used for extraction.
+* Added sugar function `dstr` to construct distributions more easily, e.g. `dstr("Binom", size = 4)` instead of `Binomial$new(size = 4)`.
+* Added sugar function `dstrs` to construct a `VectorDistribution` of distributions.
+* `ParameterSet` method `setParameterValue` now includes `resolveConflicts` parameter for resolving conflicts between conflicting parameters (see below). This should primarily only be used internally and is useful for transforming composite distributions.
+
+#### Edited Functionality
+
+* The separator for composite (wrapped) distributions is now `__` (before `_`). This may affect backwards compatibility in rare cases.
+* Construction and setting of parameters is now changed. Previously this relied on knowing a confusing hierarchy in parameters which would take priority over one another. Now if conflicting parameters are supplied in construction or on setting an error is returned, e.g. `Binomial$new(prob = 0.1, qprob = 0.2)` would cause an error. This may affect bacwards compatibility however should not do so if distributions are correctly constructed/updated without conflicts.
+* `setParameterValue` in `ParameterSet` no longer errors if a non-settable parameter is updated, instead a `warning` is given and the parameter is ignored.
+* Multivariate distributions no longer error if constructed with a single variate, though this is still advised against.
+* Internal changes to how `SDistribution` parameter defaults are set. Previously these were set in the constructor with function defaults, now they are set in the `ParameterSet`. This should not affect backwards compatibility. This should improve speed of distribution construction.
+
+#### Deprecated/Removed Functionality
+
+* Data parameter in `WeightedDiscrete` distribution has now been removed.
+
+### Bug fixes/Under the Hood Edits
+
+* Minor bug fixes in some distribution properties.
+* `MixtureDistribution` now uses `extraDistr::rmnom` for speed improvements.
+* Slight improvement to error messages in `ParameterSet` but these will be improved further in a future update.
+* Minor internal changes to storage method of `SDistribution` `ParameterSet` objects.
+* Fixed typos in parameter sets
+
+### Documentation
+
+* Documentation for `SDistribution` objects has been restructured for easier reading, the distribution default is now included.
+* Fixed typos
+
 # distr6 1.4.8
 
 * Fixes for R devel
@@ -94,7 +131,7 @@
 * `Degenerate`, `ShiftedLoglogistic` now Rcpp
 * Removed redundant `K` parameter from `MultivariateNormal`
 * Bugfix in `Wald`, symmetry was incorrectly flagged as "symmetric"
-* Fixed bug in `TruncatedDistribution` support - previously support interval type was `"[]"` instead of `"(]"`. An important implication is that even if truncating at or outside of the distribution limits, the support will still be changed if the distribution was left-closed to become left-open. 
+* Fixed bug in `TruncatedDistribution` support - previously support interval type was `"[]"` instead of `"(]"`. An important implication is that even if truncating at or outside of the distribution limits, the support will still be changed if the distribution was left-closed to become left-open.
 * Improved speed of assertions by using package `{checkmate}`
 * Bugfix in `listDistributions` which was overriding filtering with `simplify`
 
@@ -169,7 +206,7 @@
 ## Patches
 
 - Bug fix in `WeightedDiscrete` distribution `variance` calculation
-- Fixed bug in `Empirical` that was stopping the cdf of the first point in the distribution being evaluated 
+- Fixed bug in `Empirical` that was stopping the cdf of the first point in the distribution being evaluated
 - Fixed bug that allowed invalid parameter values to be set for non-reference parameters
 - Updated parameter error messages to be more informative
 - Improved speed and efficiency in `Distribution` constructor for wrappers
@@ -194,7 +231,7 @@
 - Added `errormsg` argument to assertions so a custom error message can be provided
 - Fixed error in quantile function in `Empirical` that was causing results to be dropped
 - Fixed bug in `TruncatedDistribution` that prevented multivariate distributions being truncated
-- Fixed error in variance of `Empirical` that was calculating sample not population 
+- Fixed error in variance of `Empirical` that was calculating sample not population
 - Moved rare imports to suggests
 
 # distr6 1.1.0
@@ -227,7 +264,7 @@
 
 - Bug fix in quantile function of huberization wrapper
 - Fixed the `rand` return of a Vector Distribution (transposed data.table and added column names)
-- Fixed spelling mistakes in extension guidelines and removed calls to redundant parameters 
+- Fixed spelling mistakes in extension guidelines and removed calls to redundant parameters
 - Removed redundant `crayon` dependency
 - Fixed bug in `MixtureDistribution` that was causing `rand` to erroneously return integers
 - Removed error in `Categorical` documentation

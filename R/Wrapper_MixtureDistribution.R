@@ -9,6 +9,7 @@
 #' @template param_lowertail
 #' @template param_n
 #' @template param_decorators
+#' @template param_ids
 #'
 #' @details A mixture distribution is defined by
 #'
@@ -35,7 +36,7 @@ MixtureDistribution <- R6Class("MixtureDistribution",
                           shared_params = NULL,
                           name = NULL, short_name = NULL,
                           decorators = NULL,
-                          vecdist = NULL) {
+                          vecdist = NULL, ids = NULL) {
 
       if (!is.null(vecdist)) {
         lng <- nrow(vecdist$modelTable)
@@ -106,7 +107,8 @@ MixtureDistribution <- R6Class("MixtureDistribution",
           decorators = decorators,
           outerID = "mix",
           name = name,
-          short_name = short_name
+          short_name = short_name,
+          ids = ids
         )
       }
 
@@ -210,10 +212,10 @@ MixtureDistribution <- R6Class("MixtureDistribution",
         weights <- rep(1 / lng, lng)
       }
 
-      x <- Multinomial$new(
-        probs = weights,
-        size = n
-      )$rand(1)
+      x <- extraDistr::rmnom(
+        n = 1,
+        size = n,
+        prob = weights)
 
       if (private$.univariate) {
         y <- c()

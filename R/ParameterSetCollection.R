@@ -91,20 +91,20 @@ ParameterSetCollection <- R6Class("ParameterSetCollection",
     #' psc <- ParameterSetCollection$new(Binom1 = Binomial$new()$parameters(),
     #'                                   Binom2 = Binomial$new()$parameters(),
     #'                                   Geom = Geometric$new()$parameters())
-    #' psc$getParameterValue("Binom1_prob")
+    #' psc$getParameterValue("Binom1__prob")
     #' psc$getParameterValue("prob")
     getParameterValue = function(id, error = "warn") {
       dt <- as.data.table(self)
       id0 <- id
-      sep <- gregexpr("_", id0)[[1]][[1]]
+      sep <- gregexpr("__", id0)[[1]][[1]]
 
       if (sep == -1) {
-        dt = dt[grepl(paste0("_", id0, "$"), dt$id), c("id", "value")]
+        dt <- dt[grepl(paste0("__", id0, "$"), dt$id), c("id", "value")]
         if (!nrow(dt)) {
           stopf("%s is not in this ParameterSetCollection.", id)
         } else {
-          lst = as.list(dt$value)
-          names(lst) = unlist(strsplit(dt$id, split = paste0("_", id0)))
+          lst <- as.list(dt$value)
+          names(lst) <- unlist(strsplit(dt$id, split = paste0("__", id0)))
           return(lst)
         }
       } else {
@@ -125,9 +125,9 @@ ParameterSetCollection <- R6Class("ParameterSetCollection",
     #' psc <- ParameterSetCollection$new(Binom1 = b$parameters(),
     #'                                   Binom2 = b$parameters(),
     #'                                   Geom = g$parameters())
-    #' psc$getParameterSupport("Binom1_prob")
+    #' psc$getParameterSupport("Binom1__prob")
     getParameterSupport = function(id, error = "warn") {
-      param <- strsplit(id, "_", fixed = TRUE)[[1]]
+      param <- strsplit(id, "__", fixed = TRUE)[[1]]
       private$.parametersets[[param[1]]]$getParameterSupport(param[2], error = error)
     },
 
@@ -142,26 +142,26 @@ ParameterSetCollection <- R6Class("ParameterSetCollection",
     #' psc <- ParameterSetCollection$new(Binom1 = b$parameters(),
     #'                                   Binom2 = b$parameters(),
     #'                                   Geom = g$parameters())
-    #' psc$getParameterValue("Binom1_prob")
+    #' psc$getParameterValue("Binom1__prob")
     #' b$getParameterValue("prob")
-    #' psc$setParameterValue(Binom1_prob = 0.4)
+    #' psc$setParameterValue(Binom1__prob = 0.4)
     #' # both updated
-    #' psc$getParameterValue("Binom1_prob")
+    #' psc$getParameterValue("Binom1__prob")
     #' b$getParameterValue("prob")
     #'
     #' g$setParameterValue(prob = 0.1)
     #' # both updated
-    #' psc$getParameterValue("Geom_prob")
+    #' psc$getParameterValue("Geom__prob")
     #' g$getParameterValue("prob")
-    setParameterValue = function(..., lst = NULL, error = "warn") {
+    setParameterValue = function(..., lst = NULL, error = "warn", resolveConflicts = FALSE) {
       if (is.null(lst)) {
         lst <- list(...)
       } else {
         checkmate::assertList(lst)
       }
 
-      sep <- as.numeric(as.data.table(gregexpr("_", names(lst)))[1, ])
-      param <- unlist(substr(names(lst), sep + 1, 1000))
+      sep <- as.numeric(as.data.table(gregexpr("__", names(lst)))[1, ])
+      param <- unlist(substr(names(lst), sep + 2, 1000))
       dist <- unlist(substr(names(lst), 1, sep - 1))
 
       .suppressCheck <- !is.null(self$checks)
@@ -169,7 +169,8 @@ ParameterSetCollection <- R6Class("ParameterSetCollection",
         bool <- dist == i
         newlst <- lst[bool]
         names(newlst) <- param[bool]
-        private$.parametersets[[i]]$setParameterValue(lst = newlst, .suppressCheck = .suppressCheck)
+        private$.parametersets[[i]]$setParameterValue(lst = newlst, .suppressCheck = .suppressCheck,
+                                                      resolveConflicts = resolveConflicts)
       })
 
       if (!is.null(self$checks)) {
@@ -267,16 +268,16 @@ as.data.table.ParameterSetCollection <- function(x, ...) {
 
   if (length(paramsets)) {
     lst <- unlist(lapply(paramsets, function(.x) {
-      r = as.data.table(.x)
+      r <- as.data.table(.x)
       list(r, nrow(r))
     }), recursive = FALSE)
 
     dt <- data.table::rbindlist(lst[seq.int(1, length(lst), 2)])
     dt$id <- paste(rep(names(paramsets),
                        times = as.numeric(lst[seq.int(2, length(lst), 2)])),
-                   dt$id, sep = "_")
+                   dt$id, sep = "__")
   } else {
-    dt <- data.table::data.table(id = character(), value = numeric(), support= list(),
+    dt <- data.table::data.table(id = character(), value = numeric(), support = list(),
                                  description = character())
   }
 

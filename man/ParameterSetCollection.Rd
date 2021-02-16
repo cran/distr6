@@ -30,7 +30,7 @@ ParameterSetCollection$new(lst = list(Binom1 = b$parameters(),
 psc <- ParameterSetCollection$new(Binom1 = Binomial$new()$parameters(),
                                   Binom2 = Binomial$new()$parameters(),
                                   Geom = Geometric$new()$parameters())
-psc$getParameterValue("Binom1_prob")
+psc$getParameterValue("Binom1__prob")
 psc$getParameterValue("prob")
 
 ## ------------------------------------------------
@@ -42,7 +42,7 @@ g <- Geometric$new()
 psc <- ParameterSetCollection$new(Binom1 = b$parameters(),
                                   Binom2 = b$parameters(),
                                   Geom = g$parameters())
-psc$getParameterSupport("Binom1_prob")
+psc$getParameterSupport("Binom1__prob")
 
 ## ------------------------------------------------
 ## Method `ParameterSetCollection$setParameterValue`
@@ -53,16 +53,16 @@ g <- Geometric$new()
 psc <- ParameterSetCollection$new(Binom1 = b$parameters(),
                                   Binom2 = b$parameters(),
                                   Geom = g$parameters())
-psc$getParameterValue("Binom1_prob")
+psc$getParameterValue("Binom1__prob")
 b$getParameterValue("prob")
-psc$setParameterValue(Binom1_prob = 0.4)
+psc$setParameterValue(Binom1__prob = 0.4)
 # both updated
-psc$getParameterValue("Binom1_prob")
+psc$getParameterValue("Binom1__prob")
 b$getParameterValue("prob")
 
 g$setParameterValue(prob = 0.1)
 # both updated
-psc$getParameterValue("Geom_prob")
+psc$getParameterValue("Geom__prob")
 g$getParameterValue("prob")
 
 ## ------------------------------------------------
@@ -220,7 +220,7 @@ If \code{"warn"} then returns a warning on error, otherwise breaks if \code{"sto
 \preformatted{psc <- ParameterSetCollection$new(Binom1 = Binomial$new()$parameters(),
                                   Binom2 = Binomial$new()$parameters(),
                                   Geom = Geometric$new()$parameters())
-psc$getParameterValue("Binom1_prob")
+psc$getParameterValue("Binom1__prob")
 psc$getParameterValue("prob")
 }
 \if{html}{\out{</div>}}
@@ -258,7 +258,7 @@ g <- Geometric$new()
 psc <- ParameterSetCollection$new(Binom1 = b$parameters(),
                                   Binom2 = b$parameters(),
                                   Geom = g$parameters())
-psc$getParameterSupport("Binom1_prob")
+psc$getParameterSupport("Binom1__prob")
 }
 \if{html}{\out{</div>}}
 
@@ -273,7 +273,12 @@ Sets the value(s) of the given parameter(s). Because of R6 reference semantics
 this also updates the \link{ParameterSet} of the wrapped distibution, and vice versa.
 See examples.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{ParameterSetCollection$setParameterValue(..., lst = NULL, error = "warn")}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{ParameterSetCollection$setParameterValue(
+  ...,
+  lst = NULL,
+  error = "warn",
+  resolveConflicts = FALSE
+)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -288,6 +293,10 @@ are the new values to set.}
 
 \item{\code{error}}{\code{(character(1))} \cr
 If \code{"warn"} then returns a warning on error, otherwise breaks if \code{"stop"}.}
+
+\item{\code{resolveConflicts}}{\code{(logical(1))}\cr
+If \code{FALSE} (default) throws error if conflicting parameterisations are provided, otherwise
+automatically resolves them by removing all conflicting parameters.}
 }
 \if{html}{\out{</div>}}
 }
@@ -298,16 +307,16 @@ g <- Geometric$new()
 psc <- ParameterSetCollection$new(Binom1 = b$parameters(),
                                   Binom2 = b$parameters(),
                                   Geom = g$parameters())
-psc$getParameterValue("Binom1_prob")
+psc$getParameterValue("Binom1__prob")
 b$getParameterValue("prob")
-psc$setParameterValue(Binom1_prob = 0.4)
+psc$setParameterValue(Binom1__prob = 0.4)
 # both updated
-psc$getParameterValue("Binom1_prob")
+psc$getParameterValue("Binom1__prob")
 b$getParameterValue("prob")
 
 g$setParameterValue(prob = 0.1)
 # both updated
-psc$getParameterValue("Geom_prob")
+psc$getParameterValue("Geom__prob")
 g$getParameterValue("prob")
 }
 \if{html}{\out{</div>}}

@@ -191,17 +191,17 @@ test_that("wrapped models", {
   expect_equal(a$wrappedModels()[3][[1]]$cdf(1:10), Binomial$new(prob = 0.2, size = 6)$cdf(1:10))
 
   a <- VectorDistribution$new(list(Binomial$new(prob = 0.5, size = 10), Gompertz$new()))
-  expect_equal(
-    a$wrappedModels(),
-    list(
-      Binom = Binomial$new(prob = 0.5, size = 10),
-      Gomp = Gompertz$new()
-    )
-  )
-  expect_equal(a$wrappedModels(c("Binom", "Gomp")), list(
-    Binom = Binomial$new(prob = 0.5, size = 10),
-    Gomp = Gompertz$new()
-  ))
+  w <- a$wrappedModels()
+  expect_equal(length(w), 2)
+  expect_equal(names(w), c("Binom", "Gomp"))
+  expect_equal(w[1][[1]]$strprint(), "Binom(prob = 0.5, qprob = 0.5, size = 10)")
+  expect_equal(w[2][[1]]$strprint(), "Gomp(shape = 1, scale = 1)")
+
+  w <- a$wrappedModels(c("Binom", "Gomp"))
+  expect_equal(length(w), 2)
+  expect_equal(names(w), c("Binom", "Gomp"))
+  expect_equal(w[1][[1]]$strprint(), "Binom(prob = 0.5, qprob = 0.5, size = 10)")
+  expect_equal(w[2][[1]]$strprint(), "Gomp(shape = 1, scale = 1)")
 
   mix <- MixtureDistribution$new(list(Binomial$new(), Normal$new()))
   expect_equal(mix$wrappedModels("Binom"), Binomial$new())
@@ -209,6 +209,14 @@ test_that("wrapped models", {
   expect_error(mix$wrappedModels("sdsd"), "No distribution called")
   expect_equal(mix$wrappedModels(c("Binom", "Norm")), list(Binom = Binomial$new(),
                                                            Norm = Normal$new()))
+
+  a <- VectorDistribution$new(distribution = "Binomial", params = list(
+    list(prob = 0.1, size = 2), list(prob = 0.6, size = 4),
+    list(prob = 0.2, size = 6)
+  ),
+  decorators = "ExoticStatistics")
+  expect_equal(a$wrappedModels()[[1]]$decorators, "ExoticStatistics")
+  expect_equal(a$wrappedModels("Binom1")$decorators, "ExoticStatistics")
 })
 
 # test_that("parameters", {
@@ -225,17 +233,16 @@ test_that("extract", {
     list(prob = 0.2, size = 6)
   ))
   expect_equal(a[1]$pdf(1:10), Binomial$new(prob = 0.1, size = 2)$pdf(1:10))
-  expect_equal(names(a[1:2]$wrappedModels()), c("Binom1", "Binom2"))
+  expect_equal(as.character(names(a[1:2]$wrappedModels())), c("Binom1", "Binom2"))
   expect_error(a[4], "Index i too large")
   a <- VectorDistribution$new(list(
     Binomial$new(prob = 0.1, size = 2), Binomial$new(prob = 0.6, size = 4),
     Binomial$new(prob = 0.2, size = 6)
   ))
-  expect_equal(a[1], Binomial$new(prob = 0.1, size = 2))
-  expect_equal(a[1:2], VectorDistribution$new(list(
-    Binomial$new(prob = 0.1, size = 2),
-    Binomial$new(prob = 0.6, size = 4)
-  )))
+  expect_equal(a[1]$strprint(), "Binom(prob = 0.1, qprob = 0.9, size = 2)")
+  av <- a[1:2]
+  expect_equal(getR6Class(av), "VectorDistribution")
+  expect_equal(a[1]$strprint(), "Binom(prob = 0.1, qprob = 0.9, size = 2)")
   expect_error(a[4], "Index i too large")
 })
 
@@ -249,7 +256,7 @@ test_that("decorators", {
   )
   expect_equal(a$decorators, c("CoreStatistics", "ExoticStatistics"))
   expect_equal(a[1]$decorators, c("CoreStatistics", "ExoticStatistics"))
-  expect_equal(a[1:2]$decorators, c("CoreStatistics", "ExoticStatistics"))
+  expect_equal(as.character(a[1:2]$decorators), c("CoreStatistics", "ExoticStatistics"))
 
   a <- VectorDistribution$new(list(
     Binomial$new(prob = 0.1, size = 2), Binomial$new(prob = 0.6, size = 4),
@@ -411,4 +418,44 @@ test_that("vecdist constructor", {
 
   expect_equal(as.VectorDistribution(p)$pdf(1:10), v$pdf(1:10))
   expect_equal(as.VectorDistribution(m)$cdf(1:10), v$cdf(1:10))
+})
+
+test_that("length", {
+  expect_equal(length(VectorDistribution$new(list(Binomial$new(), Exponential$new(rate = 1)))), 2)
+  expect_equal(length(VectorDistribution$new(distribution = "WeightedDiscrete", params =
+               data.frame(x = 1:2, pdf = rep(1, 2)))), 2)
+})
+
+
+test_that("ids", {
+  v1 <- VectorDistribution$new(distribution = "Binom", params = data.frame(size = 1:2))
+  v <- VectorDistribution$new(vecdist = list(v1), ids = c("a", "b_a"))
+  expect_equal(as.character(unlist(v$modelTable$shortname)), c("a", "b_a"))
+  expect_equal(names(v$wrappedModels()), c("a", "b_a"))
+  expect_equal(v["a"]$strprint(), "Binom(prob = 0.5, qprob = 0.5, size = 1)")
+
+  v <- VectorDistribution$new(distribution = "WeightedDiscrete",
+                              params = data.frame(x = 1:2, pdf = rep(1, 2)),
+                              ids = c("a", "b_a"))
+  expect_equal(as.character(unlist(v$modelTable$shortname)), c("a", "b_a"))
+  expect_equal(names(v$wrappedModels()), c("a", "b_a"))
+  expect_equal(v["a"]$strprint(), "WeightDisc()")
+  expect_error(v["c"]$strprint(), "subset")
+
+  v <- VectorDistribution$new(distribution = "WeightedDiscrete",
+                              params = data.frame(x = 1:3, pdf = rep(1, 3)),
+                              ids = c("a", "b_a", "c"))
+  expect_equal(v[c("a", "b_a")]$strprint(), c("a", "b_a"))
+
+  v <- VectorDistribution$new(list(Binomial$new(), Exponential$new(rate = 1)),
+                              ids = c("a", "b_a"))
+  expect_equal(as.character(unlist(v$modelTable$shortname)), c("a", "b_a"))
+  expect_equal(names(v$wrappedModels()), c("a", "b_a"))
+  expect_equal(v["b_a"]$strprint(), "Exp(rate = 1, scale = 1)")
+
+  expect_equal(v[c("a", "b_a")]$strprint(), c("a", "b_a"))
+
+  expect_error(VectorDistribution$new(distribution = "WeightedDiscrete",
+                              params = data.frame(x = 1:2, pdf = rep(1, 2)),
+                              ids = c("a", "a__b")), "reserved")
 })
