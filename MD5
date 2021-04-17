@@ -1,7 +1,7 @@
-1f94d55633aa7bbd2cdd7543f7d8ff82 *DESCRIPTION
+7513c80a27922cb9fe1fff31a7b5c3a6 *DESCRIPTION
 cf2ac1b6dff1ae6894fb2f357df37cbf *LICENSE
 ea9f5303949c407cbb2a553ecfc1a885 *NAMESPACE
-b29ec65475ac59571095412b1d7b0837 *NEWS.md
+5f8f43203533da296349333ac5082f7d *NEWS.md
 e3e7520fd4c840f486fb8d02b702fd45 *R/Distribution.R
 339b80078e818f53ce64074ea6409fcc *R/DistributionDecorator.R
 a68b3c3b8feaaefcffd2cfb29cc2e70a *R/DistributionDecorator_CoreStatistics.R
@@ -75,7 +75,7 @@ c7bd5be8d1f7a6ec0a79776983360554 *R/Wrapper_Convolution.R
 2c582355f19426faf5bc2a29655e716f *R/Wrapper_ProductDistribution.R
 3c8a486498915d1eba224dfb04e1a456 *R/Wrapper_Scale.R
 280b979dd459d8ccbec567096b85c443 *R/Wrapper_TruncatedDistribution.R
-ba8a1e3691bff4ba0264ea3aaa1e7d3d *R/Wrapper_VectorDistribution.R
+03de6d73fea887592e85068ca335567f *R/Wrapper_VectorDistribution.R
 225b889b0678aac44376047003727d7a *R/assertions.R
 7b3d595867d8ad844701a0c946782ffa *R/c.Distribution.R
 0cd39c26f0b1d5150779a9ae83044feb *R/decomposeMixture.R
@@ -114,7 +114,7 @@ fbc6f2d568ee3c6e4ca21aebf2f4d1ee *R/makeUniqueDistributions.R
 3975ef64999f3da8b8ea2e1d1f1c20f6 *R/skewType.R
 e75b5c707d7638b0522bd42047e6f43c *R/sugar.R
 ea8fa0424cc36a09c9aa552662b263fd *R/zzz.R
-ead18d21eb0c56a6d133ca1653a7bb3a *README.md
+68df9d6f016d38541d1fb46f18cfa42a *README.md
 724b06a8a0638918dffa729865d2bfd6 *build/vignette.rds
 7a849ecf8d297360ad0c6b20127b837d *inst/doc/distr6.R
 cf9da5c7219d4fd239a148b0e9908963 *inst/doc/distr6.html
@@ -187,7 +187,7 @@ c3eac3791faa33cf433f92fcae2a6a31 *man/Tricube.Rd
 a3ff5431ed0619295c559f800de8d4a3 *man/TruncatedDistribution.Rd
 8b8bd26fa3cb543602c53ab8fc4e8e32 *man/Uniform.Rd
 dc99d84934f63816f510a99d1729ab0a *man/UniformKernel.Rd
-52612154efee142790f4548a9fa30635 *man/VectorDistribution.Rd
+5b32abf226548fb0c75949ea9b0c98bc *man/VectorDistribution.Rd
 b85992f9d1e53d5cb68ecec63aa5f6e9 *man/Wald.Rd
 8b1d95fed237c0d814bd83ec6c4ce6c0 *man/Weibull.Rd
 f8ab11deea411a20587fd616331b68b3 *man/WeightedDiscrete.Rd
@@ -399,5 +399,5 @@ a039421a1ab79571f55b5b2a3a6b9a43 *tests/testthat/test_wrapper_convolution.R
 45dae96a0bc50f4cc83a9efebdb0e07d *tests/testthat/test_wrapper_product.R
 6b522118c222ae2216f68946210a0935 *tests/testthat/test_wrapper_scale.R
 fdc86167bd497c9891b3834fd766a75a *tests/testthat/test_wrapper_truncation.R
-972ec42958a005ce57f35ba4a577fe26 *tests/testthat/test_wrapper_vector.R
+f96e5e829689aa85ab28efb330b76fa2 *tests/testthat/test_wrapper_vector.R
 2e28f557c126c6a0344165a604e06e35 *vignettes/distr6.rmd

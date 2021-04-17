@@ -1,3 +1,11 @@
+# distr6 1.5.2
+
+* Fixed bug in extracting distributions from vector distributions
+
+# distr6 1.5.1
+
+* Added `ids` active binding to more easily get ids of distributions in `VectorDistribution`
+
 # distr6 1.5.0
 
 ### Minor Updates

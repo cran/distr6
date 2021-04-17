@@ -1,11 +1,11 @@
 Package: distr6
 Title: The Complete R6 Probability Distributions Interface
-Version: 1.5.0
+Version: 1.5.2
 Authors@R: 
       c(person(given = "Raphael",
              family = "Sonabend",
              role = c("aut","cre"),
-             email = "raphael.sonabend.15@ucl.ac.uk",
+             email = "raphaelsonabend@gmail.com",
              comment = c(ORCID = "0000-0001-9225-4654")),
       person(given = "Franz",
              family = "Kiraly",
@@ -72,13 +72,13 @@ Imports: checkmate, data.table, R6, R62S3 (>= 1.4.0), set6 (>= 0.2.0),
 Suggests: cubature, GoFKernel, knitr, testthat, rmarkdown, magrittr,
         extraDistr, actuar, plotly, pracma
 License: MIT + file LICENSE
-LazyData: true
 URL: https://alan-turing-institute.github.io/distr6/,
         https://github.com/alan-turing-institute/distr6/
 BugReports: https://github.com/alan-turing-institute/distr6/issues
 VignetteBuilder: knitr
 Encoding: UTF-8
 RoxygenNote: 7.1.1
+SystemRequirements: C++11
 Collate: 'helpers.R' 'distr6_globals.R' 'Distribution.R'
         'DistributionDecorator.R'
         'DistributionDecorator_CoreStatistics.R'
@@ -134,7 +134,7 @@ Collate: 'helpers.R' 'distr6_globals.R' 'Distribution.R'
         'sugar.R' 'zzz.R'
 LinkingTo: Rcpp
 NeedsCompilation: yes
-Packaged: 2021-02-15 22:18:00 UTC; raphael
+Packaged: 2021-04-17 08:10:45 UTC; raphael
 Author: Raphael Sonabend [aut, cre] (<https://orcid.org/0000-0001-9225-4654>),
   Franz Kiraly [aut],
   Peter Ruckdeschel [ctb] (Author of distr),
@@ -150,6 +150,6 @@ Author: Raphael Sonabend [aut, cre] (<https://orcid.org/0000-0001-9225-4654>),
   Runlong Yu [ctb],
   Chijing Zeng [ctb],
   Qian Zhou [ctb]
-Maintainer: Raphael Sonabend <raphael.sonabend.15@ucl.ac.uk>
+Maintainer: Raphael Sonabend <raphaelsonabend@gmail.com>
 Repository: CRAN
-Date/Publication: 2021-02-16 17:10:08 UTC
+Date/Publication: 2021-04-17 10:30:02 UTC
