@@ -1,6 +1,6 @@
 Package: distr6
 Title: The Complete R6 Probability Distributions Interface
-Version: 1.5.2
+Version: 1.5.4
 Authors@R: 
       c(person(given = "Raphael",
              family = "Sonabend",
@@ -119,22 +119,22 @@ Collate: 'helpers.R' 'distr6_globals.R' 'Distribution.R'
         'Wrapper_Convolution.R' 'Wrapper_HuberizedDistribution.R'
         'Wrapper_MixtureDistribution.R' 'Wrapper_ProductDistribution.R'
         'Wrapper_Scale.R' 'Wrapper_TruncatedDistribution.R'
-        'Wrapper_VectorDistribution.R' 'assertions.R'
-        'c.Distribution.R' 'decomposeMixture.R' 'decorate.R'
-        'distr6-deprecated.R' 'distr6-package.R' 'distr6.news.R'
-        'distrSimulate.R' 'exkurtosisType.R' 'generalPNorm.R'
-        'getParameterSet.R' 'helpers_pdq.R' 'helpers_wrappers.R'
-        'isPdqr.R' 'lines_continuous.R' 'lines_discrete.R' 'lines.R'
-        'listDecorators.R' 'listDistributions.R' 'listKernels.R'
-        'listWrappers.R' 'makeUniqueDistributions.R' 'measures.R'
-        'mixturiseVector.R' 'plot_continuous.R' 'plot_discrete.R'
-        'plot_distribution.R' 'plot_multivariate.R'
-        'plot_vectordistribution.R' 'qqplot.R' 'rep.Distribution.R'
-        'sets.R' 'simulateEmpiricalDistribution.R' 'skewType.R'
-        'sugar.R' 'zzz.R'
+        'Wrapper_VectorDistribution.R' 'as.Distribution.R'
+        'assertions.R' 'c.Distribution.R' 'decomposeMixture.R'
+        'decorate.R' 'distr6-deprecated.R' 'distr6-package.R'
+        'distr6.news.R' 'distrSimulate.R' 'exkurtosisType.R'
+        'generalPNorm.R' 'getParameterSet.R' 'helpers_pdq.R'
+        'helpers_wrappers.R' 'isPdqr.R' 'lines_continuous.R'
+        'lines_discrete.R' 'lines.R' 'listDecorators.R'
+        'listDistributions.R' 'listKernels.R' 'listWrappers.R'
+        'makeUniqueDistributions.R' 'measures.R' 'mixturiseVector.R'
+        'plot_continuous.R' 'plot_discrete.R' 'plot_distribution.R'
+        'plot_multivariate.R' 'plot_vectordistribution.R' 'qqplot.R'
+        'rep.Distribution.R' 'sets.R' 'simulateEmpiricalDistribution.R'
+        'skewType.R' 'sugar.R' 'zzz.R'
 LinkingTo: Rcpp
 NeedsCompilation: yes
-Packaged: 2021-04-17 08:10:45 UTC; raphael
+Packaged: 2021-07-14 11:30:04 UTC; raphaelsonabend
 Author: Raphael Sonabend [aut, cre] (<https://orcid.org/0000-0001-9225-4654>),
   Franz Kiraly [aut],
   Peter Ruckdeschel [ctb] (Author of distr),
@@ -152,4 +152,4 @@ Author: Raphael Sonabend [aut, cre] (<https://orcid.org/0000-0001-9225-4654>),
   Qian Zhou [ctb]
 Maintainer: Raphael Sonabend <raphaelsonabend@gmail.com>
 Repository: CRAN
-Date/Publication: 2021-04-17 10:30:02 UTC
+Date/Publication: 2021-07-14 12:40:02 UTC
