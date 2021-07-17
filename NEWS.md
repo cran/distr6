@@ -1,3 +1,11 @@
+# distr6 1.5.6
+
+* Fix for M1mac
+
+# distr6 1.5.5
+
+* Minor internal change
+
 # distr6 1.5.4
 
 * Added `as.Distribution.matrix` for converting matrices to a `VectorDistribution` of `WeightedDiscrete` distributions
