@@ -17,17 +17,11 @@ N$print()
 N$parameters()
 
 ## -----------------------------------------------------------------------------
-N$setParameterValue(prec = 2)
+N$setParameterValue(var = 2)
 N$getParameterValue("prec")
 
 ## -----------------------------------------------------------------------------
 N$parameters()
-
-## -----------------------------------------------------------------------------
-N$parameters()$print(hide_cols = NULL)
-
-## -----------------------------------------------------------------------------
-N$setParameterValue(var = 3)$getParameterValue("var")
 
 ## -----------------------------------------------------------------------------
 N$print()
@@ -54,7 +48,7 @@ B$quantile(0.42) # qbeta(2, 0.582, 1.2490)
 B$rand(2) # rbeta(2, 0.582, 1.2490)
 
 ## -----------------------------------------------------------------------------
-N$cdf(3, lower.tail = FALSE, log.p = TRUE) == pnorm(3, lower.tail = FALSE, log.p = TRUE)
+N$cdf(3, lower.tail = FALSE, log.p = TRUE)
 
 ## -----------------------------------------------------------------------------
 N$mean()
@@ -74,14 +68,4 @@ head(listDistributions(filter = list(valuesupport = "discrete")))
 
 # Multiple filters can be used, note this is case-insensitive
 head(listDistributions(filter = list(VaLueSupport = "continuous", package = "extraDistr")))
-
-## -----------------------------------------------------------------------------
-library(magrittr)
-N$print()
-print(N)
-N %>% print()
-
-N$pdf(2)
-pdf(N, 2)
-N %>% pdf(2)
 
