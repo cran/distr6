@@ -1,7 +1,7 @@
-bc7aa618d32d56eb9807d7b594e05d3c *DESCRIPTION
+8d3e796bb391752c54bbc30c7df2b359 *DESCRIPTION
 cf2ac1b6dff1ae6894fb2f357df37cbf *LICENSE
 e64880921d4b22f41b98b97a450ab6d6 *NAMESPACE
-d6e1a5652a9c1d7b1444a98c78e0d70c *NEWS.md
+05a8f3aa015b13b059d473e4acadd644 *NEWS.md
 bbbbf4a01b65ab4e4cd35fced03d6237 *R/Distribution.R
 339b80078e818f53ce64074ea6409fcc *R/DistributionDecorator.R
 305b601242182d20ac6513085acdc6fd *R/DistributionDecorator_CoreStatistics.R
@@ -44,7 +44,7 @@ ac2be08a831c8fefe277ebcbe5c1ebe5 *R/SDistribution_Gamma.R
 026b1afe5598f6a62db41fd1c44714bb *R/SDistribution_Geometric.R
 11295dc93f79071506fe0c196dde325e *R/SDistribution_Gompertz.R
 2979b6f765dc3597787bb6d1c8684c4c *R/SDistribution_Gumbel.R
-69dcd94b1fdc56d9c4a1f9596c10993b *R/SDistribution_Hypergeometric.R
+62741b3bc9a532088de98756fe342f4b *R/SDistribution_Hypergeometric.R
 25918115a9939ec2ef97cb4c7af555aa *R/SDistribution_InverseGamma.R
 92878a7f2e20a3d542b9afb074e733be *R/SDistribution_Laplace.R
 ff58a5ffb9651a93d35935d419250daa *R/SDistribution_Logarithmic.R
@@ -116,7 +116,7 @@ d1e8449151045263dcfdeea3e4c066ba *R/skewType.R
 68df9d6f016d38541d1fb46f18cfa42a *README.md
 7d34ebc51caf80a43f583685a6228ef5 *build/vignette.rds
 d3b07dbda947a3de020212d924f5f8bc *inst/doc/distr6.R
-8b4ee99dd571d966b0c0b142b589f441 *inst/doc/distr6.html
+a11595fc0ef3806ce34c75bc3d6ff08d *inst/doc/distr6.html
 be01bdd6d95859b16c8b44552f736290 *inst/doc/distr6.rmd
 5820f4177408582d3dc62e5dc512ec63 *man/Arcsine.Rd
 da29118692ab46df1753e15e84e14a4b *man/Bernoulli.Rd
@@ -252,7 +252,7 @@ e4133cbec2e4b27030ebf12a0b94d9d5 *tests/testthat/test-cDistribution.R
 0a64ddb46ce8fdfdb2b05ced768410d8 *tests/testthat/test-cpp-imputers.R
 1d2e7d4cb0718c9ccffe8dbb3849e615 *tests/testthat/test-decorator-corestatistics.R
 5836fd685132f17e826cc4d5eef4aa5b *tests/testthat/test-decorator-exoticstatistics.R
-25eeeb27fa0f9786a445f26099054fe0 *tests/testthat/test-decorator-functionimputation.R
+63fe4bcfba6b238add841b52f1e86a19 *tests/testthat/test-decorator-functionimputation.R
 4990aaebf8a3fb272f3f069347afe630 *tests/testthat/test-decorator.R
 ec90b960005f10b0fba15dbe78df9f41 *tests/testthat/test-distrSimulate.R
 3c26fb9f71c499f1709442c637f40dc9 *tests/testthat/test-distribution-SDistribution.R

@@ -1,6 +1,6 @@
 Package: distr6
 Title: The Complete R6 Probability Distributions Interface
-Version: 1.6.0
+Version: 1.6.2
 Authors@R: 
     c(person(given = "Raphael",
              family = "Sonabend",
@@ -81,7 +81,7 @@ License: MIT + file LICENSE
 URL: https://alan-turing-institute.github.io/distr6/,
         https://github.com/alan-turing-institute/distr6/
 BugReports: https://github.com/alan-turing-institute/distr6/issues
-Imports: checkmate, data.table, param6 (>= 0.2.1), R6, Rcpp, set6 (>=
+Imports: checkmate, data.table, param6 (>= 0.2.2), R6, Rcpp, set6 (>=
         0.2.3), stats
 Suggests: actuar, cubature, extraDistr, GoFKernel, knitr, magrittr,
         plotly, pracma, R62S3 (>= 1.4.0), rmarkdown, testthat
@@ -144,7 +144,7 @@ Collate: 'helpers.R' 'distr6_globals.R' 'Distribution.R'
         'rep.Distribution.R' 'sets.R' 'simulateEmpiricalDistribution.R'
         'skewType.R' 'sugar.R' 'zzz.R'
 NeedsCompilation: yes
-Packaged: 2021-09-01 08:50:29 UTC; raphaelsonabend
+Packaged: 2021-10-05 09:36:25 UTC; raphaelsonabend
 Author: Raphael Sonabend [aut, cre] (<https://orcid.org/0000-0001-9225-4654>),
   Franz Kiraly [aut],
   Peter Ruckdeschel [ctb] (Author of distr),
@@ -162,4 +162,4 @@ Author: Raphael Sonabend [aut, cre] (<https://orcid.org/0000-0001-9225-4654>),
   Qian Zhou [ctb]
 Maintainer: Raphael Sonabend <raphaelsonabend@gmail.com>
 Repository: CRAN
-Date/Publication: 2021-09-06 07:40:14 UTC
+Date/Publication: 2021-10-05 10:50:01 UTC
