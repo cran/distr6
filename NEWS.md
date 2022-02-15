@@ -1,3 +1,14 @@
+# distr6 1.6.6
+
+* WeightedDiscrete now correctly handles improper distributions by returning Inf and NA where appropriate
+* Added constraint on WeightedDiscrete so `cdf` parameter must be increasing
+* Add distribution method `confidence` to calculate confidence intervals
+* Fix testing of suggested distributions
+
+# distr6 1.6.5
+
+* Fixes error in c.VectorDistribution caused by R6 referencing
+
 # distr6 1.6.4
 
 * Off-by-one error fixed in WeightedDiscrete distribution cdf function
