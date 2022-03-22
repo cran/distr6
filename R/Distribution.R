@@ -404,21 +404,11 @@ Distribution <- R6Class("Distribution",
       }
 
       data <- pdq_point_assert(..., self = self, data = data)
-      if (inherits(data, "matrix")) {
-        if (!self$liesInType(apply(data, 1, as.Tuple), all = TRUE, bound = TRUE)) {
-          stop(
-            sprintf("Not all points in %s lie in the distribution domain (%s).",
-                strCollapse(apply(data, 1, function(x) as.Tuple(x)$strprint())),
-                self$traits$type$strprint())
-          )
-        }
-      } else {
-        if (!suppressWarnings(self$liesInType(as.numeric(data), all = TRUE, bound = TRUE))) {
-          stop(
-            sprintf("Not all points in %s lie in the distribution domain (%s).",
-                  strCollapse(as.numeric(data)), self$traits$type$strprint())
-          )
-        }
+      if (!suppressWarnings(self$liesInType(as.numeric(data), all = TRUE, bound = TRUE))) {
+        stop(
+          sprintf("Not all points in %s lie in the distribution domain (%s).",
+                strCollapse(as.numeric(data)), self$traits$type$strprint())
+        )
       }
 
 
@@ -476,21 +466,11 @@ Use CoreStatistics decorator to numerically estimate this.")
       }
 
       data <- pdq_point_assert(..., self = self, data = data)
-      if (inherits(data, "matrix")) {
-        if (!self$liesInType(apply(data, 1, as.Tuple), all = TRUE, bound = TRUE)) {
-          stop(
-            sprintf("Not all points in %s lie in the distribution domain (%s).",
-                    strCollapse(apply(data, 1, function(x) as.Tuple(x)$strprint())),
-                    self$traits$type$strprint())
-          )
-        }
-      } else {
-        if (!suppressWarnings(self$liesInType(as.numeric(data), all = TRUE, bound = TRUE))) {
-          stop(
-            sprintf("Not all points in %s lie in the distribution domain (%s).",
-                    strCollapse(as.numeric(data)), self$traits$type$strprint())
-          )
-        }
+      if (!suppressWarnings(self$liesInType(as.numeric(data), all = TRUE, bound = TRUE))) {
+        stop(
+          sprintf("Not all points in %s lie in the distribution domain (%s).",
+                  strCollapse(as.numeric(data)), self$traits$type$strprint())
+        )
       }
 
       if (log.p | !lower.tail) {
@@ -631,7 +611,7 @@ decorator to numerically estimate this.")
     median = function(na.rm = NULL, ...) {
       if (testSymmetric(self)) {
         med <- try(self$mean(), silent = TRUE)
-        if (class(med) == "try-error") {
+        if (inherits(med, "try-error")) {
           return(self$quantile(0.5))
         } else if (is.null(med)) {
           return(self$quantile(0.5))

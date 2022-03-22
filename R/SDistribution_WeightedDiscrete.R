@@ -374,7 +374,11 @@ WeightedDiscrete <- R6Class("WeightedDiscrete",
         }
         pdf <- matrix(unlist(pdf), nrow = length(data[[1]]), ncol = length(data))
         data <- matrix(unlist(data), ncol = ncol(pdf))
-        C_Vec_WeightedDiscretePdf(x, data, pdf, log)
+        out <- C_Vec_WeightedDiscretePdf(x, data, pdf)
+        if (log) {
+          out <- log(out)
+        }
+        out
       } else {
         .wd_pdf(x, data, pdf, log)
       }
@@ -454,12 +458,14 @@ WeightedDiscrete <- R6Class("WeightedDiscrete",
 }
 
 .wd_cdf <- function(x, data, cdf, lower.tail, log.p) {
-  cdf <- cdf[findInterval(x, data)]
+  idx <- findInterval(x, data)
+  out <- numeric(length(idx))
+  out[idx > 0] <- cdf[idx]
   if (!lower.tail) {
-    cdf <- 1 - cdf
+    out <- 1 - out
   }
   if (log.p) {
-    cdf <- log(cdf)
+    out <- log(out)
   }
-  cdf
+  out
 }

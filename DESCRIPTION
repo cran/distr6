@@ -1,6 +1,6 @@
 Package: distr6
 Title: The Complete R6 Probability Distributions Interface
-Version: 1.6.7
+Version: 1.6.8
 Authors@R: 
     c(person(given = "Raphael",
              family = "Sonabend",
@@ -81,15 +81,15 @@ License: MIT + file LICENSE
 URL: https://alan-turing-institute.github.io/distr6/,
         https://github.com/alan-turing-institute/distr6/
 BugReports: https://github.com/alan-turing-institute/distr6/issues
-Imports: checkmate, data.table, param6 (>= 0.2.4), R6, Rcpp, set6 (>=
-        0.2.3), stats
+Imports: checkmate, data.table, ooplah, param6 (>= 0.2.4), R6, Rcpp,
+        set6 (>= 0.2.3), stats
 Suggests: actuar, cubature, extraDistr, GoFKernel, knitr, plotly,
         pracma, R62S3, rmarkdown, testthat
 LinkingTo: Rcpp
 VignetteBuilder: knitr
 Config/testthat/edition: 3
 Encoding: UTF-8
-RoxygenNote: 7.1.1
+RoxygenNote: 7.1.2
 SystemRequirements: C++11
 Collate: 'helpers.R' 'distr6_globals.R' 'Distribution.R'
         'DistributionDecorator.R'
@@ -118,7 +118,7 @@ Collate: 'helpers.R' 'distr6_globals.R' 'Distribution.R'
         'SDistribution_InverseGamma.R' 'SDistribution_Laplace.R'
         'SDistribution_Logarithmic.R' 'SDistribution_Logistic.R'
         'SDistribution_Loglogistic.R' 'SDistribution_Lognormal.R'
-        'SDistribution_Multinomial.R'
+        'SDistribution_Matdist.R' 'SDistribution_Multinomial.R'
         'SDistribution_MultivariateNormal.R'
         'SDistribution_NegBinomal.R' 'SDistribution_Normal.R'
         'SDistribution_Pareto.R' 'SDistribution_Poisson.R'
@@ -138,13 +138,14 @@ Collate: 'helpers.R' 'distr6_globals.R' 'Distribution.R'
         'helpers_wrappers.R' 'isPdqr.R' 'lines_continuous.R'
         'lines_discrete.R' 'lines.R' 'listDecorators.R'
         'listDistributions.R' 'listKernels.R' 'listWrappers.R'
-        'makeUniqueDistributions.R' 'measures.R' 'mixturiseVector.R'
-        'plot_continuous.R' 'plot_discrete.R' 'plot_distribution.R'
+        'makeUniqueDistributions.R' 'measures.R' 'mixMatrix.R'
+        'mixturiseVector.R' 'plot_continuous.R' 'plot_discrete.R'
+        'plot_distribution.R' 'plot_matdistribution.R'
         'plot_multivariate.R' 'plot_vectordistribution.R' 'qqplot.R'
         'rep.Distribution.R' 'sets.R' 'simulateEmpiricalDistribution.R'
         'skewType.R' 'sugar.R' 'zzz.R'
 NeedsCompilation: yes
-Packaged: 2022-02-18 15:19:54 UTC; raphaelsonabend
+Packaged: 2022-03-21 21:00:08 UTC; raphaelsonabend
 Author: Raphael Sonabend [aut, cre] (<https://orcid.org/0000-0001-9225-4654>),
   Franz Kiraly [aut],
   Peter Ruckdeschel [ctb] (Author of distr),
@@ -162,4 +163,4 @@ Author: Raphael Sonabend [aut, cre] (<https://orcid.org/0000-0001-9225-4654>),
   Qian Zhou [ctb]
 Maintainer: Raphael Sonabend <raphaelsonabend@gmail.com>
 Repository: CRAN
-Date/Publication: 2022-02-22 03:20:02 UTC
+Date/Publication: 2022-03-22 10:10:10 UTC
