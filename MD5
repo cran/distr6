@@ -1,7 +1,7 @@
-04f53b2097cddb930c4b720d584f0722 *DESCRIPTION
+eedbd70e9b0a74d4fe81c7d11832c6f7 *DESCRIPTION
 cf2ac1b6dff1ae6894fb2f357df37cbf *LICENSE
 4408ce571281a2c4a7f54d64f4a7f802 *NAMESPACE
-1b162452c519b07768c357ffb53a530d *NEWS.md
+628c940a7074ee40553736117d0682bf *NEWS.md
 39cc976e78acc92973ab45706edab894 *R/Distribution.R
 339b80078e818f53ce64074ea6409fcc *R/DistributionDecorator.R
 305b601242182d20ac6513085acdc6fd *R/DistributionDecorator_CoreStatistics.R
@@ -119,7 +119,7 @@ b34e827a04e2ba227afcedf3a8bd3a59 *R/sugar.R
 62d688934ee1358a2c6197765d553c43 *README.md
 7d34ebc51caf80a43f583685a6228ef5 *build/vignette.rds
 d3b07dbda947a3de020212d924f5f8bc *inst/doc/distr6.R
-13f93d92eb82231e5c75cce575e951b9 *inst/doc/distr6.html
+69142d0cea408cfe6d348ffd89730da7 *inst/doc/distr6.html
 be01bdd6d95859b16c8b44552f736290 *inst/doc/distr6.rmd
 d0893e324cefea9ee200bf2953878b5a *man/Arcsine.Rd
 65f60d7c9510e578a07d99094dcfd425 *man/Bernoulli.Rd
@@ -285,7 +285,7 @@ a525061cd831d3ae923098ef7d9da5e6 *tests/testthat/test-kernel.R
 a16570bda29b02260b84f5ba418ab2c3 *tests/testthat/test-plot-lines.R
 dda261e510664df5065455f8506eb8ed *tests/testthat/test-plot-qqplot.R
 f34bfe56bcc8fb3a991133aec145e64c *tests/testthat/test-plot-vector.R
-cf45cb930976392c17863caa565232d8 *tests/testthat/test-plot.R
+51d1f1fd4f97494ea570b6b288e57ac5 *tests/testthat/test-plot.R
 12d45420c73d9fe6a8a41d0ba91365b1 *tests/testthat/test-repDistribution.R
 d0f506625eb0df44273909785da59717 *tests/testthat/test-sdistribution-Arcsine.R
 17b2c1785dabca2a5b09c67182877f2b *tests/testthat/test-sdistribution-Bernoulli.R
